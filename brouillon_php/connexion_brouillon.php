@@ -13,10 +13,10 @@ if(isset($_POST['formconnexion'])) {
       $userexist = $requser->rowCount();
       if($userexist == 1) {
          $userinfo = $requser->fetch();
-         $_SESSION['id'] = $userinfo['id'];
-         $_SESSION['pseudo'] = $userinfo['pseudo'];
-         $_SESSION['mail'] = $userinfo['mail'];
-         header("Location: http://localhost/kult/html/movie-list.html?id=".$_SESSION['id']);
+         $_SESSION['Id'] = $userinfo['Id'];
+         $_SESSION['Pseudo'] = $userinfo['Pseudo'];
+         $_SESSION['Mail'] = $userinfo['Mail'];
+         header("Location: profil.php?id=".$_SESSION['Id']);
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
       }
