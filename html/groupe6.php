@@ -1,30 +1,36 @@
-<?php
-session_start();
+    <?php
+    session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+    $bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
 
-if(isset($_POST['formconnexion'])) {
-   $mailconnect = htmlspecialchars($_POST['mailconnect']);
-   $mdpconnect = sha1($_POST['mdpconnect']);
-   if(!empty($mailconnect) AND !empty($mdpconnect)) {
-     
-      $requser = $bdd->prepare("SELECT * FROM Utilisateur WHERE ( Mail='$mailconnect' OR Pseudo='$mailconnect' ) AND MDP='$mdpconnect'");
-      $requser->execute(array($mailconnect, $mdpconnect));
-      $userexist = $requser->rowCount();
-      if($userexist == 1) {
-         $userinfo = $requser->fetch();
-         $_SESSION['Id'] = $userinfo['Id'];
-         $_SESSION['Pseudo'] = $userinfo['Pseudo'];
-         $_SESSION['Mail'] = $userinfo['Mail'];
-         header("Location: http://localhost/kult/html/movie-list.html?id=".$_SESSION['Id']);
-      } else {
-         $erreur = "Mauvais mail ou mot de passe !";
-      }
-   } else {
-      $erreur = "Tous les champs doivent être complétés !";
-   }
-}
-?>
+    if(isset($_POST['groupe'])) {
+        $nom = htmlspecialchars($_POST['nom']);
+        if(!empty($_POST['nom']) ) {
+            $nomlength = strlen($nom);
+
+
+        if($nomlength <= 255) { 
+                    $reqnom = $bdd->prepare("SELECT * FROM GROUPE WHERE Nom = ?");
+                    $reqnom->execute(array($nom));
+                    $nomexist = $reqnom->rowCount();
+                    if($nomexist == 0) {
+                        if($mdp == $mdp2) {
+                            $insertmbr = $bdd->prepare("INSERT INTO GROUPE(Nom) VALUES(?)");
+                            $insertmbr->execute(array($nom));
+                            $erreur = "Votre groupe a bien été créé !";
+                        } 
+                    } 
+                    else {
+                        $erreur = "Groupe déjà utilisé!";
+                
+                    } 
+
+        } 
+        else {
+            $erreur = "Votre prenom ne doit pas dépasser 255 caractères !";
+        }
+        }}
+    ?>
 
 
 
@@ -120,25 +126,15 @@ if(isset($_POST['formconnexion'])) {
                                 <p class="status"></p>
 
                                 <div class="form-group">
-                                    <label for="mailconnect">Pseudo ou email</label>
-                                    <input type="text" class="form-control" id="mailconnect" name="mailconnect" placeholder="Entrez votre Pseudo ou email *" />
+                                    <label for="Nom">Nom</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez le nom du groupe *" />
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="mdpconnect">Mot de passe</label>
-                                    <input type="password" class="form-control" id="mdpconnect" name="mdpconnect" placeholder="Entrez votre mot de passe *" />
 
-                                </div>
+                               
 
                                 <div class="form-group">
-                                    <div class="checkbox pad-bottom-10">
-                                        <input id="check1" type="checkbox" name="remember" value="yes">
-                                        <label for="check1">Me garder connecté</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="submit" name="formconnexion" value="Sign in" class="btn btn-main btn-effect nomargin" />
+                                    <input type="submit" name="groupe" value="Créer nouveau groupe" class="btn btn-main btn-effect nomargin" />
 
                                 </div>
                             </form>
@@ -152,13 +148,7 @@ if(isset($_POST['formconnexion'])) {
                              ?>                           
                             <!-- End of Login form -->
 
-                            <div class="bottom-links">
-                                <span>
-                                    Pas inscrit ?
-                                    <a  class="signUpClick">M'inscrire</a>
-                                </span>
-                                <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
-                            </div>
+                            
                         </div>
 
                     </div>
