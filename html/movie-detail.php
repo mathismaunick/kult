@@ -1,34 +1,4 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-
-<?php
-
-if(isset($_POST['recherche'])) {
-  $recherche = htmlspecialchars($_POST['recherche']);
-  //Requête API avec le keyword
-  $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
-    $result = json_decode($json, TRUE);
-    $résultat = $result['results'];
-    
-  
-}
-    elseif(isset($_GET['recherche'])) {
-        $recherche = htmlspecialchars($_GET['recherche']);
-  //Requête API avec le keyword
-  $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
-    $result = json_decode($json, TRUE);
-    $résultat = $result['results'];
-    }
-  ?>  
-    
-   <!DOCTYPE html>
 
 <html lang="en">
 
@@ -45,7 +15,7 @@ if(isset($_POST['recherche'])) {
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>KULT</title>
+    <title>Movify - Movies, Series & Cinema HTML Template</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -109,22 +79,22 @@ if(isset($_POST['recherche'])) {
 
         <!-- =============== START OF HEADER NAVIGATION =============== -->
         <!-- Insert the class "sticky" in the header if you want a sticky header -->
-        <header class="header">
+        <header class="header header-fixed header-transparent text-white">
             <div class="container-fluid">
 
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="index.html">
                         <!-- INSERT YOUR LOGO HERE -->
-                        KULT
+                        <img src="assets/images/logo.svg" alt="logo" width="150" class="logo">
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                        
+                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
-                    
+
                     <!-- Login Button on Responsive -->
                     <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
-
+                    
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
                           <span class="hamburger-inner"></span>
@@ -138,13 +108,13 @@ if(isset($_POST['recherche'])) {
                         <ul class="navbar-nav mx-auto" id="main-menu">
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
                                     <!-- Menu Item -->
                                     <li>
-                                        <a class="dropdown-item" href="index.php">Home Version 1</a>
+                                        <a class="dropdown-item" href="index.html">Home Version 1</a>
                                     </li>
 
                                     <!-- Menu Item -->
@@ -167,7 +137,7 @@ if(isset($_POST['recherche'])) {
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fil d'actus</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -226,7 +196,7 @@ if(isset($_POST['recherche'])) {
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groupes</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Movies & TV Shows</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -336,7 +306,7 @@ if(isset($_POST['recherche'])) {
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
                                 <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                    <i class="icon-user"></i>Se connecter
+                                    <i class="icon-user"></i>login
                                 </a>
                             </li>
                         </ul>
@@ -353,200 +323,538 @@ if(isset($_POST['recherche'])) {
 
 
 
-        <!-- =============== START OF PAGE HEADER =============== -->
-         <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
+        <!-- =============== START OF MOVIE DETAIL INTRO =============== -->
+        <section class="movie-detail-intro overlay-gradient ptb100" style="background: url(assets/images/other/movie-detail-bg.jpg);">
+        </section>
+        <!-- =============== END OF MOVIE DETAIL INTRO =============== -->
+
+<!-- Récupération des infos -->
+<?php
+$id = $_GET['id'];
+    
+$result = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
+$title = $result['title'];
+$poster_path = $result['poster_path'];
+$genres = $result['genres'][0]["name"];
+$runtime = $result['runtime'];
+$release_date = $result['release_date'];
+
+$vid = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
+$video = $vid['results'][0]['key'];
+
+
+?>
+
+        <!-- =============== START OF MOVIE DETAIL INTRO 2 =============== -->
+        <section class="movie-detail-intro2">
             <div class="container">
-                <div class="inner">
-                    <h2 class="title">RESULTATS</h2>
-                    <ol class="breadcrumb">
-                        <li><a href="index.php">Home</a></li>
-                        <li>Résultats de la recherche <?php echo $recherche; ?></li>
-                    
-                    </ol>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="movie-poster">
+                            <?php echo '<img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$poster_path.'" alt="">' ?>
+
+                            <?php echo '<a href="https://www.youtube.com/watch?v=' .$video. '" class="play-video">' ?>
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+
+
+                        <div class="movie-details">
+                            <?php echo '<h3 class="title">'.$title.'</h3>'?>
+
+                            <ul class="movie-subtext">
+                                <li>PG-13</li>
+                                <?php echo '<li>'.$runtime.' min</li>'?>
+                                <?php echo '<li>'.$genres.'</li>'?>
+                                <?php echo '<li>'.$release_date.'</li>'?>
+                            </ul>
+
+                            <a href="#" class="btn btn-main btn-effect">trailer</a>
+                            <a href="#" class="btn btn-main btn-effect">watch later</a>
+                            <a href="#" class="btn rate-movie"><i class="icon-heart"></i></a>
+
+                            <div class="rating mt10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <span>296 Ratings</span>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
                 </div>
             </div>
         </section>
-        <!-- =============== END OF PAGE HEADER =============== -->
+        <!-- =============== End OF MOVIE DETAIL INTRO 2 =============== -->
 
-
-
-        <!-- =============== START OF MAIN =============== -->
-        <main class="ptb100">
+        <!-- =============== START OF MOVIE DETAIL MAIN SECTION =============== -->
+        <section class="movie-detail-main ptb100">
             <div class="container">
 
-                <!-- Start of Filters -->
-                <div class="row mb50">
-
-                    <div class="col-md-6">
-                        <!-- Layout Switcher -->
-                        <div class="layout-switcher">
-                            <a href="<?php echo 'recherchelist.php?recherche='.$recherche.'"' ?> class="list active"><i class="fa fa-align-justify"></i></a>
-                            
-                            <a href="<?php echo 'recherche.php?recherche='.$recherche.'"' ?> class="grid "><i class="fa fa-th"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-
-                        <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
-                               <select class="chosen-select-no-single">
-                                    <option>Ordre par défaut</option>
-                                    <option>Featured</option>
-                                    <option>Plus vu</option>
-                                    <option>Mieux noté</option>
-                                    <option>Récent</option>
-                                    <option>Ancien</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Sort by / End -->
-
-                    </div>
-
-                </div>
-                <!-- End of Filters -->
-
-
-
-                <!-- Start of Movie List -->
                 <div class="row">
+                    <!-- Start of Movie Main -->
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="inner pr50">
 
-                    <!-- Movie List Item -->
-                    <?php 
-                    $nbmax = 0;
-                    if(count($résultat)<17){
-                        $nbmax = count($résultat);
-                    }
-                    elseif(count($résultat)>=17){
-                        $nbmax = 17;
-                    }
-                               
-                   
-                               
-                 for($i = 0; $i<=$nbmax; $i++){
-                     
-                     $overview=$résultat[$i]['overview'];
-                     
-                      if (strlen($overview)>=150) {
-                        $synopsis = substr($overview, 0, 150);
-                        $synopsis .="...";
-                    }
-                    elseif(strlen($overview)<=150 && $overview!=""){
-                        $nbmanquants = 150 - strlen($overview);
-                       
-                        //for($j=0; $j<$nbmanquants; $j++){
-                        $synopsis = $overview;
-                        $synopsis .= str_repeat(".", $nbmanquants) ;
-                        
-                        
-                    }
-                     if($overview==""){
-                         $synopsis = $overview;
-                         $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
-                         $synopsis .=str_repeat(". ", 66);
-                         
-                     }
-                     $title = $résultat[$i]['title'];
-                     //if (strlen($title)>=16) {
-                      //  $title = substr($title, 0, 16);
-                      //  $title .="...";
-                    //}
-                      $json = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat[$i]['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
-                     $vid = json_decode($json, TRUE);
-                     if($vid['results']!=null){
-                    $vidéo = $vid['results'][0]['key'];
-                     }
-                     else $vidéo="";
-                     
-                     
-                     
-                    echo
-                    '<div class="col-md-12 col-sm-12">
-                        <div class="movie-list-1 mb30">
-                            <div class="listing-container">
+                            <!-- Storyline -->
+                            <div class="storyline">
+                                <h3 class="title">Storyline</h3>
 
-                                <!-- Movie List Image -->
-                                <div class="listing-image">
+                                <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Cras suscipit, quam vitae adipiscing faucibus, risus nibh laoreet odio, a porttitor metus eros ut enim. Morbi augue velit, tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.</p>
+                            </div>
 
-                                    <!-- Play Button -->
-                                    <div class="play-btn">
-                                        <a href="https://www.youtube.com/watch?v='.$vidéo.'" class="play-video">
-                                            <i class="fa fa-play"></i>
+                            <!-- Media -->
+                            <div class="movie-media mt50">
+                                <h3 class="title"> Photos & Videos</h3>
+
+                                <ul class="image-gallery isotope">
+                                    <li class="element">
+                                        <a href="assets/images/blog/bloglist-1.jpg">
+                                            <img src="assets/images/blog/bloglist-1.jpg" class="img-responsive" alt="">
                                         </a>
-                                    </div>
+                                    </li>
 
-                                    <!-- Buttons -->
-                                    <div class="buttons">
-                                        <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom">
-                                            <i class="icon-heart"></i>
+                                    <li class="element">
+                                        <a href="assets/images/blog/bloglist-2.jpg">
+                                            <img src="assets/images/blog/bloglist-2.jpg" class="img-responsive" alt="">
                                         </a>
+                                    </li>
 
-                                        <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom">
-                                            <i class="icon-share"></i>
+                                    <li class="element">
+                                        <a href="assets/images/other/home2-bg.jpg">
+                                            <img src="assets/images/other/home2-bg.jpg" class="img-responsive" alt="">
                                         </a>
-                                    </div>
+                                    </li>
 
-                                    <!-- Rating -->
-                                    <div class="stars">
-                                        <div class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                    </div>
+                                    <li class="element">
+                                        <a href="assets/images/blog/bloglist-2.jpg">
+                                            <img src="assets/images/blog/bloglist-2.jpg" class="img-responsive" alt="">
+                                        </a>
+                                    </li>
 
-                                    <!-- Image -->
-                                    <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" alt="">
-                                </div>
+                                    <li class="element">
+                                        <a href="assets/images/blog/bloglist-1.jpg">
+                                            <img src="assets/images/blog/bloglist-1.jpg" class="img-responsive" alt="">
+                                        </a>
+                                    </li>
 
-                                <!-- Movie List Content -->
-                                <div class="listing-content">
-                                    <div class="inner">
-                                        <h3 class="title">'.$title.'</h3>
+                                    <li class="element">
+                                        <a href="assets/images/blog/bloglist-3.jpg">
+                                            <img src="assets/images/blog/bloglist-3.jpg" class="img-responsive" alt="">
+                                        </a>
+                                    </li>
 
-                                        <p>'.$synopsis.'</p>
+                                    <li class="element">
+                                        <a href="assets/images/blog/bloglist-1.jpg">
+                                            <img src="assets/images/blog/bloglist-1.jpg" class="img-responsive" alt="">
+                                        </a>
+                                    </li>
 
-                                         <a href="movie-detail.php?id='.$résultat[$i]['id'].'" class="btn btn-main btn-effect">details</a>
-                                    </div>
-                                </div>
+                                    <li class="element">
+                                        <a href="assets/images/other/landscape.jpg">
+                                            <img src="assets/images/other/landscape.jpg" class="img-responsive" alt="">
+                                        </a>
+                                    </li>
+
+                                    <li class="element">
+                                        <a href="assets/images/other/home2-bg.jpg">
+                                            <img src="assets/images/other/home2-bg.jpg" class="img-responsive" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
 
                             </div>
+
                         </div>
-                    </div>';
-                 }
-                    
-                    ?>
-                    
-                
-
-                </div>
-                <!-- End of Movie List -->
-
-
-
-                <!-- Start of Pagination -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <nav class="pagination">
-                            <ul>
-                                <li><a href="#" class="current-page">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="ti-angle-right"></i></a></li>
-                            </ul>
-                        </nav>
                     </div>
+                    <!-- End of Movie Main -->
+
+
+                    <!-- Start of Sidebar -->
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="sidebar">
+
+                            <!-- Start of Details Widget -->
+                            <aside class="widget widget-movie-details">
+                                <h3 class="title">Details</h3>
+
+                                <ul>
+                                    <li><strong>Release date: </strong>December 15, 2017</li>
+                                    <li><strong>Director: </strong><a href="#">Rian Johnson</a></li>
+                                    <li><strong>Budget: </strong>200 million USD</li>
+                                    <li><strong>Country: </strong>USA</li>
+                                    <li><strong>Language: </strong>English</li>
+                                    <li><strong>Production Co: </strong><a href="#">Lucasfilm</a></li>
+                                </ul>
+                            </aside>
+                            <!-- End of Details Widget -->
+
+                            <!-- Start of Details Widget -->
+                            <aside class="widget widget-movie-cast">
+                                <h3 class="title">Cast</h3>
+
+                                <ul class="cast-wrapper">
+                                    <li>
+                                        <a href="celebrity-detail.html">
+                                            <span class="circle-img">
+                                                <img src="assets/images/celebrities/celebrity1.jpg" alt="">
+                                            </span>
+                                            <h6 class="name">Bryan Doe</h6>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="celebrity-detail.html">
+                                            <span class="circle-img">
+                                                <img src="assets/images/celebrities/celebrity2.jpg" alt="">
+                                            </span>
+                                            <h6 class="name">Baron Saul</h6>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="celebrity-detail.html">
+                                            <span class="circle-img">
+                                                <img src="assets/images/celebrities/celebrity3.jpg" alt="">
+                                            </span>
+                                            <h6 class="name">Ewan Actor</h6>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="celebrity-detail.html">
+                                            <span class="circle-img">
+                                                <img src="assets/images/celebrities/celebrity4.jpg" alt="">
+                                            </span>
+                                            <h6 class="name">Nicole Beet</h6>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <a href="celebrities-list.html" class="btn btn-main btn-effect mt20">view all</a>
+
+                            </aside>
+                            <!-- End of Details Widget -->
+
+                        </div>
+                    </div>
+                    <!-- End of Sidebar -->
                 </div>
-                <!-- End of Pagination -->
 
             </div>
-        </main>
-        <!-- =============== END OF MAIN =============== -->
+        </section>
+        <!-- =============== END OF MOVIE DETAIL MAIN SECTION =============== -->
 
+
+
+        <!-- =============== START OF RECOMMENDED MOVIES SECTION =============== -->
+        <section class="recommended-movies bg-light ptb100">
+            <div class="container">
+
+                <!-- Start of row -->
+                <div class="row">
+                    <div class="col-md-8 col-sm-12">
+                        <h2 class="title">People who liked this also liked...</h2>
+                    </div>
+                </div>
+                <!-- End of row -->
+
+
+                <!-- Start of Latest Movies Slider -->
+                <div class="owl-carousel recommended-slider mt20">
+
+                    <!-- === Start of Sliding Item 1 === -->
+                    <div class="item">
+                        <!-- Start of Movie Box -->
+                        <div class="movie-box-1">
+
+                            <!-- Start of Poster -->
+                            <div class="poster">
+                                <img src="assets/images/posters/poster-5.jpg" alt="">
+                            </div>
+                            <!-- End of Poster -->
+
+                            <!-- Start of Buttons -->
+                            <div class="buttons">
+                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                            <!-- End of Buttons -->
+
+                            <!-- Start of Movie Details -->
+                            <div class="movie-details">
+                                <h4 class="movie-title">
+                                    <a href="movie-detail.html">Daredevil</a>
+                                </h4>
+                                <span class="released">19 Apr 2015</span>
+                            </div>
+                            <!-- End of Movie Details -->
+
+                            <!-- Start of Rating -->
+                            <div class="stars">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <span>8.7 / 10</span>
+                            </div>
+                            <!-- End of Rating -->
+
+                        </div>
+                        <!-- End of Movie Box -->
+                    </div>
+                    <!-- === End of Sliding Item 1 === -->
+
+
+                    <!-- === Start of Sliding Item 2 === -->
+                    <div class="item">
+                        <!-- Start of Movie Box -->
+                        <div class="movie-box-1">
+
+                            <!-- Start of Poster -->
+                            <div class="poster">
+                                <img src="assets/images/posters/poster-6.jpg" alt="">
+                            </div>
+                            <!-- End of Poster -->
+
+                            <!-- Start of Buttons -->
+                            <div class="buttons">
+                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                            <!-- End of Buttons -->
+
+                            <!-- Start of Movie Details -->
+                            <div class="movie-details">
+                                <h4 class="movie-title">
+                                    <a href="movie-detail.html">Stranger Things</a>
+                                </h4>
+                                <span class="released">15 Jul 2016</span>
+                            </div>
+                            <!-- End of Movie Details -->
+
+                            <!-- Start of Rating -->
+                            <div class="stars">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <span>9 / 10</span>
+                            </div>
+                            <!-- End of Rating -->
+
+                        </div>
+                        <!-- End of Movie Box -->
+                    </div>
+                    <!-- === End of Sliding Item 2 === -->
+
+
+                    <!-- === Start of Sliding Item 3 === -->
+                    <div class="item">
+                        <!-- Start of Movie Box -->
+                        <div class="movie-box-1">
+
+                            <!-- Start of Poster -->
+                            <div class="poster">
+                                <img src="assets/images/posters/poster-7.jpg" alt="">
+                            </div>
+                            <!-- End of Poster -->
+
+                            <!-- Start of Buttons -->
+                            <div class="buttons">
+                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                            <!-- End of Buttons -->
+
+                            <!-- Start of Movie Details -->
+                            <div class="movie-details">
+                                <h4 class="movie-title">
+                                    <a href="movie-detail.html">Luke Cage</a>
+                                </h4>
+                                <span class="released">30 Sep 2016</span>
+                            </div>
+                            <!-- End of Movie Details -->
+
+                            <!-- Start of Rating -->
+                            <div class="stars">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                                <span>7.6 / 10</span>
+                            </div>
+                            <!-- End of Rating -->
+
+                        </div>
+                        <!-- End of Movie Box -->
+                    </div>
+                    <!-- === End of Sliding Item 3 === -->
+
+
+                    <!-- === Start of Sliding Item 4 === -->
+                    <div class="item">
+                        <!-- Start of Movie Box -->
+                        <div class="movie-box-1">
+
+                            <!-- Start of Poster -->
+                            <div class="poster">
+                                <img src="assets/images/posters/poster-8.jpg" alt="">
+                            </div>
+                            <!-- End of Poster -->
+
+                            <!-- Start of Buttons -->
+                            <div class="buttons">
+                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                            <!-- End of Buttons -->
+
+                            <!-- Start of Movie Details -->
+                            <div class="movie-details">
+                                <h4 class="movie-title">
+                                    <a href="movie-detail.html">The Flash</a>
+                                </h4>
+                                <span class="released">7 Oct 2014</span>
+                            </div>
+                            <!-- End of Movie Details -->
+
+                            <!-- Start of Rating -->
+                            <div class="stars">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </div>
+                                <span>8 / 10</span>
+                            </div>
+                            <!-- End of Rating -->
+
+                        </div>
+                        <!-- End of Movie Box -->
+                    </div>
+                    <!-- === End of Sliding Item 4 === -->
+
+
+                    <!-- === Start of Sliding Item 5 === -->
+                    <div class="item">
+                        <!-- Start of Movie Box -->
+                        <div class="movie-box-1">
+
+                            <!-- Start of Poster -->
+                            <div class="poster">
+                                <img src="assets/images/posters/poster-5.jpg" alt="">
+                            </div>
+                            <!-- End of Poster -->
+
+                            <!-- Start of Buttons -->
+                            <div class="buttons">
+                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                            <!-- End of Buttons -->
+
+                            <!-- Start of Movie Details -->
+                            <div class="movie-details">
+                                <h4 class="movie-title">
+                                    <a href="movie-detail.html">Daredevil</a>
+                                </h4>
+                                <span class="released">19 Apr 2015</span>
+                            </div>
+                            <!-- End of Movie Details -->
+
+                            <!-- Start of Rating -->
+                            <div class="stars">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <span>8.7 / 10</span>
+                            </div>
+                            <!-- End of Rating -->
+
+                        </div>
+                        <!-- End of Movie Box -->
+                    </div>
+                    <!-- === End of Sliding Item 5 === -->
+
+
+                    <!-- === Start of Sliding Item 6 === -->
+                    <div class="item">
+                        <!-- Start of Movie Box -->
+                        <div class="movie-box-1">
+
+                            <!-- Start of Poster -->
+                            <div class="poster">
+                                <img src="assets/images/posters/poster-6.jpg" alt="">
+                            </div>
+                            <!-- End of Poster -->
+
+                            <!-- Start of Buttons -->
+                            <div class="buttons">
+                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                            <!-- End of Buttons -->
+
+                            <!-- Start of Movie Details -->
+                            <div class="movie-details">
+                                <h4 class="movie-title">
+                                    <a href="movie-detail.html">Stranger Things</a>
+                                </h4>
+                                <span class="released">15 Jul 2016</span>
+                            </div>
+                            <!-- End of Movie Details -->
+
+                            <!-- Start of Rating -->
+                            <div class="stars">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <span>9 / 10</span>
+                            </div>
+                            <!-- End of Rating -->
+
+                        </div>
+                        <!-- End of Movie Box -->
+                    </div>
+                    <!-- === End of Sliding Item 6 === -->
+
+                </div>
+                <!-- End of Latest Movies Slider -->
+
+            </div>
+        </section>
+        <!-- =============== END OF RECOMMENDED MOVIES SECTION =============== -->
 
 
         <!-- =============== START OF FOOTER =============== -->
@@ -712,7 +1020,7 @@ if(isset($_POST['recherche'])) {
         <!-- ===== Start of Signin wrapper ===== -->
         <div class="signin-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Se connecter</h4>
+                <h4 class="text-center">Sign in</h4>
             </div>
 
 
@@ -723,34 +1031,34 @@ if(isset($_POST['recherche'])) {
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="username">Pseudo ou Email</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Pseudo ou Email" />
+                        <label for="username">Username or Email *</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Your Username or Email *" />
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" />
+                        <label for="password">Password *</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" />
                     </div>
 
                     <div class="form-group">
                         <div class="checkbox pad-bottom-10">
                             <input id="check1" type="checkbox" name="remember" value="yes">
-                            <label for="check1">Rester connecté</label>
+                            <label for="check1">Keep me signed in</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Se connecter" class="btn btn-main btn-effect nomargin" />
+                        <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
                     </div>
                 </form>
                 <!-- End of Login form -->
 
                 <div class="bottom-links">
                     <span>
-                        Pas déjà inscrit ?
-                        <a  class="signUpClick">S'inscrire</a>
+                        Not a member?
+                        <a  class="signUpClick">Sign up</a>
                     </span>
-                    <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a  class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
             </div>
 
@@ -762,80 +1070,43 @@ if(isset($_POST['recherche'])) {
         <!-- ===== Start of Signup wrapper ===== -->
         <div class="signup-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">S'inscrire</h4>
+                <h4 class="text-center">Sign Up</h4>
             </div>
 
             <div class="small-dialog-content">
 
                 <!-- Start of Registration form -->
-                <form method="POST" action="">
+                <form id="cariera_registration" action="#" method="POST">
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="nom">Nom</label>
-                        <input type="text" placeholder="Votre nom" id="nom" name="nom" value="<?php if(isset($nom)) { echo $nom; } ?>" />
+                        <label for="movify_user_login">Username</label>
+                        <input name="movify_user_login" id="movify_user_login" class="form-control" type="text"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="prenom">Prenom</label>
-                       <input type="text" placeholder="Votre prenom" id="prenom" name="prenom" value="<?php if(isset($prenom)) { echo $prenom; } ?>" />
+                        <label for="movify_user_email">Email</label>
+                        <input name="movify_user_email" id="movify_user_email" class="form-control" type="email"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="nom">Pseudo</label>
-                        <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                        <label for="password">Password</label>
+                        <input name="movify_user_pass" id="movify_password" class="form-control" type="password"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="mail">Email</label>
-                        <input type="email" placeholder="Votre mail" id="mail" name="mail" value="<?php if(isset($mail)) { echo $mail; } ?>" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mail2">Confirmation Email</label>
-                        <input type="email" placeholder="Confirmation de votre mail" id="mail2" name="mail2" value="<?php if(isset($mail2)) { echo $mail2; } ?>" />
-        
-                    </div>
-
-                     <div class="form-group">
-                        <label for="mdp">Mot de passe</label>
-                        <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mdp2">Confirmer votre mot de passe</label>
-                        <input type="password" placeholder="Confirmation du mot de passe" id="mdp2" name="mdp2" />
-                    </div>
-             
-
-                    <div class="form-group">
-
-                        <input type="submit" class="btn btn-main btn-effect nomargin" name="forminscription" value="S'inscrire"/>
-
+                        <input type="submit" class="btn btn-main btn-effect nomargin" value="Register"/>
                     </div>
                 </form>
-
-                <!-- message d'erreur  -->
-
-                 <?php
-                 if(isset($erreur)) {
-                    echo '<font color="red">'.$erreur."</font>";
-                 }
-                 ?>                
-
                 <!-- End of Registration form -->
 
                 <div class="bottom-links">
                     <span>
-                        Déjà un compte ?
-                        <a class="signInClick">Se connecter</a>
+                        Already have an account?
+                        <a class="signInClick">Sign in</a>
                     </span>
 
-                    <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
 
             </div> <!-- .small-dialog-content -->
@@ -848,7 +1119,7 @@ if(isset($_POST['recherche'])) {
         <!-- ===== Start of Forget Password wrapper ===== -->
         <div class="forgetpassword-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Mot de passe oublié</h4>
+                <h4 class="text-center">Forgotten Password</h4>
             </div>
 
             <div class="small-dialog-content">
@@ -858,7 +1129,7 @@ if(isset($_POST['recherche'])) {
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="password">Adresse Email</label>
+                        <label for="password">Email Address *</label>
                         <input type="email" name="user_login" class="form-control" id="email3" placeholder="Email Address *" />
                     </div>
 
@@ -869,7 +1140,7 @@ if(isset($_POST['recherche'])) {
                 <!-- End of Forger Password form -->
 
                 <div class="bottom-links">
-                    <a class="cancelClick">Annuler</a>
+                    <a class="cancelClick">Cancel</a>
                 </div>
 
             </div><!-- .small-dialog-content -->
@@ -922,9 +1193,4 @@ if(isset($_POST['recherche'])) {
 
 </body>
 
-</html>
-
-
-   
-</body>
 </html>

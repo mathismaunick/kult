@@ -504,7 +504,7 @@ if(isset($_POST['recherche'])) {
 
                                         <p>'.$synopsis.'</p>
 
-                                        <a href="movie-detail.php" class="btn btn-main btn-effect">details</a>
+                                        <a href="movie-detail.php?id='.$résultat[$i]['id'].'" class="btn btn-main btn-effect">details</a>
                                     </div>
                                 </div>
 
