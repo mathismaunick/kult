@@ -362,16 +362,16 @@ session_start();
             <!-- Movie List Item -->
             <?php 
             $nbmax = 0;
-            if(count($résultat)<17){
+            if(count($résultat)<18){
                 $nbmax = count($résultat);
             }
-            elseif(count($résultat)>=17){
-                $nbmax = 17;
+            elseif(count($résultat)>=18){
+                $nbmax = 18;
             }
 
 
 
-            for($i = 0; $i<=$nbmax; $i++){
+            for($i = 0; $i<$nbmax; $i++){
 
              $overview=$résultat[$i]['overview'];
 

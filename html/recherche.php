@@ -11,7 +11,7 @@ if(isset($_POST['recherche'])) {
   $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
   $result = json_decode($json, TRUE);
   $résultat = $result['results'];
-  
+
   
 }
 elseif(isset($_GET['recherche'])) {
@@ -301,7 +301,7 @@ elseif(isset($_GET['recherche'])) {
             <ol class="breadcrumb">
                 <li><a href="index.php">Home</a></li>
                 <li>Résultats de la recherche <?php echo $recherche; ?></li>
-                
+
             </ol>
         </div>
     </div>
@@ -321,7 +321,7 @@ elseif(isset($_GET['recherche'])) {
                 <!-- Layout Switcher -->
                 <div class="layout-switcher">
                     <a href="<?php echo 'recherchelist.php?recherche='.$recherche.'"' ?> class="list"><i class="fa fa-align-justify"></i></a>
-                    
+
                     <a href="<?php echo 'recherche.php?recherche='.$recherche.'"' ?> class="grid active"><i class="fa fa-th"></i></a>
                 </div>
             </div>
@@ -355,54 +355,54 @@ elseif(isset($_GET['recherche'])) {
             <!-- Movie List Item -->
             <?php 
             $nbmax = 0;
-            if(count($résultat)<17){
+            if(count($résultat)<18){
                 $nbmax = count($résultat);
             }
-            elseif(count($résultat)>=17){
-                $nbmax = 17;
+            elseif(count($résultat)>=18){
+                $nbmax = 18;
             }
-            
-            
-            
-            for($i = 0; $i<=$nbmax; $i++){
-               
+
+
+
+            for($i = 0; $i<$nbmax; $i++){
+
                $overview=$résultat[$i]['overview'];
-               
+
                if (strlen($overview)>=150) {
                 $synopsis = substr($overview, 0, 150);
                 $synopsis .="...";
             }
             elseif(strlen($overview)<=150 && $overview!=""){
                 $nbmanquants = 150 - strlen($overview);
-                
+
                         //for($j=0; $j<$nbmanquants; $j++){
                 $synopsis = $overview;
                 $synopsis .= str_repeat(".", $nbmanquants) ;
-                
-                
+
+
             }
             if($overview==""){
                $synopsis = $overview;
                $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
                $synopsis .=str_repeat(". ", 66);
-               
+
            }
            $title = $résultat[$i]['title'];
            if (strlen($title)>=16) {
             $title = substr($title, 0, 16);
             $title .="...";
         }
-        
+
         $json = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat[$i]['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
         $vid = json_decode($json, TRUE);
         if($vid['results']!=null){
             $vidéo = $vid['results'][0]['key'];
         }
         else $vidéo="";
-        
-        
-        
-        
+
+
+
+
         echo '<div class="col-lg-4 col-md-6 col-sm-12">
         <div class="movie-box-2 mb30">
         <div class="listing-container">
@@ -439,10 +439,18 @@ elseif(isset($_GET['recherche'])) {
         </div>
         </div>
 
-        <!-- Image -->
-        <img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
-        </div>
+        <!-- Image -->';
+        if($résultat[$i]['poster_path']!=''){
+        echo '<img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
+        </div>';
+        }
+        else{
 
+            echo '<img src="assets/images/posters/poster-1.jpg" alt="">
+                            </div>';
+        }
+
+        echo'
         <!-- Movie List Content -->
         <div class="listing-content">
         <div class="inner">
@@ -458,12 +466,12 @@ elseif(isset($_GET['recherche'])) {
         </div>
         </div>';
     }
-    
-    
-    
+
+
+
     ?>
 
-    
+
 
 
 </div>
@@ -740,7 +748,7 @@ elseif(isset($_GET['recherche'])) {
                 <div class="form-group">
                     <label for="mail2">Confirmation Email</label>
                     <input type="email" placeholder="Confirmation de votre mail" id="mail2" name="mail2" value="<?php if(isset($mail2)) { echo $mail2; } ?>" />
-                    
+
                 </div>
 
                 <div class="form-group">
@@ -753,7 +761,7 @@ elseif(isset($_GET['recherche'])) {
                     <label for="mdp2">Confirmer votre mot de passe</label>
                     <input type="password" placeholder="Confirmation du mot de passe" id="mdp2" name="mdp2" />
                 </div>
-                
+
 
                 <div class="form-group">
 
