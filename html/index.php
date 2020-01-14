@@ -59,6 +59,12 @@ if($nomlength <= 255) {
       $erreur = "Tous les champs doivent être complétés !";
    }
 }
+
+if(isset($_POST['recherche'])) {
+    echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
+}
+
+
 ?>
 
 
@@ -441,7 +447,7 @@ if($nomlength <= 255) {
                 <div class="container">
 
                     <!-- ===== START OF SEARCH FORM ===== -->
-                    <form action="recherche.php" id="search-form-1" method="post">
+                    <form action="" id="search-form-1" method="post">
                         <div class="row justify-content-center">
                             <div class="col-md-8 col-sm-10 col-12">
                                 <div class="form-group">

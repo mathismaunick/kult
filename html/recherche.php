@@ -21,6 +21,8 @@ elseif(isset($_GET['recherche'])) {
     $result = json_decode($json, TRUE);
     $résultat = $result['results'];
 }
+
+
 ?>  
 
 <!DOCTYPE html>
