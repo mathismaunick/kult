@@ -15,7 +15,7 @@
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>Movify - Movies, Series & Cinema HTML Template</title>
+    <title>KULT</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -47,8 +47,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 
@@ -79,17 +79,16 @@
 
         <!-- =============== START OF HEADER NAVIGATION =============== -->
         <!-- Insert the class "sticky" in the header if you want a sticky header -->
-        <header class="header header-fixed header-transparent text-white">
+        <header class="header">
             <div class="container-fluid">
 
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- INSERT YOUR LOGO HERE -->
-                        <img src="assets/images/logo.svg" alt="logo" width="150" class="logo">
+                        <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
 
                     <!-- Login Button on Responsive -->
@@ -108,13 +107,13 @@
                         <ul class="navbar-nav mx-auto" id="main-menu">
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
                                     <!-- Menu Item -->
                                     <li>
-                                        <a class="dropdown-item" href="index.html">Home Version 1</a>
+                                        <a class="dropdown-item" href="index.php">Home Version 1</a>
                                     </li>
 
                                     <!-- Menu Item -->
@@ -137,7 +136,7 @@
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fil d'actus</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -196,7 +195,7 @@
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Movies & TV Shows</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groupes</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -306,7 +305,7 @@
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
                                 <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                    <i class="icon-user"></i>login
+                                    <i class="icon-user"></i>Se connecter
                                 </a>
                             </li>
                         </ul>
@@ -328,19 +327,88 @@
         </section>
         <!-- =============== END OF MOVIE DETAIL INTRO =============== -->
 
-<!-- Récupération des infos -->
+
+<!-- Récupération des infos via les requetes-->
 <?php
 $id = $_GET['id'];
-    
-$result = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
-$title = $result['title'];
-$poster_path = $result['poster_path'];
-$genres = $result['genres'][0]["name"];
-$runtime = $result['runtime'];
-$release_date = $result['release_date'];
 
+/////Requete à TMDB
+$result = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
+
+if($result['title'] != ""){
+    $title = $result['title'];}
+else{$title = " ";}
+
+if($result['overview'] != ""){
+    $overview = $result['overview'];}
+else{$overview = " ";}
+
+if($result['production_countries'] != null){
+    $production_countries = $result['production_countries'][0]['iso_3166_1'];}
+else{$production_countries = " ";}
+
+if($result['runtime'] != null){
+    $runtime = $result['runtime'];}
+else{$runtime = " ";}
+
+if($result['release_date'] != null){
+    $release_date = $result['release_date'];}
+else{$release_date = " ";}
+
+if($result['spoken_languages'] != null){
+    $spoken_languages = $result['spoken_languages'][0]['name'];}
+else{$spoken_languages = " ";}
+
+if($result['vote_count'] != null){
+    $vote_count = $result['vote_count'];}
+else{$vote_count = " ";}
+
+//Traitement pour affichage du genre
+if($result['genres'] != null){
+    $genres = $result['genres'];
+    $tmp = count($genres);
+    $tot_genres='';
+    for($i=0;$i<$tmp;$i++){
+        $tot_genres .= $result['genres'][$i]['name'].', ';
+    }
+    $tot_genres = substr("$tot_genres", 0, -2);
+    }
+else{$tot_genres=' ';}
+
+
+//Traitement pour affichage du budget
+if($result['budget'] != null){
+    $budget = $result['budget'];
+    if($budget>=1000000){
+        $budget = substr("$budget", 0, -6).' Million(s) USD';
+    }
+    if($budget>=1000000000){
+        $budget = substr("$budget", 0, -9).' Milliard(s) USD';
+    }
+}
+else{$budget ="/";}
+
+//Blindage Affiches
+if($result['poster_path'] != 'null'){
+    $poster_path = $result['poster_path'];
+}
+
+
+/////Requete à TMDB (pour la vidéo)
 $vid = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
-$video = $vid['results'][0]['key'];
+if($vid['results'] != null){
+    $video = $vid['results'][0]['key'];
+}
+
+
+/////Requete à CaptainWatch
+$capt = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$id.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
+if($capt['crews'] != null){$crews = $capt['crews'][0]['name'];}
+else{$crews = " ";}
+
+//Traitement pour affichage casting
+$casting = $capt['casts'];
+$tmp2 = count($casting);
 
 
 ?>
@@ -352,9 +420,20 @@ $video = $vid['results'][0]['key'];
                     <div class="col-md-12">
 
                         <div class="movie-poster">
-                            <?php echo '<img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$poster_path.'" alt="">' ?>
-
-                            <?php echo '<a href="https://www.youtube.com/watch?v=' .$video. '" class="play-video">' ?>
+                            <?php
+                            if($poster_path != null){
+                                echo '<img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$poster_path.'" alt="">';                        
+                            }
+                            else{
+                                echo '<img src="assets/images/posters/poster-8.jpg" alt="">';
+                            }
+                            if($vid['results'] != null){
+                                echo '<a href="https://www.youtube.com/watch?v='.$video.'" class="play-video">';
+                            }
+                            else{
+                                echo '<a href="https://www.youtube.com/watch?v=skYJpowAYPw" class="play-video">';
+                            }
+                            ?>
                                 <i class="fa fa-play"></i>
                             </a>
                         </div>
@@ -364,13 +443,18 @@ $video = $vid['results'][0]['key'];
                             <?php echo '<h3 class="title">'.$title.'</h3>'?>
 
                             <ul class="movie-subtext">
-                                <li>PG-13</li>
                                 <?php echo '<li>'.$runtime.' min</li>'?>
-                                <?php echo '<li>'.$genres.'</li>'?>
+                                <?php echo '<li>'.$tot_genres.'</li>'?>
                                 <?php echo '<li>'.$release_date.'</li>'?>
                             </ul>
-
-                            <a href="#" class="btn btn-main btn-effect">trailer</a>
+                            <?php
+                            if($vid['results'] != null){
+                             echo '<a href="https://www.youtube.com/watch?v=' .$video. '" class="btn btn-main btn-effect">trailer</a>';
+                            }
+                            else{
+                                echo '<a href="#" class="btn btn-main btn-effect">trailer</a>';
+                            }
+                                ?>
                             <a href="#" class="btn btn-main btn-effect">watch later</a>
                             <a href="#" class="btn rate-movie"><i class="icon-heart"></i></a>
 
@@ -380,7 +464,8 @@ $video = $vid['results'][0]['key'];
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
-                                <span>296 Ratings</span>
+
+                                <?php echo '<span>'.$vote_count.' avis</span>'?>
                             </div>
                         </div>
 
@@ -403,14 +488,14 @@ $video = $vid['results'][0]['key'];
 
                             <!-- Storyline -->
                             <div class="storyline">
-                                <h3 class="title">Storyline</h3>
+                                <h3 class="title">Résumé</h3>
 
-                                <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Cras suscipit, quam vitae adipiscing faucibus, risus nibh laoreet odio, a porttitor metus eros ut enim. Morbi augue velit, tempus mattis dignissim nec, porta sed risus. Donec eget magna eu lorem tristique pellentesque eget eu dui. Fusce lacinia tempor malesuada. Ut lacus sapien, placerat a ornare nec, elementum sit amet felis. Maecenas pretium lorem hendrerit eros sagittis fermentum.</p>
+                                <?php echo '<p> '.$overview.'</p>';?>
                             </div>
 
                             <!-- Media -->
                             <div class="movie-media mt50">
-                                <h3 class="title"> Photos & Videos</h3>
+                                <h3 class="title"> Photos & Vidéos</h3>
 
                                 <ul class="image-gallery isotope">
                                     <li class="element">
@@ -481,15 +566,14 @@ $video = $vid['results'][0]['key'];
 
                             <!-- Start of Details Widget -->
                             <aside class="widget widget-movie-details">
-                                <h3 class="title">Details</h3>
+                                <h3 class="title">Détails</h3>
 
                                 <ul>
-                                    <li><strong>Release date: </strong>December 15, 2017</li>
-                                    <li><strong>Director: </strong><a href="#">Rian Johnson</a></li>
-                                    <li><strong>Budget: </strong>200 million USD</li>
-                                    <li><strong>Country: </strong>USA</li>
-                                    <li><strong>Language: </strong>English</li>
-                                    <li><strong>Production Co: </strong><a href="#">Lucasfilm</a></li>
+                                    <?php echo '<li><strong>Date de sortie: </strong>'.$release_date.'</li>'?>
+                                    <?php echo '<li><strong>Réalisateur: </strong>'.$crews.'</li>'?>
+                                    <?php echo '<li><strong>Budget: </strong>'.$budget.'</li>'?>
+                                    <?php echo '<li><strong>Pays de production: </strong>'.$production_countries.'</li>'?>
+                                    <?php echo '<li><strong>Langue originale: </strong>'.$spoken_languages.'</li>'?>
                                 </ul>
                             </aside>
                             <!-- End of Details Widget -->
@@ -499,41 +583,31 @@ $video = $vid['results'][0]['key'];
                                 <h3 class="title">Cast</h3>
 
                                 <ul class="cast-wrapper">
-                                    <li>
-                                        <a href="celebrity-detail.html">
-                                            <span class="circle-img">
-                                                <img src="assets/images/celebrities/celebrity1.jpg" alt="">
-                                            </span>
-                                            <h6 class="name">Bryan Doe</h6>
-                                        </a>
-                                    </li>
+                                    <?php 
+                                    for($j=0;$j<$tmp2;$j++){
 
-                                    <li>
-                                        <a href="celebrity-detail.html">
-                                            <span class="circle-img">
-                                                <img src="assets/images/celebrities/celebrity2.jpg" alt="">
-                                            </span>
-                                            <h6 class="name">Baron Saul</h6>
-                                        </a>
-                                    </li>
+                                        $id_acteur = $capt['casts'][$j]['id'];
+                                        $req_acteur = json_decode(file_get_contents('https://api.themoviedb.org/3/person/'.$id_acteur.'?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
+                                        $img_acteur = $req_acteur['profile_path'];
 
-                                    <li>
-                                        <a href="celebrity-detail.html">
-                                            <span class="circle-img">
-                                                <img src="assets/images/celebrities/celebrity3.jpg" alt="">
-                                            </span>
-                                            <h6 class="name">Ewan Actor</h6>
-                                        </a>
-                                    </li>
+                                    echo '
+                                       <li>
+                                            <a href="celebrity-detail.html">
+                                                <span class="circle-img">
+                                                    <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$img_acteur.'" alt="">
+                                                    
+                                                </span>
+                                                <h6 class="name">'.$capt['casts'][$j]['name'].'</h6>
+                                            </a>
+                                        </li> ';
+                                    }
+                                     
 
-                                    <li>
-                                        <a href="celebrity-detail.html">
-                                            <span class="circle-img">
-                                                <img src="assets/images/celebrities/celebrity4.jpg" alt="">
-                                            </span>
-                                            <h6 class="name">Nicole Beet</h6>
-                                        </a>
-                                    </li>
+                                    ?>
+
+                                    
+
+                                    
                                 </ul>
 
                                 <a href="celebrities-list.html" class="btn btn-main btn-effect mt20">view all</a>
