@@ -1,4 +1,5 @@
 <?php
+session_start();
 //$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
@@ -165,7 +166,7 @@ if(isset($_POST['recherche'])) {
                     </a>
                     
                     <!-- Login Button on Responsive -->
-                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
+                    <a href="login-register.php" class="login-mobile-btn"><i class="icon-user"></i></a>
 
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
@@ -179,32 +180,8 @@ if(isset($_POST['recherche'])) {
                         <!-- ====== Start of Main Menu ====== -->
                         <ul class="navbar-nav mx-auto" id="main-menu">
                             <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
-
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="index.php">Home Version 1</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="index2.html">Home Version 2</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="index3.html">Home Version 3</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="index4.html">Home Version 4</a>
-                                    </li>
-
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Accueil</a>
                             </li>
 
                                                         <!-- Menu Item -->
@@ -213,56 +190,8 @@ if(isset($_POST['recherche'])) {
                             </li>
 
                             <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groupes</a>
-
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-list.html">Movie List 1</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-list2.html">Movie List 2</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid.html">Movie Grid 1</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid2.html">Movie Grid 2</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid3.html">Movie Grid 3</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid4.html">Movie Grid 4</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-detail.html">Movie Detail</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-detail2.html">Movie Detail 2</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="watch-later.html">Watch Later</a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="groupe.php">Groupes</a>
                             </li>
 
                             <!-- Menu Item -->
@@ -323,7 +252,7 @@ if(isset($_POST['recherche'])) {
 
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
-                                <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
+                                <a href="login-register.php" class="btn btn-main btn-effect login-btn">
                                     <i class="icon-user"></i>Se connecter
                                 </a>
                             </li>

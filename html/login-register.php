@@ -46,7 +46,7 @@ if(isset($_POST['formconnexion'])) {
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>Movify - Movies, Series & Cinema HTML Template</title>
+    <title>KULT</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -87,7 +87,7 @@ if(isset($_POST['formconnexion'])) {
 
 
     <!-- =============== START OF PRELOADER =============== -->
-    <div class="loading">
+    <!-- <div class="loading">
         <div class="loading-inner">
             <div class="loading-effect">
                 <div class="object"></div>
@@ -250,7 +250,7 @@ if(isset($_POST['formconnexion'])) {
                 </div>
                 <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
 
-                <a href="index.html" class="text-white">Back to Home</a>
+                <a href="index.php" class="text-white">Back to Home</a>
 
             </div>
         </main>
