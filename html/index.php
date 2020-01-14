@@ -201,63 +201,9 @@ if($nomlength <= 255) {
                                 </ul>
                             </li>
 
-                            <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fil d'actus</a>
-
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="404.html">404 Page</a>
-                                    </li>
-
-                                    <!-- Divider -->
-                                    <li class="divider" role="separator"></li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="celebrities-list.html">celebrities list</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="celebrities-grid.html">celebrities grid</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="celebrity-detail.html">celebrity detail</a>
-                                    </li>
-
-                                    <!-- Divider -->
-                                    <li class="divider" role="separator"></li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="contact-us.html">Contact us</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="coming-soon.html">Coming soon</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="pricing.html">Pricing Plan</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="login-register.html">Login - Register</a>
-                                    </li>
-                                    
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="testimonials.html">Testimonials</a>
-                                    </li>
-                                </ul>
+                                                        <!-- Menu Item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
                             </li>
 
                             <!-- Menu Item -->

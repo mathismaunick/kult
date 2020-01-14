@@ -1,7 +1,7 @@
     <?php
     session_start();
 
-    $bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+    $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
     if(isset($_POST['groupe'])) {
         $nom = htmlspecialchars($_POST['nom']);

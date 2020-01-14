@@ -30,7 +30,7 @@ $id=[];
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>Movify - Movies, Series & Cinema HTML Template</title>
+    <title>KULT</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -100,11 +100,10 @@ $id=[];
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- INSERT YOUR LOGO HERE -->
-                        <img src="assets/images/logo.svg" alt="logo" width="150" class="logo">
+                        <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
 
                     <!-- Login Button on Responsive -->
@@ -151,62 +150,8 @@ $id=[];
                     </li>
 
                     <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="404.html">404 Page</a>
-                            </li>
-
-                            <!-- Divider -->
-                            <li class="divider" role="separator"></li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="celebrities-list.html">celebrities list</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="celebrities-grid.html">celebrities grid</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="celebrity-detail.html">celebrity detail</a>
-                            </li>
-
-                            <!-- Divider -->
-                            <li class="divider" role="separator"></li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="contact-us.html">Contact us</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="coming-soon.html">Coming soon</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="pricing.html">Pricing Plan</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="login-register.html">Login - Register</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="testimonials.html">Testimonials</a>
-                            </li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
                     </li>
 
                     <!-- Menu Item -->
@@ -358,43 +303,6 @@ $id=[];
 <main class="ptb100">
     <div class="container">
 
-        <!-- Start of Filters -->
-        <div class="row mb50">
-
-            <div class="col-md-6">
-                <!-- Layout Switcher -->
-                <div class="layout-switcher">
-                    <a href="movie-list.html" class="list"><i class="fa fa-align-justify"></i></a>
-                    <a href="movie-grid.html" class="grid active"><i class="fa fa-th"></i></a>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-
-                <!-- Sort by -->
-                <div class="sort-by">
-                    <div class="sort-by-select">
-                        <select class="chosen-select-no-single">
-                            <option>Default Order</option>
-                            <option>Featured</option>
-                            <option>Top Viewed</option>
-                            <option>Top Rated</option>
-                            <option>Newest</option>
-                            <option>Oldest</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Sort by / End -->
-
-            </div>
-
-        </div>
-
-
-
-
-
-
         <div class="row">
 
          <?php
@@ -441,7 +349,7 @@ $id=[];
             <h2 class="title">'.$object_response["results"][$i]["title"].'</h2>
 
             <p>'.$object_response["results"][$i]["overview"].'</p>
-            <a href="movie-detail.html" class="btn btn-main btn-effect">details</a>
+            <a href="movie-detail.php?id='.$single_id.'" class="btn btn-main btn-effect">details</a>
             </div>
 
 
