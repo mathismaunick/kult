@@ -1,30 +1,47 @@
-<?php
-session_start();
+    <?php
+    session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', '');
+    //$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+    $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
+    $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+    $db_found = mysqli_select_db($db_handle,"kult");
+    if(isset($_POST['groupe'])) {
+        $nom = htmlspecialchars($_POST['nom']);
+        if(!empty($_POST['nom']) ) {
+            $nomlength = strlen($nom);
 
-if(isset($_POST['formconnexion'])) {
-   $mailconnect = htmlspecialchars($_POST['mailconnect']);
-   $mdpconnect = sha1($_POST['mdpconnect']);
-   if(!empty($mailconnect) AND !empty($mdpconnect)) {
-     
-      $requser = $bdd->prepare("SELECT * FROM Utilisateur WHERE ( Mail='$mailconnect' OR Pseudo='$mailconnect' ) AND MDP='$mdpconnect'");
-      $requser->execute(array($mailconnect, $mdpconnect));
-      $userexist = $requser->rowCount();
-      if($userexist == 1) {
-         $userinfo = $requser->fetch();
-         $_SESSION['Id'] = $userinfo['Id'];
-         $_SESSION['Pseudo'] = $userinfo['Pseudo'];
-         $_SESSION['Mail'] = $userinfo['Mail'];
-         header("Location: http://localhost/kult/html/index.php");
-      } else {
-         $erreur = "Mauvais mail ou mot de passe !";
-      }
-   } else {
-      $erreur = "Tous les champs doivent être complétés !";
-   }
-}
-?>
+
+        if($nomlength <= 255) { 
+                    $reqnom = $bdd->prepare("SELECT * FROM GROUPE WHERE Nom = ?");
+                    $reqnom->execute(array($nom));
+                    $nomexist = $reqnom->rowCount();
+                    if($nomexist == 0) {
+                        //if($mdp == $mdp2) {
+                            $insertmbr = $bdd->prepare("INSERT INTO GROUPE(Nom) VALUES(?)");
+                            $insertmbr->execute(array($nom));
+                            $erreur = "Votre groupe a bien été créé !";
+                        
+                         $SQL1 = "SELECT * FROM groupe WHERE Nom='".$nom."'";
+                         $result1 = mysqli_query($db_handle, $SQL1);
+                         $db_field1=mysqli_fetch_assoc($result1);
+                         
+                        $SQL56 = "INSERT INTO `groupe_membre`(`IdGroupe`, `IdUtilisateur`) VALUES (".$db_field1['Id']." , ".$_SESSION['Id'].")";
+                        $result56 = mysqli_query($db_handle, $SQL56);
+                        
+                            echo '<meta http-equiv="refresh" content="0;URL=ajoutermembres.php?idgroupe='.$db_field1['Id'].'">';
+                        //} 
+                    } 
+                    else {
+                        $erreur = "Groupe déjà existant !";
+                
+                    } 
+
+        } 
+        else {
+            $erreur = "Votre prenom ne doit pas dépasser 255 caractères !";
+        }
+        }}
+    ?>
 
 
 
@@ -109,7 +126,7 @@ if(isset($_POST['formconnexion'])) {
                     <!-- ===== Start of Signin wrapper ===== -->
                     <div class="signin-wrapper">
                         <div class="small-dialog-headline">
-                            <h4 class="text-center">Se connecter</h4>
+                            <h4 class="text-center">Créer un nouveau groupe</h4>
                         </div>
 
 
@@ -120,25 +137,15 @@ if(isset($_POST['formconnexion'])) {
                                 <p class="status"></p>
 
                                 <div class="form-group">
-                                    <label for="mailconnect">Pseudo ou email</label>
-                                    <input type="text" class="form-control" id="mailconnect" name="mailconnect" placeholder="Entrez votre Pseudo ou email *" />
+                                    <label for="Nom">Nom</label>
+                                    <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez le nom du groupe *" />
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="mdpconnect">Mot de passe</label>
-                                    <input type="password" class="form-control" id="mdpconnect" name="mdpconnect" placeholder="Entrez votre mot de passe *" />
 
-                                </div>
+                               
 
                                 <div class="form-group">
-                                    <div class="checkbox pad-bottom-10">
-                                        <input id="check1" type="checkbox" name="remember" value="yes">
-                                        <label for="check1">Me garder connecté</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="submit" name="formconnexion" value="Sign in" class="btn btn-main btn-effect nomargin" />
+                                    <a href="ajoutermembres.php"><input type="submit" name="groupe" value="Créer nouveau groupe" class="btn btn-main btn-effect nomargin" /></a>
 
                                 </div>
                             </form>
@@ -152,13 +159,7 @@ if(isset($_POST['formconnexion'])) {
                              ?>                           
                             <!-- End of Login form -->
 
-                            <div class="bottom-links">
-                                <span>
-                                    Pas inscrit ?
-                                    <a  class="signUpClick">M'inscrire</a>
-                                </span>
-                                <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
-                            </div>
+                            
                         </div>
 
                     </div>
@@ -250,7 +251,7 @@ if(isset($_POST['formconnexion'])) {
                 </div>
                 <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
 
-                <a href="index.html" class="text-white">Back to Home</a>
+                <a href="index.php" class="text-white">Back to Home</a>
 
             </div>
         </main>

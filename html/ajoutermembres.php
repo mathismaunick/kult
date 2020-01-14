@@ -1,30 +1,30 @@
-<?php
-session_start();
+    <?php
+    session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', '');
+    //$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+    $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
+    $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+    $db_found = mysqli_select_db($db_handle,"kult");
 
-if(isset($_POST['formconnexion'])) {
-   $mailconnect = htmlspecialchars($_POST['mailconnect']);
-   $mdpconnect = sha1($_POST['mdpconnect']);
-   if(!empty($mailconnect) AND !empty($mdpconnect)) {
-     
-      $requser = $bdd->prepare("SELECT * FROM Utilisateur WHERE ( Mail='$mailconnect' OR Pseudo='$mailconnect' ) AND MDP='$mdpconnect'");
-      $requser->execute(array($mailconnect, $mdpconnect));
-      $userexist = $requser->rowCount();
-      if($userexist == 1) {
-         $userinfo = $requser->fetch();
-         $_SESSION['Id'] = $userinfo['Id'];
-         $_SESSION['Pseudo'] = $userinfo['Pseudo'];
-         $_SESSION['Mail'] = $userinfo['Mail'];
-         header("Location: http://localhost/kult/html/index.php");
-      } else {
-         $erreur = "Mauvais mail ou mot de passe !";
-      }
-   } else {
-      $erreur = "Tous les champs doivent être complétés !";
-   }
-}
-?>
+     $SQL1 = "SELECT * FROM groupe WHERE Id='".$_GET['idgroupe']."'";
+     $result1 = mysqli_query($db_handle, $SQL1);
+     $db_field1=mysqli_fetch_assoc($result1);
+
+    if(isset($_POST['groupe'])) {
+        
+        if(isset($_POST['pseudo'])){
+            
+             $SQL3 = "SELECT * FROM utilisateur WHERE Pseudo='".$_POST['pseudo']."'";
+            $result3 = mysqli_query($db_handle, $SQL3);
+            $db_field3=mysqli_fetch_assoc($result3);
+            $SQL2 = "INSERT INTO `groupe_membre`(`IdGroupe`, `IdUtilisateur`) VALUES (".$_GET['idgroupe']." , ".$db_field3['Id'].")";
+            $result2 = mysqli_query($db_handle, $SQL2);
+            
+            
+        }
+    }
+    
+    ?>
 
 
 
@@ -109,39 +109,47 @@ if(isset($_POST['formconnexion'])) {
                     <!-- ===== Start of Signin wrapper ===== -->
                     <div class="signin-wrapper">
                         <div class="small-dialog-headline">
-                            <h4 class="text-center">Se connecter</h4>
+                            <h4 class="text-center">Ajouter des membres au groupe : <?php echo $db_field1['Nom']; ?></h4>
                         </div>
 
 
                         <div class="small-dialog-content">
-
+                            Membres du groupe : 
+                            <br>
+                            <?php
+                              $SQL30 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$_GET['idgroupe']."'";
+                              $result30 = mysqli_query($db_handle, $SQL30);
+                            while($db_field30=mysqli_fetch_assoc($result30)){
+                                $SQL40 = "SELECT * FROM utilisateur WHERE Id='".$db_field30['IdUtilisateur']."'";
+                                  $result40 = mysqli_query($db_handle, $SQL40);
+                                  while($db_field40=mysqli_fetch_assoc($result40)){
+                                      echo $db_field40['Pseudo'].'<br>';
+                            }
+                            }
+                                
+                             ?> 
                             <!-- Start of Login form -->
                             <form id="cariera_login" method="post">
                                 <p class="status"></p>
 
                                 <div class="form-group">
-                                    <label for="mailconnect">Pseudo ou email</label>
-                                    <input type="text" class="form-control" id="mailconnect" name="mailconnect" placeholder="Entrez votre Pseudo ou email *" />
+                                    <label for="Nom">Pseudo</label>
+                                    <input type="text" class="form-control" id="nom" name="pseudo" placeholder="Entrez le pseudo de la personne à ajouter *" />
                                 </div>
+
+
+                               
 
                                 <div class="form-group">
-                                    <label for="mdpconnect">Mot de passe</label>
-                                    <input type="password" class="form-control" id="mdpconnect" name="mdpconnect" placeholder="Entrez votre mot de passe *" />
+                                    <input type="submit" name="groupe" value="Ajouter le membre" class="btn  nomargin btn-success" />
 
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="checkbox pad-bottom-10">
-                                        <input id="check1" type="checkbox" name="remember" value="yes">
-                                        <label for="check1">Me garder connecté</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="submit" name="formconnexion" value="Sign in" class="btn btn-main btn-effect nomargin" />
+                                </form>
+                                <div>
+                                    <a href="groupe.php"><button class="btn btn-dark">Terminer</button></a>
 
                                 </div>
-                            </form>
+                            
 
                             <!-- message d'erreur -->
 
@@ -152,13 +160,7 @@ if(isset($_POST['formconnexion'])) {
                              ?>                           
                             <!-- End of Login form -->
 
-                            <div class="bottom-links">
-                                <span>
-                                    Pas inscrit ?
-                                    <a  class="signUpClick">M'inscrire</a>
-                                </span>
-                                <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
-                            </div>
+                            
                         </div>
 
                     </div>
@@ -250,7 +252,7 @@ if(isset($_POST['formconnexion'])) {
                 </div>
                 <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
 
-                <a href="index.html" class="text-white">Back to Home</a>
+                <a href="index.php" class="text-white">Back to Home</a>
 
             </div>
         </main>
