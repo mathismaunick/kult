@@ -4,63 +4,6 @@ session_start();
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
 
-if(isset($_POST['forminscription'])) {
-   $nom = htmlspecialchars($_POST['nom']);
-   $prenom = htmlspecialchars($_POST['prenom']);
-   $pseudo = htmlspecialchars($_POST['pseudo']);
-   $mail = htmlspecialchars($_POST['mail']);
-   $mail2 = htmlspecialchars($_POST['mail2']);
-   $mdp = sha1($_POST['mdp']);
-   $mdp2 = sha1($_POST['mdp2']);
-   if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mail2']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
-      $nomlength = strlen($nom);
-      $prenomlength = strlen($prenom);
-      $pseudolength = strlen($pseudo);
-
-
-if($nomlength <= 255) { 
-   if($prenomlength <= 255) {      
-      if($pseudolength <= 255) {
-         if($mail == $mail2) {
-            if(filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-               $reqmail = $bdd->prepare("SELECT * FROM utilisateur WHERE Mail = ?");
-               $reqmail->execute(array($mail));
-               $mailexist = $reqmail->rowCount();
-               if($mailexist == 0) {
-                  if($mdp == $mdp2) {
-                     $insertmbr = $bdd->prepare("INSERT INTO utilisateur(Nom, Prenom, Pseudo, Mail, MDP) VALUES(?, ?, ?, ?, ?)");
-                     $insertmbr->execute(array($nom, $prenom, $pseudo, $mail, $mdp));
-                     $erreur = "Votre compte a bien été créé !";
-                  } else {
-                     $erreur = "Vos mots de passes ne correspondent pas !";
-                  }
-               } else {
-                  $erreur = "Adresse mail déjà utilisée !";
-               }
-            } else {
-               $erreur = "Votre adresse mail n'est pas valide !";
-            }
-         } else {
-            $erreur = "Vos adresses mail ne correspondent pas !";
-         }
-
-      } else {
-         $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
-      }
-
-            } else {
-         $erreur = "Votre prenom ne doit pas dépasser 255 caractères !";
-      }
-
-      } else {
-         $erreur = "Votre nom ne doit pas dépasser 255 caractères !";
-      }
-
-   } else {
-      $erreur = "Tous les champs doivent être complétés !";
-   }
-}
-
 if(isset($_POST['recherche'])) {
     echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
 }
@@ -166,7 +109,7 @@ if(isset($_POST['recherche'])) {
                     </a>
                     
                     <!-- Login Button on Responsive -->
-                    <a href="login-register.php" class="login-mobile-btn"><i class="icon-user"></i></a>
+                    <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i></a>
 
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
@@ -191,33 +134,36 @@ if(isset($_POST['recherche'])) {
 
                             <!-- Menu Item -->
                             <li class="nav-item">
-                                <a class="nav-link" href="groupe.php">Groupes</a>
+
+                            <?php
+                            if (isset($_SESSION['Id'])):
+                            ?>
+                                <a class="nav-link" href="groupe.php?id=<?= $_SESSION['Id'] ?>"\'>Groupes</a>
+                            <?php
+                            else:
+                            ?>
+                                <a class="nav-link" a href="groupe.php">Groupes</a>
+                            <?php
+                            endif
+                            ?>
+
                             </li>
+
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
                                     <!-- Menu Item -->
                                     <li>
-                                        <a class="dropdown-item" href="blog-list.html">Blog List</a>
+                                        <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
                                     </li>
 
                                     <!-- Menu Item -->
                                     <li>
-                                        <a class="dropdown-item" href="blog-list-fullwidth.html">Blog List Fullwidth</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="blog-post-detail.html">Blog Detail</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="blog-post-detail-fullwidth.html">Blog Detail Fullwidth</a>
+                                        <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
                                     </li>
 
                                 </ul>
@@ -252,9 +198,23 @@ if(isset($_POST['recherche'])) {
 
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
-                                <a href="login-register.php" class="btn btn-main btn-effect login-btn">
-                                    <i class="icon-user"></i>Se connecter
-                                </a>
+
+                                    <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se déconnecter
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se connecter
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
+
                             </li>
                         </ul>
                         <!-- ====== End of Extra Nav ====== -->

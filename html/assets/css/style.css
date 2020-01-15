@@ -3202,7 +3202,7 @@ form#contact-form div#contact-result.valid {
 /********************** 8.4 Login - Register ************************/
 
 .login-register-page {
-    height: 100vh;
+    height: 170vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;

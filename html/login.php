@@ -16,7 +16,7 @@ if(isset($_POST['formconnexion'])) {
          $_SESSION['Id'] = $userinfo['Id'];
          $_SESSION['Pseudo'] = $userinfo['Pseudo'];
          $_SESSION['Mail'] = $userinfo['Mail'];
-         header("Location: http://localhost/kult/html/index.php");
+         header("Location: index.php?id=".$_SESSION['Id']);
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
       }
@@ -155,7 +155,7 @@ if(isset($_POST['formconnexion'])) {
                             <div class="bottom-links">
                                 <span>
                                     Pas inscrit ?
-                                    <a href="register.php" class="signInClick">Se connecter</a>
+                                    <a href="register.php" class="signInClick">S'inscrire</a>
                                 </span>
                                 <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
                             </div>

@@ -1,30 +1,67 @@
 <?php
-session_start();
+//$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
-$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', '');
 
-if(isset($_POST['formconnexion'])) {
-   $mailconnect = htmlspecialchars($_POST['mailconnect']);
-   $mdpconnect = sha1($_POST['mdpconnect']);
-   if(!empty($mailconnect) AND !empty($mdpconnect)) {
-     
-      $requser = $bdd->prepare("SELECT * FROM Utilisateur WHERE ( Mail='$mailconnect' OR Pseudo='$mailconnect' ) AND MDP='$mdpconnect'");
-      $requser->execute(array($mailconnect, $mdpconnect));
-      $userexist = $requser->rowCount();
-      if($userexist == 1) {
-         $userinfo = $requser->fetch();
-         $_SESSION['Id'] = $userinfo['Id'];
-         $_SESSION['Pseudo'] = $userinfo['Pseudo'];
-         $_SESSION['Mail'] = $userinfo['Mail'];
-         header("Location: http://localhost/kult/html/index.php");
+if(isset($_POST['forminscription'])) {
+   $nom = htmlspecialchars($_POST['nom']);
+   $prenom = htmlspecialchars($_POST['prenom']);
+   $pseudo = htmlspecialchars($_POST['pseudo']);
+   $mail = htmlspecialchars($_POST['mail']);
+   $mail2 = htmlspecialchars($_POST['mail2']);
+   $mdp = sha1($_POST['mdp']);
+   $mdp2 = sha1($_POST['mdp2']);
+   if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mail2']) AND !empty($_POST['mdp']) AND !empty($_POST['mdp2'])) {
+      $nomlength = strlen($nom);
+      $prenomlength = strlen($prenom);
+      $pseudolength = strlen($pseudo);
+
+
+if($nomlength <= 255) { 
+   if($prenomlength <= 255) {      
+      if($pseudolength <= 255) {
+         if($mail == $mail2) {
+            if(filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+               $reqmail = $bdd->prepare("SELECT * FROM utilisateur WHERE Mail = ?");
+               $reqmail->execute(array($mail));
+               $mailexist = $reqmail->rowCount();
+               if($mailexist == 0) {
+                  if($mdp == $mdp2) {
+                     $insertmbr = $bdd->prepare("INSERT INTO utilisateur(Nom, Prenom, Pseudo, Mail, MDP) VALUES(?, ?, ?, ?, ?)");
+                     $insertmbr->execute(array($nom, $prenom, $pseudo, $mail, $mdp));
+                     $erreur = "Votre compte a bien été créé !";
+                  } else {
+                     $erreur = "Vos mots de passes ne correspondent pas !";
+                  }
+               } else {
+                  $erreur = "Adresse mail déjà utilisée !";
+               }
+            } else {
+               $erreur = "Votre adresse mail n'est pas valide !";
+            }
+         } else {
+            $erreur = "Vos adresses mail ne correspondent pas !";
+         }
+
       } else {
-         $erreur = "Mauvais mail ou mot de passe !";
+         $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
       }
+
+            } else {
+         $erreur = "Votre prenom ne doit pas dépasser 255 caractères !";
+      }
+
+      } else {
+         $erreur = "Votre nom ne doit pas dépasser 255 caractères !";
+      }
+
    } else {
       $erreur = "Tous les champs doivent être complétés !";
    }
 }
 ?>
+
+
 
 
 
@@ -46,7 +83,7 @@ if(isset($_POST['formconnexion'])) {
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>KULT</title>
+    <title>Movify - Movies, Series & Cinema HTML Template</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -78,16 +115,26 @@ if(isset($_POST['formconnexion'])) {
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 
 <body>
 
+    <!--
+
+        <section id="slider" class="full-slider">
+            <div class="rev-slider-wrapper fullscreen-container overlay-gradient"    >
+                <div id="fullscreen-slider" class="rev_slider fullscreenbanner" style="display:none" data-version="5.4.1">
+  
+                </div>
+            </div>
+
+    -->
 
     <!-- =============== START OF PRELOADER =============== -->
-    <!-- <div class="loading">
+    <div class="loading">
         <div class="loading-inner">
             <div class="loading-effect">
                 <div class="object"></div>
@@ -107,62 +154,90 @@ if(isset($_POST['formconnexion'])) {
                 <div class="small-dialog login-register">
 
                     <!-- ===== Start of Signin wrapper ===== -->
+
+                    <!-- ===== End of Signin wrapper ===== -->
+
+
+
+                    <!-- ===== Start of Signup wrapper ===== -->
                     <div class="signin-wrapper">
                         <div class="small-dialog-headline">
-                            <h4 class="text-center">Se connecter</h4>
+                            <h4 class="text-center">S'inscrire</h4>
                         </div>
-
 
                         <div class="small-dialog-content">
 
-                            <!-- Start of Login form -->
-                            <form id="cariera_login" method="post">
+                            <!-- Start of Registration form -->
+                            <form id="cariera_registration" action="#" method="POST">
                                 <p class="status"></p>
 
                                 <div class="form-group">
-                                    <label for="mailconnect">Pseudo ou email</label>
-                                    <input type="text" class="form-control" id="mailconnect" name="mailconnect" placeholder="Entrez votre Pseudo ou email *" />
+                                <label for="nom">Nom</label>
+                                <input type="text" placeholder="Votre nom" id="nom" name="nom" value="<?php if(isset($nom)) { echo $nom; } ?>" />
+                                </div>
+
+
+                                 <div class="form-group">
+                                    <label for="prenom">Prenom</label>
+                                   <input type="text" placeholder="Votre prenom" id="prenom" name="prenom" value="<?php if(isset($prenom)) { echo $prenom; } ?>" />
+                                </div>    
+
+                                <div class="form-group">
+                                    <label for="nom">Pseudo</label>
+                                    <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                                </div>                                
+
+                                <div class="form-group">
+                                    <label for="mail">Email</label>
+                                    <input type="email" placeholder="Votre mail" id="mail" name="mail" value="<?php if(isset($mail)) { echo $mail; } ?>" />
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="mail2">Confirmation Email</label>
+                                    <input type="email" placeholder="Confirmation de votre mail" id="mail2" name="mail2" value="<?php if(isset($mail2)) { echo $mail2; } ?>" />
+                    
+                                </div>
+
+                                 <div class="form-group">
+                                    <label for="mdp">Mot de passe</label>
+                                    <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="mdp2">Confirmer votre mot de passe</label>
+                                    <input type="password" placeholder="Confirmation du mot de passe" id="mdp2" name="mdp2" />
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="mdpconnect">Mot de passe</label>
-                                    <input type="password" class="form-control" id="mdpconnect" name="mdpconnect" placeholder="Entrez votre mot de passe *" />
-
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="checkbox pad-bottom-10">
-                                        <input id="check1" type="checkbox" name="remember" value="yes">
-                                        <label for="check1">Me garder connecté</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="submit" name="formconnexion" value="Sign in" class="btn btn-main btn-effect nomargin" />
-
+                                    <input type="submit" class="btn btn-main btn-effect nomargin" name="forminscription" value="S'inscrire"/>
                                 </div>
                             </form>
+                            <!-- End of Registration form -->
 
-                            <!-- message d'erreur -->
+                            <!-- message d'erreur  -->
 
-                              <?php
+                             <?php
                              if(isset($erreur)) {
                                 echo '<font color="red">'.$erreur."</font>";
                              }
-                             ?>                           
-                            <!-- End of Login form -->
+                             ?>                              
 
                             <div class="bottom-links">
                                 <span>
-                                    Pas inscrit ?
-                                    <a href="register.php" class="signInClick">Se connecter</a>
+                                    Déjà un compte?
+                                    <a href="login.php" class="signInClick">Se connecter</a>
                                 </span>
-                                <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+
+                                <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
                             </div>
-                        </div>
+
+                        </div> <!-- .small-dialog-content -->
 
                     </div>
-                    <!-- ===== End of Signin wrapper ===== -->
+                    <!-- ===== End of Signup wrapper ===== -->
+
 
 
                     <!-- ===== Start of Forget Password wrapper ===== -->

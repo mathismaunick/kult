@@ -11,8 +11,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 ?>
 
 
-    
-   <!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -20,6 +19,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
     <meta charset="UTF-8">
 
     <!-- ===== Mobile viewport optimized ===== -->
+    <!-- test push -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
 
@@ -29,7 +29,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>KULT</title>
+    <title>Abonnement Kult</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -101,9 +101,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
                     <a class="navbar-brand" href="index.php">
                         <!-- INSERT YOUR LOGO HERE -->
-                        KULT
-                        <!-- INSERT YOUR WHITE LOGO HERE -->
-                        
+                       <h4><strong>KULT</strong></h4>
                     </a>
                     
                     <!-- Login Button on Responsive -->
@@ -122,25 +120,13 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                         <ul class="navbar-nav mx-auto" id="main-menu">
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
                                     <!-- Menu Item -->
                                     <li>
-
-                                    <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a class="dropdown-item" href="index.php?id=<?= $_SESSION['Id'] ?>"\'>Home Version 1</a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a class="dropdown-item" a href="index.php">Home Version 1</a>
-                                    <?php
-                                    endif
-                                    ?>                                        
-
+                                        <a class="dropdown-item" href="index.php">Home Version 1</a>
                                     </li>
 
                                     <!-- Menu Item -->
@@ -163,7 +149,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fil d'actus</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -222,7 +208,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groupes</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Movies & TV Shows</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -331,6 +317,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
+
                                     <?php
                                     if (isset($_SESSION['Id'])):
                                     ?>
@@ -346,7 +333,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                                     <?php
                                     endif
                                     ?>  
-
+                                </a>
                             </li>
                         </ul>
                         <!-- ====== End of Extra Nav ====== -->
@@ -363,13 +350,13 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
 
         <!-- =============== START OF PAGE HEADER =============== -->
-         <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
+        <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
             <div class="container">
                 <div class="inner">
-                    <h2 class="title">MES GROUPES</h2>
+                    <h2 class="title">Nos offres</h2>
                     <ol class="breadcrumb">
                         <li><a href="index.php">Home</a></li>
-                    
+                        <li>Nos différents abonnements</li>
                     </ol>
                 </div>
             </div>
@@ -378,154 +365,244 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
 
 
-        <!-- =============== START OF MAIN =============== -->
-        <main class="ptb100">
+        <!-- =============== START OF PRICING PLAN 1 =============== -->
+        <section class="pricing-plan-1 ptb100">
             <div class="container">
-                <a href="creationgroupe.php" class="list active">CREER UN NOUVEAU GROUPE</a>
-                <!-- Start of Filters -->
-                <div class="row mb50">
+                <div class="row justify-content">
+                    <div class="col-md-8 col-sm-12">
 
-                    <div class="col-md-6">
-                        <!-- Layout Switcher -->
-                        <div class="layout-switcher">
-                            <!-- <a href="groupe.php" class="list active"><i class="fa fa-align-justify"></i></a>-->
-                           
-                        </div>
-                    </div>
+                        <!-- Start of Pricing Table -->
+                        <div class="pricing-table-1">
 
-                    <div class="col-md-6">
-
-                        <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
-                               <select class="chosen-select-no-single">
-                                    <option>Ordre par défaut</option>
-                                    <option>Featured</option>
-                                    <option>Plus vu</option>
-                                    <option>Mieux noté</option>
-                                    <option>Récent</option>
-                                    <option>Ancien</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Sort by / End -->
-
-                    </div>
-
-                </div>
-                <!-- End of Filters -->
-
-
-
-                <!-- Start of Movie List -->
-                <div class="row">
-
-                    <!-- Groupe List Item -->
-                    <?php
-
-                //if(isset($_POST['recherche'])) {
-                    if(isset($_SESSION['id'])){
-                    //$id = 1;
-                  //Requête à ma BDD pour récupérer les groupes de l'utilisateur
-                    if($db_handle && $db_found){
-                         $SQL1 = "SELECT * FROM groupe_membre WHERE IdUtilisateur='".$_SESSION['id']."'";
-                         $result1 = mysqli_query($db_handle, $SQL1);
-
-                        while($db_field1=mysqli_fetch_assoc($result1)){
-
-                         $SQL2 = "SELECT * FROM groupe WHERE Id='".$db_field1['IdGroupe']."'";
-                         $result2 = mysqli_query($db_handle, $SQL2);
-                         $db_field2=mysqli_fetch_assoc($result2);
-                        
-                        echo '<div class="col-md-12 col-sm-12">
-                        <div class="movie-list-1 mb30">
-                            <div class="listing-container">
-
-                                <!-- Movie List Image -->
-                                <div class="listing-content">
-                                <div class="inner">
-                                        <h3 style="font-color: white;" class="title">'.$db_field2['Nom'].'</h3>
-
-                                        <p></p>
-
-                                         <a href="groupe-detail.php?id='.$db_field2['Id'].'" class="btn btn-main btn-effect">details</a>
-                                    </div>
-                                    
-
-                                    <!-- Buttons -->
-                                    <div class="buttons">
-                                        
-                                    </div>
-
-                                    <!-- Rating -->
-                                    <div class="stars">
-                                        
-                                    </div>
-
-                                    
+                            <!-- ===== Start of Featured Holder ===== -->
+                            <div class="features-holder">
+                                <div class="features-title">
+                                    <h5>What You Get</h5>
                                 </div>
 
-                                <!-- Movie List Content -->
-                                <div style="margin-top: 50px;"class="listing-content">';
-                                $SQL3 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$db_field2['Id']."'";
-                             $result3 = mysqli_query($db_handle, $SQL3);
-                              while($db_field3=mysqli_fetch_assoc($result3)){
-                                  $SQL4 = "SELECT * FROM utilisateur WHERE Id='".$db_field3['IdUtilisateur']."'";
-                                  $result4 = mysqli_query($db_handle, $SQL4);
-                                  while($db_field4=mysqli_fetch_assoc($result4)){
-                                      if($db_field4['Id']!=$_SESSION['Id']){
-                                            echo '<h3 style="color: white;" class="title">'.$db_field4['Pseudo'].'</h3>';
-                                      }
-                                      else{
-                                          echo '<h3 style="color: white;" class="title"> Moi </h3>';
-                                      }
-                              }} 
-                                
-                                echo '</div>
+                                <!-- Start of Features List -->
+                                <div class="features-list-wrapper">
+                                    <ul class="features-list">
+
+                                        <!-- List Item -->
+                                        <li>
+                                            <h6>Nombre de groupes illimité</h6>
+                                        </li>
+
+                                        <!-- List Item -->
+                                        <li>
+                                            <h6>Rechercher un film</h6>
+                                        </li>
+
+
+                                        <!-- List Item -->
+                                        <li>
+                                            <h6>Noter un film</h6>
+                                        </li>
+
+
+                                        <!-- List Item -->
+                                        <li>
+                                            <h6>Note personalisable</h6>
+                                        </li>
+
+
+                                        <!-- List Item -->
+                                        <li>
+                                            <h6>Statisques</h6>
+                                        </li>
+
+                                        <!-- List Item -->
+                                        <li>
+                                            <h6>Coup d'un soir</h6>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <!-- Start of Features List -->
 
                             </div>
+                            <!-- ===== End of Featured Holder ===== -->
+
+
+                            <!-- ===== Start of Price Table Featured ===== -->
+                            <div class="price-table price-table-featured">
+
+                                <!-- Start of Table Header -->
+                                <div class="table-header">
+                                    <h5>Gratuit</h5>
+                                </div>
+                                <!-- End of Table Header -->
+
+                                <!-- Start Table Content -->
+                                <div class="table-content">
+                                    <ul>
+                                        <li>3</li>
+                                        <li><i class="fa fa-check"></i></li>
+                                        <li><i class="fa fa-check"></i></li>
+                                        <li><i class="fa fa-times"></i></li>
+                                        <li><i class="fa fa-times"></i></li>
+                                        <li><i class="fa fa-times"></i></li>
+                                    </ul>
+                                </div>
+                                <!-- End Table Content -->
+
+                                <!-- Start Table Footer -->
+                                <div class="table-footer">
+                                    <div class="price-holder">
+                                        <span class="currency">€</span>
+                                        <span class="price">0.0</span>
+                                        <span class="time">/ mois</span>
+                                    </div>
+                                    <a href="#" target="_self" class="btn btn-main btn-effect"><i class="fa fa-shopping-cart"></i></a>
+                                </div>
+                                <!-- End Table Footer -->
+
+                            </div>
+                            <!-- ===== End of Price Table Featured ===== -->
+
+
+
+
+
+                            <!-- ===== Start of Price Table ===== -->
+                            <div class="price-table">
+
+                                <!-- Start of Table Header -->
+                                <div class="table-header">
+                                    <h5>Basic</h5>
+                                </div>
+                                <!-- End of Table Header -->
+
+                                <!-- Start Table Content -->
+                                <div class="table-content">
+                                    <ul>
+                                        <li>10</li>
+                                        <li><i class="fa fa-check"></i></li>
+                                        <li><i class="fa fa-check"></i></li>
+                                        <li><i class="fa fa-times"></i></li>
+                                        <li><i class="fa fa-times"></i></li>
+                                        <li><i class="fa fa-times"></i></li>
+                                    </ul>
+                                </div>
+                                <!-- End Table Content -->
+
+                                <!-- Start Table Footer -->
+                                <div class="table-footer">
+                                    <div class="price-holder">
+                                        <span class="currency">€</span>
+                                        <span class="price">0.89</span>
+                                        <span class="time">/ mois</span>
+                                    </div>
+                                    <a href="#" target="_self" class="btn btn-main btn-effect"><i class="fa fa-shopping-cart"></i></a>
+                                </div>
+                                <!-- End Table Footer -->
+
+                           
+                            <!-- ===== End of Price Table ===== -->
+
+
+
+                            <!-- ===== End of Price Table Featured ===== -->
+
+
+                            
+                             </div>
+                            <!-- ===== End of Price Table Featured ===== -->
+
+
                         </div>
-                    </div>';
-                             
-                            
-                                
-                        }
-                            
+                        <!-- End of Pricing Table -->
 
-                         
-
-                        }
-
-
-                     }
-
-                //}
-
-  ?>  
-                    
-                </div>
-                <!-- End of Movie List -->
-
-
-
-                <!-- Start of Pagination -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <nav class="pagination">
-                            <ul>
-                                <li><a href="#" class="current-page">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="ti-angle-right"></i></a></li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
-                <!-- End of Pagination -->
-
             </div>
-        </main>
-        <!-- =============== END OF MAIN =============== -->
+        </section>
+        <!-- =============== END OF PRICING PLAN 1 =============== -->
+
+        <hr class="op6">
+
+        <!-- =============== START OF PRICING PLAN 2 =============== -->
+        <section class="pricing-plan-2 ptb100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- Start of Pricing Table -->
+                        <div class="pricing-table-2">
+
+                            <!-- Pricing Plan 1 -->
+                            <div class="plan">
+
+                                <!-- Price -->
+                                <div class="plan-price">
+                                    <h3>Basic</h3>
+                                    <span class="value">€0.89</span>
+                                    <span class="period">Profitez de Kult sans publicité</span>
+                                </div>
+
+                                <!-- Features -->
+                                <div class="plan-features">
+                                    <ul>
+                                        <li>Limité à 10 groupes</li>
+                                        <li>Pas de publicités</li>
+                                    <a class="btn btn-main btn-effect mt30" href="#">Get Started</a>
+                                </div>
+
+                            </div>
+
+                            <!-- Featured - Pricing Plan 2 -->
+                            <div class="plan featured">
+
+                                <!-- Price -->
+                                <div class="plan-price">
+                                    <h3>Premium</h3>
+                                    <span class="value">€1.50</span>
+                                    <span class="period">Abonnement le plus apprécié par nos membres</span>
+                                </div>
+
+                                <!-- Features -->
+                                <div class="plan-features">
+                                    <ul>
+                                        <li>Nombre illimité de groupes</li>
+                                        <li>Note personnalisable</li>
+                                        <li>Pas de publicités</li>
+                                        <li>Statistiques</li>
+                                        <li>Coup d'un soir</li>
+                                    </ul>
+                                    <a class="btn btn-main btn-effect mt30" href="#">Commencez !</a>
+                                </div>
+                            </div>
+
+                            <!-- Pricing Plan 3 -->
+                            <div class="plan">
+
+                                <!-- Price -->
+                                <div class="plan-price">
+                                    <h3>Gratuit</h3>
+                                    <span class="value">€0</span>
+                                    <span class="period">Profitez des fonctionnalités principales de Kult gratuitement</span>
+                                </div>
+
+                                <!-- Features -->
+                                <div class="plan-features">
+                                    <ul>
+                                        <li>Limité à 3 groupes</li>
+                                        <li>Rechercher et noter des films</li>
+                                        <li>Publicités</li>
+                                    </ul>
+                                    <a class="btn btn-main btn-effect mt30" href="#">Commencez !</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End of Pricing Table -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =============== END OF PRICING PLAN 2 =============== -->
 
 
 
@@ -692,7 +769,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
         <!-- ===== Start of Signin wrapper ===== -->
         <div class="signin-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Se connecter</h4>
+                <h4 class="text-center">Sign in</h4>
             </div>
 
 
@@ -703,34 +780,34 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="username">Pseudo ou Email</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Pseudo ou Email" />
+                        <label for="username">Username or Email *</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Your Username or Email *" />
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" />
+                        <label for="password">Password *</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" />
                     </div>
 
                     <div class="form-group">
                         <div class="checkbox pad-bottom-10">
                             <input id="check1" type="checkbox" name="remember" value="yes">
-                            <label for="check1">Rester connecté</label>
+                            <label for="check1">Keep me signed in</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Se connecter" class="btn btn-main btn-effect nomargin" />
+                        <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
                     </div>
                 </form>
                 <!-- End of Login form -->
 
                 <div class="bottom-links">
                     <span>
-                        Pas déjà inscrit ?
-                        <a  class="signUpClick">S'inscrire</a>
+                        Not a member?
+                        <a  class="signUpClick">Sign up</a>
                     </span>
-                    <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a  class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
             </div>
 
@@ -742,80 +819,43 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
         <!-- ===== Start of Signup wrapper ===== -->
         <div class="signup-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">S'inscrire</h4>
+                <h4 class="text-center">Sign Up</h4>
             </div>
 
             <div class="small-dialog-content">
 
                 <!-- Start of Registration form -->
-                <form method="POST" action="">
+                <form id="cariera_registration" action="#" method="POST">
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="nom">Nom</label>
-                        <input type="text" placeholder="Votre nom" id="nom" name="nom" value="<?php if(isset($nom)) { echo $nom; } ?>" />
+                        <label for="movify_user_login">Username</label>
+                        <input name="movify_user_login" id="movify_user_login" class="form-control" type="text"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="prenom">Prenom</label>
-                       <input type="text" placeholder="Votre prenom" id="prenom" name="prenom" value="<?php if(isset($prenom)) { echo $prenom; } ?>" />
+                        <label for="movify_user_email">Email</label>
+                        <input name="movify_user_email" id="movify_user_email" class="form-control" type="email"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="nom">Pseudo</label>
-                        <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                        <label for="password">Password</label>
+                        <input name="movify_user_pass" id="movify_password" class="form-control" type="password"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="mail">Email</label>
-                        <input type="email" placeholder="Votre mail" id="mail" name="mail" value="<?php if(isset($mail)) { echo $mail; } ?>" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mail2">Confirmation Email</label>
-                        <input type="email" placeholder="Confirmation de votre mail" id="mail2" name="mail2" value="<?php if(isset($mail2)) { echo $mail2; } ?>" />
-        
-                    </div>
-
-                     <div class="form-group">
-                        <label for="mdp">Mot de passe</label>
-                        <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mdp2">Confirmer votre mot de passe</label>
-                        <input type="password" placeholder="Confirmation du mot de passe" id="mdp2" name="mdp2" />
-                    </div>
-             
-
-                    <div class="form-group">
-
-                        <input type="submit" class="btn btn-main btn-effect nomargin" name="forminscription" value="S'inscrire"/>
-
+                        <input type="submit" class="btn btn-main btn-effect nomargin" value="Register"/>
                     </div>
                 </form>
-
-                <!-- message d'erreur  -->
-
-                 <?php
-                 if(isset($erreur)) {
-                    echo '<font color="red">'.$erreur."</font>";
-                 }
-                 ?>                
-
                 <!-- End of Registration form -->
 
                 <div class="bottom-links">
                     <span>
-                        Déjà un compte ?
-                        <a class="signInClick">Se connecter</a>
+                        Already have an account?
+                        <a class="signInClick">Sign in</a>
                     </span>
 
-                    <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
 
             </div> <!-- .small-dialog-content -->
@@ -828,7 +868,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
         <!-- ===== Start of Forget Password wrapper ===== -->
         <div class="forgetpassword-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Mot de passe oublié</h4>
+                <h4 class="text-center">Forgotten Password</h4>
             </div>
 
             <div class="small-dialog-content">
@@ -838,7 +878,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="password">Adresse Email</label>
+                        <label for="password">Email Address *</label>
                         <input type="email" name="user_login" class="form-control" id="email3" placeholder="Email Address *" />
                     </div>
 
@@ -849,7 +889,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                 <!-- End of Forger Password form -->
 
                 <div class="bottom-links">
-                    <a class="cancelClick">Annuler</a>
+                    <a class="cancelClick">Cancel</a>
                 </div>
 
             </div><!-- .small-dialog-content -->
@@ -902,9 +942,4 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
 </body>
 
-</html>
-
-
-   
-</body>
 </html>
