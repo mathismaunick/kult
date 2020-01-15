@@ -106,7 +106,19 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                     </a>
 
                     <!-- Login Button on Responsive -->
-                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
+                    <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?> 
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
@@ -193,10 +205,24 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
                         <!-- Menu Item -->
                         <li class="nav-item m-auto">
-                            <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                <i class="icon-user"></i>login
-                            </a>
-                        </li>
+
+                                    <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se déconnecter
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se connecter
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
+
+                            </li>
                     </ul>
                     <!-- ====== End of Extra Nav ====== -->
 
@@ -218,7 +244,6 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                     <h2 class="title">Kult, c'est quoi ?</h2>
                     <ol class="breadcrumb">
                         <li><a href="index.php">Home</a></li>
-                        <li>Movie Grid 2</li>
                     </ol>
                 </div>
             </div>
