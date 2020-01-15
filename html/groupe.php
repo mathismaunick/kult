@@ -380,8 +380,25 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
         <!-- =============== START OF MAIN =============== -->
         <main class="ptb100">
-            <div class="container">
-                <a href="creationgroupe.php" class="list active">CREER UN NOUVEAU GROUPE</a>
+            <div class="container">      
+
+            <!-- Blindage pour création d'un groupe ssi on est connecte -->      
+
+                            <?php
+                            if (isset($_SESSION['Id'])):
+                            ?>
+                                <a class="list active" href="creationgroupe.php?id=<?= $_SESSION['Id'] ?>"\'>CREER UN NOUVEAU GROUPE</a>
+                            <?php
+                            else:
+                                echo '<font color="red">'."Connectez-vous pour créer un groupe !"."</font>";
+                            ?>
+                            <a href="login.php" class="signInClick">
+                                 <i class="icon-user"></i> Se connecter
+                            </a>
+                            <?php
+                            endif
+                            ?>                    
+
                 <!-- Start of Filters -->
                 <div class="row mb50">
 
