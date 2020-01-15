@@ -92,7 +92,20 @@
                     </a>
 
                     <!-- Login Button on Responsive -->
-                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
+                    <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
+                    
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
@@ -179,9 +192,21 @@
 
                         <!-- Menu Item -->
                         <li class="nav-item m-auto">
-                            <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                <i class="icon-user"></i>login
-                            </a>
+                            <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se déconnecter
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se connecter
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
                         </li>
                     </ul>
                     <!-- ====== End of Extra Nav ====== -->
@@ -333,16 +358,16 @@ $tmp2 = count($casting);
                             <a href="#" class="btn btn-main btn-effect">watch later</a>
                             <a href="#" class="btn rate-movie"><i class="icon-heart"></i></a>
 
-                            <div class="rating mt10">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
+                                <div class="rating mt10">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
 
                                 <?php echo '<span>'.$vote_count.' avis</span>'?>
-                            </div>
-                        </div>
+                                </div>
+                            </div>  
 
                         <div class="clearfix"></div>
 

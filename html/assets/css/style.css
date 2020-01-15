@@ -557,7 +557,7 @@ footer.entry-footer {
 .circle-img img {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    border-radius: 50%;
+    border-radius: 20%;
 }
 
 .rev-slider-wrapper {
