@@ -7,6 +7,13 @@ session_start();
 
 if(isset($_POST['recherche'])) {
   $recherche = htmlspecialchars($_POST['recherche']);
+
+  while(strpos($recherche," ") != false){
+
+      $firstSpace = strpos($recherche," ");
+      $recherche = substr_replace($recherche, "%20", $firstSpace, 1);
+
+  }
   //Requête API avec le keyword
   $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
   $result = json_decode($json, TRUE);
@@ -16,10 +23,18 @@ if(isset($_POST['recherche'])) {
 }
 elseif(isset($_GET['recherche'])) {
     $recherche = htmlspecialchars($_GET['recherche']);
+
+    while(strpos($recherche," ") != false){
+
+      $firstSpace = strpos($recherche," ");
+      $recherche = substr_replace($recherche, "%20", $firstSpace, 1);
+
+  }
+
   //Requête API avec le keyword
-    $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
-    $result = json_decode($json, TRUE);
-    $résultat = $result['results'];
+  $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
+  $result = json_decode($json, TRUE);
+  $résultat = $result['results'];
 }
 
 
@@ -443,13 +458,13 @@ elseif(isset($_GET['recherche'])) {
 
         <!-- Image -->';
         if($résultat[$i]['poster_path']!=''){
-        echo '<img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
-        </div>';
+            echo '<img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
+            </div>';
         }
         else{
 
             echo '<img src="assets/images/posters/poster-1.jpg" alt="">
-                            </div>';
+            </div>';
         }
 
         echo'

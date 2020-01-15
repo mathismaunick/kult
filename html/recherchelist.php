@@ -12,6 +12,12 @@ session_start();
 
     if(isset($_POST['recherche'])) {
       $recherche = htmlspecialchars($_POST['recherche']);
+      while(strpos($recherche," ") != false){
+
+          $firstSpace = strpos($recherche," ");
+          $recherche = substr_replace($recherche, "%20", $firstSpace, 1);
+
+      }
   //Requête API avec le keyword
       $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
       $result = json_decode($json, TRUE);
@@ -21,10 +27,17 @@ session_start();
   }
   elseif(isset($_GET['recherche'])) {
     $recherche = htmlspecialchars($_GET['recherche']);
+
+    while(strpos($recherche," ") != false){
+
+      $firstSpace = strpos($recherche," ");
+      $recherche = substr_replace($recherche, "%20", $firstSpace, 1);
+
+  }
   //Requête API avec le keyword
-    $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
-    $result = json_decode($json, TRUE);
-    $résultat = $result['results'];
+  $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
+  $result = json_decode($json, TRUE);
+  $résultat = $result['results'];
 }
 ?>  
 
@@ -126,349 +139,349 @@ session_start();
                     <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
 
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
-                       <span class="hamburger-box">
-                          <span class="hamburger-inner"></span>
-                      </span>
-                  </button>
+                     <span class="hamburger-box">
+                      <span class="hamburger-inner"></span>
+                  </span>
+              </button>
 
-                  <!-- ====== Start of #main-nav ====== -->
-                  <div class="navbar-collapse" id="main-nav">
+              <!-- ====== Start of #main-nav ====== -->
+              <div class="navbar-collapse" id="main-nav">
 
-                    <!-- ====== Start of Main Menu ====== -->
-                    <ul class="navbar-nav mx-auto" id="main-menu">
-                        <!-- Menu Item -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
+                <!-- ====== Start of Main Menu ====== -->
+                <ul class="navbar-nav mx-auto" id="main-menu">
+                    <!-- Menu Item -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
 
-                            <!-- Dropdown Menu -->
-                            <ul class="dropdown-menu">
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="index.php">Home Version 1</a>
-                                </li>
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu">
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="index.php">Home Version 1</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="index2.html">Home Version 2</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="index2.html">Home Version 2</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="index3.html">Home Version 3</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="index3.html">Home Version 3</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="index4.html">Home Version 4</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="index4.html">Home Version 4</a>
+                            </li>
 
-                            </ul>
-                        </li>
+                        </ul>
+                    </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                        </li>
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                    </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groupes</a>
+                    <!-- Menu Item -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groupes</a>
 
-                            <!-- Dropdown Menu -->
-                            <ul class="dropdown-menu">
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-list.html">Movie List 1</a>
-                                </li>
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu">
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-list.html">Movie List 1</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-list2.html">Movie List 2</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-list2.html">Movie List 2</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-grid.html">Movie Grid 1</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-grid.html">Movie Grid 1</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-grid2.html">Movie Grid 2</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-grid2.html">Movie Grid 2</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-grid3.html">Movie Grid 3</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-grid3.html">Movie Grid 3</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-grid4.html">Movie Grid 4</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-grid4.html">Movie Grid 4</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-detail.html">Movie Detail</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-detail.html">Movie Detail</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="movie-detail2.html">Movie Detail 2</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="movie-detail2.html">Movie Detail 2</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="watch-later.html">Watch Later</a>
-                                </li>
-                            </ul>
-                        </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="watch-later.html">Watch Later</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+                    <!-- Menu Item -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
 
-                            <!-- Dropdown Menu -->
-                            <ul class="dropdown-menu">
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="blog-list.html">Blog List</a>
-                                </li>
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu">
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="blog-list.html">Blog List</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="blog-list-fullwidth.html">Blog List Fullwidth</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="blog-list-fullwidth.html">Blog List Fullwidth</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="blog-post-detail.html">Blog Detail</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="blog-post-detail.html">Blog Detail</a>
+                            </li>
 
-                                <!-- Menu Item -->
-                                <li>
-                                    <a class="dropdown-item" href="blog-post-detail-fullwidth.html">Blog Detail Fullwidth</a>
-                                </li>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="blog-post-detail-fullwidth.html">Blog Detail Fullwidth</a>
+                            </li>
 
-                            </ul>
-                        </li>
+                        </ul>
+                    </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact-us.html">Contact us</a>
-                        </li>
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact-us.html">Contact us</a>
+                    </li>
 
-                    </ul>
-                    <!-- ====== End of Main Menu ====== -->
-
-
-                    <!-- ====== Start of Extra Nav ====== -->
-                    <ul class="navbar-nav extra-nav">
-
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link toggle-search" href="#">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-
-                        <!-- Menu Item -->
-                        <li class="nav-item notification-wrapper">
-                            <a class="nav-link notification" href="#">
-                                <i class="fa fa-globe"></i>
-                                <span class="notification-count">2</span>
-                            </a>
-                        </li>
-
-                        <!-- Menu Item -->
-                        <li class="nav-item m-auto">
-                            <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                <i class="icon-user"></i>Se connecter
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- ====== End of Extra Nav ====== -->
-
-                </div>
-                <!-- ====== End of #main-nav ====== -->
-            </nav>
-            <!-- ====== End of Navbar ====== -->
-
-        </div>
-    </header>
-    <!-- =============== END OF HEADER NAVIGATION =============== -->
+                </ul>
+                <!-- ====== End of Main Menu ====== -->
 
 
+                <!-- ====== Start of Extra Nav ====== -->
+                <ul class="navbar-nav extra-nav">
 
-    <!-- =============== START OF PAGE HEADER =============== -->
-    <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
-        <div class="container">
-            <div class="inner">
-                <h2 class="title">RESULTATS</h2>
-                <ol class="breadcrumb">
-                    <li><a href="index.php">Home</a></li>
-                    <li>Résultats de la recherche <?php echo $recherche; ?></li>
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link toggle-search" href="#">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
 
-                </ol>
-            </div>
-        </div>
-    </section>
-    <!-- =============== END OF PAGE HEADER =============== -->
+                    <!-- Menu Item -->
+                    <li class="nav-item notification-wrapper">
+                        <a class="nav-link notification" href="#">
+                            <i class="fa fa-globe"></i>
+                            <span class="notification-count">2</span>
+                        </a>
+                    </li>
 
-
-
-    <!-- =============== START OF MAIN =============== -->
-    <main class="ptb100">
-        <div class="container">
-
-            <!-- Start of Filters -->
-            <div class="row mb50">
-
-                <div class="col-md-6">
-                    <!-- Layout Switcher -->
-                    <div class="layout-switcher">
-                        <a href="<?php echo 'recherchelist.php?recherche='.$recherche.'"' ?> class="list active"><i class="fa fa-align-justify"></i></a>
-
-                        <a href="<?php echo 'recherche.php?recherche='.$recherche.'"' ?> class="grid "><i class="fa fa-th"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-
-                    <!-- Sort by -->
-                    <div class="sort-by">
-                        <div class="sort-by-select">
-                           <select class="chosen-select-no-single">
-                            <option>Ordre par défaut</option>
-                            <option>Featured</option>
-                            <option>Plus vu</option>
-                            <option>Mieux noté</option>
-                            <option>Récent</option>
-                            <option>Ancien</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Sort by / End -->
+                    <!-- Menu Item -->
+                    <li class="nav-item m-auto">
+                        <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
+                            <i class="icon-user"></i>Se connecter
+                        </a>
+                    </li>
+                </ul>
+                <!-- ====== End of Extra Nav ====== -->
 
             </div>
+            <!-- ====== End of #main-nav ====== -->
+        </nav>
+        <!-- ====== End of Navbar ====== -->
+
+    </div>
+</header>
+<!-- =============== END OF HEADER NAVIGATION =============== -->
+
+
+
+<!-- =============== START OF PAGE HEADER =============== -->
+<section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
+    <div class="container">
+        <div class="inner">
+            <h2 class="title">RESULTATS</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.php">Home</a></li>
+                <li>Résultats de la recherche <?php echo $recherche; ?></li>
+
+            </ol>
+        </div>
+    </div>
+</section>
+<!-- =============== END OF PAGE HEADER =============== -->
+
+
+
+<!-- =============== START OF MAIN =============== -->
+<main class="ptb100">
+    <div class="container">
+
+        <!-- Start of Filters -->
+        <div class="row mb50">
+
+            <div class="col-md-6">
+                <!-- Layout Switcher -->
+                <div class="layout-switcher">
+                    <a href="<?php echo 'recherchelist.php?recherche='.$recherche.'"' ?> class="list active"><i class="fa fa-align-justify"></i></a>
+
+                    <a href="<?php echo 'recherche.php?recherche='.$recherche.'"' ?> class="grid "><i class="fa fa-th"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <!-- Sort by -->
+                <div class="sort-by">
+                    <div class="sort-by-select">
+                     <select class="chosen-select-no-single">
+                        <option>Ordre par défaut</option>
+                        <option>Featured</option>
+                        <option>Plus vu</option>
+                        <option>Mieux noté</option>
+                        <option>Récent</option>
+                        <option>Ancien</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Sort by / End -->
 
         </div>
-        <!-- End of Filters -->
+
+    </div>
+    <!-- End of Filters -->
 
 
 
-        <!-- Start of Movie List -->
-        <div class="row">
+    <!-- Start of Movie List -->
+    <div class="row">
 
-            <!-- Movie List Item -->
-            <?php 
-            $nbmax = 0;
-            if(count($résultat)<18){
-                $nbmax = count($résultat);
-            }
-            elseif(count($résultat)>=18){
-                $nbmax = 18;
-            }
+        <!-- Movie List Item -->
+        <?php 
+        $nbmax = 0;
+        if(count($résultat)<18){
+            $nbmax = count($résultat);
+        }
+        elseif(count($résultat)>=18){
+            $nbmax = 18;
+        }
 
 
 
-            for($i = 0; $i<$nbmax; $i++){
+        for($i = 0; $i<$nbmax; $i++){
 
-             $overview=$résultat[$i]['overview'];
+           $overview=$résultat[$i]['overview'];
 
-             if (strlen($overview)>=150) {
-                $synopsis = substr($overview, 0, 150);
-                $synopsis .="...";
-            }
-            elseif(strlen($overview)<=150 && $overview!=""){
-                $nbmanquants = 150 - strlen($overview);
+           if (strlen($overview)>=150) {
+            $synopsis = substr($overview, 0, 150);
+            $synopsis .="...";
+        }
+        elseif(strlen($overview)<=150 && $overview!=""){
+            $nbmanquants = 150 - strlen($overview);
 
                         //for($j=0; $j<$nbmanquants; $j++){
-                $synopsis = $overview;
-                $synopsis .= str_repeat(".", $nbmanquants) ;
+            $synopsis = $overview;
+            $synopsis .= str_repeat(".", $nbmanquants) ;
 
 
-            }
-            if($overview==""){
-             $synopsis = $overview;
-             $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
-             $synopsis .=str_repeat(". ", 66);
+        }
+        if($overview==""){
+           $synopsis = $overview;
+           $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
+           $synopsis .=str_repeat(". ", 66);
 
-         }
-         $title = $résultat[$i]['title'];
+       }
+       $title = $résultat[$i]['title'];
                      //if (strlen($title)>=16) {
                       //  $title = substr($title, 0, 16);
                       //  $title .="...";
                     //}
-         $json = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat[$i]['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
-         $vid = json_decode($json, TRUE);
-         if($vid['results']!=null){
-            $vidéo = $vid['results'][0]['key'];
-        }
-        else $vidéo="";
-
-
-
-        echo
-        '<div class="col-md-12 col-sm-12">
-        <div class="movie-list-1 mb30">
-        <div class="listing-container">
-
-        <!-- Movie List Image -->
-        <div class="listing-image">
-
-        <!-- Play Button -->
-        <div class="play-btn">
-        <a href="https://www.youtube.com/watch?v='.$vidéo.'" class="play-video">
-        <i class="fa fa-play"></i>
-        </a>
-        </div>
-
-        <!-- Buttons -->
-        <div class="buttons">
-        <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom">
-        <i class="icon-heart"></i>
-        </a>
-
-        <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom">
-        <i class="icon-share"></i>
-        </a>
-        </div>
-
-        <!-- Rating -->
-        <div class="stars">
-        <div class="rating">
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star-o"></i>
-        </div>
-        </div>
-
-        <!-- Image -->
-
-
-        <img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
-
-        </div>
-
-        <!-- Movie List Content -->
-        <div class="listing-content">
-        <div class="inner">
-        <h3 class="title">'.$title.'</h3>
-
-        <p>'.$synopsis.'</p>
-
-        <a href="movie-detail.php?id='.$résultat[$i]['id'].'" class="btn btn-main btn-effect">details</a>
-        </div>
-        </div>
-
-        </div>
-        </div>
-        </div>';
+       $json = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat[$i]['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
+       $vid = json_decode($json, TRUE);
+       if($vid['results']!=null){
+        $vidéo = $vid['results'][0]['key'];
     }
+    else $vidéo="";
 
-    ?>
+
+
+    echo
+    '<div class="col-md-12 col-sm-12">
+    <div class="movie-list-1 mb30">
+    <div class="listing-container">
+
+    <!-- Movie List Image -->
+    <div class="listing-image">
+
+    <!-- Play Button -->
+    <div class="play-btn">
+    <a href="https://www.youtube.com/watch?v='.$vidéo.'" class="play-video">
+    <i class="fa fa-play"></i>
+    </a>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+    <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom">
+    <i class="icon-heart"></i>
+    </a>
+
+    <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom">
+    <i class="icon-share"></i>
+    </a>
+    </div>
+
+    <!-- Rating -->
+    <div class="stars">
+    <div class="rating">
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star"></i>
+    <i class="fa fa-star-o"></i>
+    </div>
+    </div>
+
+    <!-- Image -->
+
+
+    <img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
+
+    </div>
+
+    <!-- Movie List Content -->
+    <div class="listing-content">
+    <div class="inner">
+    <h3 class="title">'.$title.'</h3>
+
+    <p>'.$synopsis.'</p>
+
+    <a href="movie-detail.php?id='.$résultat[$i]['id'].'" class="btn btn-main btn-effect">details</a>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>';
+}
+
+?>
 
 
 
