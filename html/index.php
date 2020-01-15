@@ -171,7 +171,7 @@ if(isset($_POST['recherche'])) {
 
                             <!-- Menu Item -->
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.html">Contact us</a>
+                                <a class="nav-link" href="contact-us.php">Contactez nous</a>
                             </li>
 
                         </ul>

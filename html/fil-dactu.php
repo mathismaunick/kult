@@ -110,444 +110,373 @@ $id=[];
                     <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
-                     <span class="hamburger-box">
-                      <span class="hamburger-inner"></span>
-                  </span>
-              </button>
+                       <span class="hamburger-box">
+                          <span class="hamburger-inner"></span>
+                      </span>
+                  </button>
 
-              <!-- ====== Start of #main-nav ====== -->
-              <div class="navbar-collapse" id="main-nav">
+                  <!-- ====== Start of #main-nav ====== -->
+                  <div class="navbar-collapse" id="main-nav">
 
-                <!-- ====== Start of Main Menu ====== -->
-                <ul class="navbar-nav mx-auto" id="main-menu">
-                    <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
-
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index.html">Home Version 1</a>
+                    <!-- ====== Start of Main Menu ====== -->
+                    <ul class="navbar-nav mx-auto" id="main-menu">
+                        <!-- Menu Item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Accueil</a>
                             </li>
 
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index2.html">Home Version 2</a>
+                        <!-- Menu Item -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                        </li>
+
+                        <li class="nav-item">
+
+                            <?php
+                            if (isset($_SESSION['Id'])):
+                                ?>
+                                <a class="nav-link" href="groupe.php?id=<?= $_SESSION['Id'] ?>"\'>Groupes</a>
+                                <?php
+                            else:
+                                ?>
+                                <a class="nav-link" a href="groupe.php">Groupes</a>
+                                <?php
+                            endif
+                            ?>
+
+                        </li>
+
+                        <!-- Menu Item -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
+
+                                <!-- Dropdown Menu -->
+                                <ul class="dropdown-menu">
+                                    <!-- Menu Item -->
+                                    <li>
+                                        <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
+                                    </li>
+
+                                    <!-- Menu Item -->
+                                    <li>
+                                        <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
+                                    </li>
+
+                                </ul>
                             </li>
 
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index3.html">Home Version 3</a>
+                        <!-- Menu Item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact-us.php">Contactez nous</a>
                             </li>
 
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index4.html">Home Version 4</a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Movies & TV Shows</a>
-
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-list.html">Movie List 1</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-list2.html">Movie List 2</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid.html">Movie Grid 1</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid2.html">Movie Grid 2</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid3.html">Movie Grid 3</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid4.html">Movie Grid 4</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-detail.html">Movie Detail</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-detail2.html">Movie Detail 2</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="watch-later.html">Watch Later</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-list.html">Blog List</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-list-fullwidth.html">Blog List Fullwidth</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-post-detail.html">Blog Detail</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-post-detail-fullwidth.html">Blog Detail Fullwidth</a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact-us.html">Contact us</a>
-                    </li>
-
-                </ul>
-                <!-- ====== End of Main Menu ====== -->
-
-
-                <!-- ====== Start of Extra Nav ====== -->
-                <ul class="navbar-nav extra-nav">
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link toggle-search" href="#">
-                            <i class="fa fa-search"></i>
-                        </a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item notification-wrapper">
-                        <a class="nav-link notification" href="#">
-                            <i class="fa fa-globe"></i>
-                            <span class="notification-count">2</span>
-                        </a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item m-auto">
-                        <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                            <i class="icon-user"></i>login
-                        </a>
-                    </li>
-                </ul>
-                <!-- ====== End of Extra Nav ====== -->
-
-            </div>
-            <!-- ====== End of #main-nav ====== -->
-        </nav>
-        <!-- ====== End of Navbar ====== -->
-
-    </div>
-</header>
-<!-- =============== END OF HEADER NAVIGATION =============== -->
-
-
-
-<!-- =============== START OF PAGE HEADER =============== -->
-<section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
-    <div class="container">
-        <div class="inner">
-            <h2 class="title">Fil d'actualités</h2>
-            <ol class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li>Dernières sorties au cinéma</li>
-            </ol>
-        </div>
-    </div>
-</section>
-<!-- =============== END OF PAGE HEADER =============== -->
-
-
-
-<!-- =============== START OF MAIN =============== -->
-<main class="ptb100">
-    <div class="container">
-
-        <div class="row">
-
-         <?php
-
-         for($i=0;$i<$size;$i++){
-
-            $single_id = $object_response["results"][$i]["id"];
-
-            $url2="https://api.themoviedb.org/3/movie/".$single_id."/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR";
-            $json_response2 = file_get_contents($url2);
-
-            $object_response2 = json_decode($json_response2, true);
-
-            if($object_response2["results"] != null)
-                $id_film=$object_response2["results"][0]["key"];
-
-
-            echo '<!-- Movie List Item -->
-            <div class="col-md-12 col-sm-12">
-            <div class="movie-list-2">
-            <div class="listing-container">
-
-            <!-- Movie List Image -->
-            <div class="listing-image">
-
-            <!-- Image -->
-            <div class="img-wrapper">
-
-            <!-- Play Button -->
-            <div class="play-btn">
-
-            <a href="https://www.youtube.com/watch?v='.$id_film.'" class="play-video">
-            <i class="fa fa-play"></i>
-            </a>
-            </div>
-
-            <img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$object_response['results'][$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].'">
-            </div>
-            </div>
-
-            <!-- Movie List Content -->
-            <div class="listing-content">
-            <div class="inner">
-            <h2 class="title">'.$object_response["results"][$i]["title"].'</h2>
-
-            <p>'.$object_response["results"][$i]["overview"].'</p>
-            <a href="movie-detail.php?id='.$single_id.'" class="btn btn-main btn-effect">details</a>
-            </div>
-
-
-            <!-- Buttons -->
-            <div class="buttons">
-            <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom">
-            <i class="icon-heart"></i>
-            </a>
-
-            <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom">
-            <i class="icon-share"></i>
-            </a>
-            </div>
-
-            <!-- Rating -->
-            <div class="stars">
-            <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-            </div>
-            </div>
-
-            </div>
-
-            </div>
-            </div>
-            </div>';
-
-        }
-        ?>
-
-
-
-        <!-- Start of Pagination -->
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <nav class="pagination">
-                    <ul>
-                        <li><a href="#" class="current-page">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="ti-angle-right"></i></a></li>
                     </ul>
-                </nav>
+                    <!-- ====== End of Main Menu ====== -->
+
+
+                    <!-- ====== Start of Extra Nav ====== -->
+                    <ul class="navbar-nav extra-nav">
+
+                        <!-- Menu Item -->
+                        <li class="nav-item">
+                            <a class="nav-link toggle-search" href="#">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+
+                        <!-- Menu Item -->
+                        <li class="nav-item notification-wrapper">
+                            <a class="nav-link notification" href="#">
+                                <i class="fa fa-globe"></i>
+                                <span class="notification-count">2</span>
+                            </a>
+                        </li>
+
+                        <!-- Menu Item -->
+                        <li class="nav-item m-auto">
+                            <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
+                                <i class="icon-user"></i>login
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- ====== End of Extra Nav ====== -->
+
+                </div>
+                <!-- ====== End of #main-nav ====== -->
+            </nav>
+            <!-- ====== End of Navbar ====== -->
+
+        </div>
+    </header>
+    <!-- =============== END OF HEADER NAVIGATION =============== -->
+
+
+
+    <!-- =============== START OF PAGE HEADER =============== -->
+    <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
+        <div class="container">
+            <div class="inner">
+                <h2 class="title">Fil d'actualités</h2>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Dernières sorties au cinéma</li>
+                </ol>
             </div>
         </div>
-        <!-- End of Pagination -->
-
-    </div>
-
-
-</main>
-<!-- =============== END OF MAIN =============== -->
+    </section>
+    <!-- =============== END OF PAGE HEADER =============== -->
 
 
 
-<!-- =============== START OF FOOTER =============== -->
-<footer class="footer1 bg-dark">
-
-    <!-- ===== START OF FOOTER WIDGET AREA ===== -->
-    <div class="footer-widget-area ptb100">
+    <!-- =============== START OF MAIN =============== -->
+    <main class="ptb100">
         <div class="container">
+
             <div class="row">
 
-                <!-- Start of Widget 1 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-about">
+               <?php
 
-                        <!-- INSERT YOUR LOGO HERE -->
-                        <img src="assets/images/logo.svg" alt="logo" class="logo">
-                        <!-- INSERT YOUR WHITE LOGO HERE -->
-                        <img src="assets/images/logo-white.svg" alt="white logo" class="logo-white">
-                        <p class="nomargin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
-                    </div>
+               for($i=0;$i<$size;$i++){
+
+                $single_id = $object_response["results"][$i]["id"];
+
+                $url2="https://api.themoviedb.org/3/movie/".$single_id."/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR";
+                $json_response2 = file_get_contents($url2);
+
+                $object_response2 = json_decode($json_response2, true);
+
+                if($object_response2["results"] != null)
+                    $id_film=$object_response2["results"][0]["key"];
+
+
+                echo '<!-- Movie List Item -->
+                <div class="col-md-12 col-sm-12">
+                <div class="movie-list-2">
+                <div class="listing-container">
+
+                <!-- Movie List Image -->
+                <div class="listing-image">
+
+                <!-- Image -->
+                <div class="img-wrapper">
+
+                <!-- Play Button -->
+                <div class="play-btn">
+
+                <a href="https://www.youtube.com/watch?v='.$id_film.'" class="play-video">
+                <i class="fa fa-play"></i>
+                </a>
                 </div>
-                <!-- End of Widget 1 -->
 
-                <!-- Start of Widget 2 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-links">
-                        <h4 class="widget-title">Useful links</h4>
+                <img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$object_response['results'][$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$object_response['results'][$i]['poster_path'].'">
+                </div>
+                </div>
 
-                        <ul class="general-listing">
-                            <li><a href="#">about movify</a></li>
-                            <li><a href="#">blog</a></li>
-                            <li><a href="#">forum</a></li>
-                            <li><a href="#">my account</a></li>
-                            <li><a href="#">watch list</a></li>
+                <!-- Movie List Content -->
+                <div class="listing-content">
+                <div class="inner">
+                <h2 class="title">'.$object_response["results"][$i]["title"].'</h2>
+
+                <p>'.$object_response["results"][$i]["overview"].'</p>
+                <a href="movie-detail.php?id='.$single_id.'" class="btn btn-main btn-effect">details</a>
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="buttons">
+                <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom">
+                <i class="icon-heart"></i>
+                </a>
+
+                <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom">
+                <i class="icon-share"></i>
+                </a>
+                </div>
+
+                <!-- Rating -->
+                <div class="stars">
+                <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                </div>
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+                </div>';
+
+            }
+            ?>
+
+
+
+            <!-- Start of Pagination -->
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <nav class="pagination">
+                        <ul>
+                            <li><a href="#" class="current-page">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#"><i class="ti-angle-right"></i></a></li>
                         </ul>
-
-                    </div>
+                    </nav>
                 </div>
-                <!-- End of Widget 2 -->
-
-                <!-- Start of Widget 3 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-blog">
-                        <h4 class="widget-title">latest news</h4>
-
-                        <ul class="blog-posts">
-                            <li><a href="#">blog post 1</a><small>januar 13, 2018</small></li>
-                            <li><a href="#">blog post 2</a><small>januar 13, 2018</small></li>
-                            <li><a href="#">blog post 3</a><small>januar 13, 2018</small></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- End of Widget 3 -->
-
-                <!-- Start of Widget 4 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-social">
-                        <h4 class="widget-title">follow us</h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque.</p>
-
-                        <!-- Start of Social Buttons -->
-                        <ul class="social-btns">
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll facebook">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll twitter">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll google-plus">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <!-- Social Media -->
-                            <li>
-                                <a href="#" class="social-btn-roll instagram">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End of Social Buttons -->
-
-                    </div>
-                </div>
-                <!-- End of Widget 4 -->
-
             </div>
+            <!-- End of Pagination -->
+
         </div>
-    </div>
-    <!-- ===== END OF FOOTER WIDGET AREA ===== -->
 
 
-    <!-- ===== START OF FOOTER COPYRIGHT AREA ===== -->
-    <div class="footer-copyright-area ptb30">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="d-flex">
-                        <div class="links">
-                            <ul class="list-inline">
-                                <li class="list-inline-item"><a href="#">Privacy & Cookies</a></li>
-                                <li class="list-inline-item"><a href="#">Terms & Conditions</a></li>
-                                <li class="list-inline-item"><a href="#">Legal Disclaimer</a></li>
-                                <li class="list-inline-item"><a href="#">Community</a></li>
+    </main>
+    <!-- =============== END OF MAIN =============== -->
+
+
+
+    <!-- =============== START OF FOOTER =============== -->
+    <footer class="footer1 bg-dark">
+
+        <!-- ===== START OF FOOTER WIDGET AREA ===== -->
+        <div class="footer-widget-area ptb100">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Start of Widget 1 -->
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="widget widget-about">
+
+                            <!-- INSERT YOUR LOGO HERE -->
+                            <img src="assets/images/logo.svg" alt="logo" class="logo">
+                            <!-- INSERT YOUR WHITE LOGO HERE -->
+                            <img src="assets/images/logo-white.svg" alt="white logo" class="logo-white">
+                            <p class="nomargin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
+                        </div>
+                    </div>
+                    <!-- End of Widget 1 -->
+
+                    <!-- Start of Widget 2 -->
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="widget widget-links">
+                            <h4 class="widget-title">Useful links</h4>
+
+                            <ul class="general-listing">
+                                <li><a href="#">about movify</a></li>
+                                <li><a href="#">blog</a></li>
+                                <li><a href="#">forum</a></li>
+                                <li><a href="#">my account</a></li>
+                                <li><a href="#">watch list</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- End of Widget 2 -->
+
+                    <!-- Start of Widget 3 -->
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="widget widget-blog">
+                            <h4 class="widget-title">latest news</h4>
+
+                            <ul class="blog-posts">
+                                <li><a href="#">blog post 1</a><small>januar 13, 2018</small></li>
+                                <li><a href="#">blog post 2</a><small>januar 13, 2018</small></li>
+                                <li><a href="#">blog post 3</a><small>januar 13, 2018</small></li>
                             </ul>
                         </div>
+                    </div>
+                    <!-- End of Widget 3 -->
 
-                        <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
+                    <!-- Start of Widget 4 -->
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="widget widget-social">
+                            <h4 class="widget-title">follow us</h4>
 
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque.</p>
+
+                            <!-- Start of Social Buttons -->
+                            <ul class="social-btns">
+                                <!-- Social Media -->
+                                <li>
+                                    <a href="#" class="social-btn-roll facebook">
+                                        <div class="social-btn-roll-icons">
+                                            <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                            <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <!-- Social Media -->
+                                <li>
+                                    <a href="#" class="social-btn-roll twitter">
+                                        <div class="social-btn-roll-icons">
+                                            <i class="social-btn-roll-icon fa fa-twitter"></i>
+                                            <i class="social-btn-roll-icon fa fa-twitter"></i>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <!-- Social Media -->
+                                <li>
+                                    <a href="#" class="social-btn-roll google-plus">
+                                        <div class="social-btn-roll-icons">
+                                            <i class="social-btn-roll-icon fa fa-google-plus"></i>
+                                            <i class="social-btn-roll-icon fa fa-google-plus"></i>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <!-- Social Media -->
+                                <li>
+                                    <a href="#" class="social-btn-roll instagram">
+                                        <div class="social-btn-roll-icons">
+                                            <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                            <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- End of Social Buttons -->
+
+                        </div>
+                    </div>
+                    <!-- End of Widget 4 -->
+
+                </div>
+            </div>
+        </div>
+        <!-- ===== END OF FOOTER WIDGET AREA ===== -->
+
+
+        <!-- ===== START OF FOOTER COPYRIGHT AREA ===== -->
+        <div class="footer-copyright-area ptb30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex">
+                            <div class="links">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><a href="#">Privacy & Cookies</a></li>
+                                    <li class="list-inline-item"><a href="#">Terms & Conditions</a></li>
+                                    <li class="list-inline-item"><a href="#">Legal Disclaimer</a></li>
+                                    <li class="list-inline-item"><a href="#">Community</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- ===== END OF FOOTER COPYRIGHT AREA ===== -->
+        <!-- ===== END OF FOOTER COPYRIGHT AREA ===== -->
 
-</footer>
-<!-- =============== END OF FOOTER =============== -->
+    </footer>
+    <!-- =============== END OF FOOTER =============== -->
 
 </div>
 <!-- =============== END OF WRAPPER =============== -->
