@@ -83,7 +83,7 @@ if($nomlength <= 255) {
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>Movify - Movies, Series & Cinema HTML Template</title>
+    <title>KULT</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">

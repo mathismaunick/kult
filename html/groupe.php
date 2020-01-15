@@ -106,7 +106,19 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                     </a>
 
                     <!-- Login Button on Responsive -->
-                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
+                     <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
@@ -134,7 +146,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                             <?php
                             if (isset($_SESSION['Id'])):
                                 ?>
-                                <a class="nav-link" href="groupe.php?id=<?= $_SESSION['Id'] ?>"\'>Groupes</a>
+                                <a class="nav-link" href="groupe.php">Groupes</a>
                                 <?php
                             else:
                                 ?>
@@ -193,9 +205,21 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
                         <!-- Menu Item -->
                         <li class="nav-item m-auto">
-                            <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                <i class="icon-user"></i>login
-                            </a>
+                             <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se déconnecter
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se connecter
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
                         </li>
                     </ul>
                     <!-- ====== End of Extra Nav ====== -->
@@ -236,7 +260,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                             <?php
                             if (isset($_SESSION['Id'])):
                             ?>
-                                <a class="list active" href="creationgroupe.php?id=<?= $_SESSION['Id'] ?>"\'>CREER UN NOUVEAU GROUPE</a>
+                                <a class="list active" href="creationgroupe.php">CREER UN NOUVEAU GROUPE</a>
                             <?php
                             else:
                                 echo '<font color="red">'."Connectez-vous pour créer un groupe !"."</font>";
@@ -290,11 +314,11 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                     <?php
 
                 //if(isset($_POST['recherche'])) {
-                    if(isset($_SESSION['id'])){
+                    if(isset($_SESSION['Id'])){
                     //$id = 1;
                   //Requête à ma BDD pour récupérer les groupes de l'utilisateur
                     if($db_handle && $db_found){
-                         $SQL1 = "SELECT * FROM groupe_membre WHERE IdUtilisateur='".$_SESSION['id']."'";
+                         $SQL1 = "SELECT * FROM groupe_membre WHERE IdUtilisateur='".$_SESSION['Id']."'";
                          $result1 = mysqli_query($db_handle, $SQL1);
 
                         while($db_field1=mysqli_fetch_assoc($result1)){
