@@ -1,7 +1,23 @@
+<?php
+session_start();
+$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+$db_found = mysqli_select_db($db_handle,"kult");
+
+    
+        
+if(isset($_POST['rating'])){
+     $SQL2 = "INSERT INTO `film_avis`(`IdFilm`, `IdUtilisateur`, `Note`) VALUES (".$_GET['id']." , ".$_SESSION['Id'].",".$_POST['rating'].")";
+     $result2 = mysqli_query($db_handle, $SQL2);
+    
+}
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/star.js"></script>
 <head>
     <meta charset="UTF-8">
 
@@ -42,6 +58,8 @@
 
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    
+    <link type="text/css" rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -357,21 +375,217 @@ $tmp2 = count($casting);
                                 ?>
                             <a href="#" class="btn btn-main btn-effect">watch later</a>
                             <a href="#" class="btn rate-movie"><i class="icon-heart"></i></a>
+                            
+                            <?php 
+                             $SQLnote = "SELECT * FROM film_avis WHERE IdFilm='".$_GET['id']."' AND IdUtilisateur='".$_SESSION['Id']."'";
+                            $resultnote = mysqli_query($db_handle, $SQLnote);
+                            $db_fieldnote=mysqli_fetch_assoc($resultnote);
+                            
+                            
+                            if($db_fieldnote==NULL){
+                                echo '<form method="post">
+                            <div class="mt10">
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                            
+                        
+                        <span class="r r0_5" data-rating="1" data-value="0.5"></span>
+                        <span class="r r1" data-rating="1" data-value="1"></span>
+                        <span class="r r1_5" data-rating="15" data-value="1.5"></span>
+                        <span class="r r2" data-rating="2" data-value="2"></span>
+                        <span class="r r2_5" data-rating="25" data-value="2.5"></span>
+                        <span class="r r3" data-rating="3" data-value="3"></span>
+                        <span class="r r3_5" data-rating="35" data-value="3.5"></span>
+                        <span class="r r4" data-rating="4" data-value="4"></span>
+                        <span class="r r4_5" data-rating="45" data-value="4.5"></span>
+                        <span class="r r5" data-rating="5" data-value="5"></span>
+                        </span> <input type="submit" style="background: none; border: none; cursor: pointer; color: white;" value="Noter ce film"/>
+                                <div class="values">
+                
+                      <div>
+                        <input type="hidden" id="rating" value="0" />
+                      </div>
+                      <div>
+                        <input type="hidden" name="rating" id="rating_val" value="0" />
+                      </div>
 
-                                <div class="rating mt10">
+
+                    </div>
+                               
+                        </div>
+                                </form> ';
+                                
+                            }
+                            elseif($db_fieldnote['Note']=="0"){
+                                echo '
+                            <div class="mt10">
+                            <span class="rating_stars rating_0">
+                        <span class="s" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($db_fieldnote['Note']=="0.5"){
+                                echo '
+                            <div class="mt10">
+                            <span class="rating_stars rating_0">
+                        
+                        <span class="s active-low" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                        elseif($db_fieldnote['Note']=="1"){
+                                echo '
+                            <div class="mt10">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                        elseif($db_fieldnote['Note']=="1.5"){
+                                echo '
+                            <div class="mt10">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($db_fieldnote['Note']=="2"){
+                                echo '
+                            <div class="mt10">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($db_fieldnote['Note']=="2.5"){
+                                echo '
+                            <div class="mt10">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            
+                            elseif($db_fieldnote['Note']=="3"){
+                                echo '
+                            <div class="mt10">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                             elseif($db_fieldnote['Note']=="3.5"){
+                                echo '
+                            <div class="mt10">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($db_fieldnote['Note']=="4"){
+                                echo '
+                            <div class="mt10">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($db_fieldnote['Note']=="4.5"){
+                                echo '
+                            <div class="mt10">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($db_fieldnote['Note']=="5"){
+                                echo '
+                            <div class="mt10">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            
+                            
+                            
+                            ?>
+                             
+                                <!-- <<div class="rating mt10">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-
-                                <?php echo '<span>'.$vote_count.' avis</span>'?>
-                                </div>
-                            </div>  
-
+                                    <i class="fa fa-star-o"></i> -->
+                           
+                   
+                               
+                            </div> 
+                   
                         <div class="clearfix"></div>
 
                     </div>
+                   
+                
                 </div>
             </div>
         </section>
@@ -571,7 +785,7 @@ $tmp2 = count($casting);
                             <!-- End of Movie Details -->
 
                             <!-- Start of Rating -->
-                            <div class="stars">
+                           <!-- <div class="stars">
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -580,7 +794,7 @@ $tmp2 = count($casting);
                                     <i class="fa fa-star-half-o"></i>
                                 </div>
                                 <span>8.7 / 10</span>
-                            </div>
+                            </div> -->
                             <!-- End of Rating -->
 
                         </div>
