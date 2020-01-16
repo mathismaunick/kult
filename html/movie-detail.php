@@ -8,6 +8,37 @@ $db_found = mysqli_select_db($db_handle,"kult");
 if(isset($_POST['rating'])){
      $SQL2 = "INSERT INTO `film_avis`(`IdFilm`, `IdUtilisateur`, `Note`) VALUES (".$_GET['id']." , ".$_SESSION['Id'].",".$_POST['rating'].")";
      $result2 = mysqli_query($db_handle, $SQL2);
+
+     $SQLdelete = "DELETE FROM `recommandation` WHERE `IdFilm`=".$_GET['id']." ";
+     $resultdelete = mysqli_query($db_handle, $SQLdelete);
+
+
+
+     //Boucle pour ajouter tous les similaires
+     $capt = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$_GET['id'].'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
+
+     $count_similars = count($capt['similars']);
+     for($i=0;$i<$count_similars;$i++){
+
+        $SQL4 = "SELECT `Poids` FROM `recommandation` WHERE `IdFilm`=".$capt['similars'][$i]['tmdb_id']." ";
+        $result4 = mysqli_query($db_handle, $SQL4);
+        $db_field4 = mysqli_fetch_assoc($result4);
+
+        if(intval($db_field4)<intval($_POST['rating'])){
+            $SQL5 = "DELETE FROM `recommandation` WHERE `IdFilm`=".$capt['similars'][$i]['tmdb_id']." ";
+            $result5 = mysqli_query($db_handle, $SQL5);
+
+            $SQL3 = "INSERT INTO `recommandation`(`IdUtilisateur`,`IdFilm`,`Poids`) VALUES (".$_SESSION['Id'].",".$capt['similars'][$i]['tmdb_id'].",".$_POST['rating'].")";
+            $result3 = mysqli_query($db_handle, $SQL3);
+
+        }
+        elseif($db_field4==NULL){
+            $SQL3 = "INSERT INTO `recommandation`(`IdUtilisateur`,`IdFilm`,`Poids`) VALUES (".$_SESSION['Id'].",".$capt['similars'][$i]['tmdb_id'].",".$_POST['rating'].")";
+            $result3 = mysqli_query($db_handle, $SQL3);
+        }
+        
+     }
+     
     
 }
 ?>
@@ -323,6 +354,7 @@ if($vid['results'] != null){
 $capt = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$id.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
 if($capt['crews'] != null){$crews = $capt['crews'][0]['name'];}
 else{$crews = " ";}
+
 
 //Traitement pour affichage casting
 $casting = $capt['casts'];
