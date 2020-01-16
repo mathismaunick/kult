@@ -405,7 +405,7 @@ $tmp2 = count($casting);
                         <span class="r r4" data-rating="4" data-value="4"></span>
                         <span class="r r4_5" data-rating="45" data-value="4.5"></span>
                         <span class="r r5" data-rating="5" data-value="5"></span>
-                        </span> <input type="submit" style="background: none; border: none; cursor: pointer; color: white;" value="Noter ce film"/>
+                        </span> <input class="title" type="submit" style="background: none; border: none; cursor: pointer;" value="Noter ce film"/>
                                 <div class="values">
                 
                       <div>
