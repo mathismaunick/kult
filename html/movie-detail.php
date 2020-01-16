@@ -73,7 +73,7 @@ if(isset($_POST['rating'])){
 <body>
 
 
-    <!-- =============== START OF PRELOADER =============== -->
+    <!-- =============== START OF PRELOADER =============== 
     <div class="loading">
         <div class="loading-inner">
             <div class="loading-effect">
@@ -81,7 +81,7 @@ if(isset($_POST['rating'])){
             </div>
         </div>
     </div>
-    <!-- =============== END OF PRELOADER =============== -->
+    =============== END OF PRELOADER =============== -->
 
 
 
