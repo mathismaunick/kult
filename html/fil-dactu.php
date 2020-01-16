@@ -293,17 +293,6 @@ $id=[];
                 </a>
                 </div>
 
-                <!-- Rating -->
-                <div class="stars">
-                <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                </div>
-                </div>
-
                 </div>
 
                 </div>
