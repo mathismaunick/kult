@@ -377,6 +377,7 @@ $tmp2 = count($casting);
                             <a href="#" class="btn rate-movie"><i class="icon-heart"></i></a>
                             
                             <?php 
+                            if(isset($_SESSION['Id'])){
                              $SQLnote = "SELECT * FROM film_avis WHERE IdFilm='".$_GET['id']."' AND IdUtilisateur='".$_SESSION['Id']."'";
                             $resultnote = mysqli_query($db_handle, $SQLnote);
                             $db_fieldnote=mysqli_fetch_assoc($resultnote);
@@ -565,7 +566,7 @@ $tmp2 = count($casting);
                         </span>    
                         </div>';
                             }
-                            
+                            }
                             
                             
                             ?>
