@@ -1,5 +1,8 @@
 <?php
 session_start();
+$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+$db_found = mysqli_select_db($db_handle,"kult");
+
 ?>
 
 
@@ -119,204 +122,145 @@ elseif(isset($_GET['recherche'])) {
     <div class="wrapper">
 
 
-        <!-- =============== START OF HEADER NAVIGATION =============== -->
-        <!-- Insert the class "sticky" in the header if you want a sticky header -->
-        <header class="header">
-            <div class="container-fluid">
+     <!-- =============== START OF HEADER NAVIGATION =============== -->
+     <!-- Insert the class "sticky" in the header if you want a sticky header -->
+     <header class="header">
+        <div class="container-fluid">
 
-                <!-- ====== Start of Navbar ====== -->
-                <nav class="navbar navbar-expand-lg">
+            <!-- ====== Start of Navbar ====== -->
+            <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.php">
-                        <!-- INSERT YOUR LOGO HERE -->
-                        <h4><strong>KULT</strong></h4>
-                        <!-- INSERT YOUR WHITE LOGO HERE -->
+                <a class="navbar-brand" href="index.php">
+                    <!-- INSERT YOUR LOGO HERE -->
+                    <h4><strong>KULT</strong></h4>
+                    <!-- INSERT YOUR WHITE LOGO HERE -->
+                </a>
+
+                <!-- Login Button on Responsive -->
+                <?php
+                if (isset($_SESSION['Id'])):
+                    ?>
+                    <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
                     </a>
+                    <?php
+                else:
+                    ?>
+                    <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
+                    </a>
+                    <?php
+                endif
+                ?>  
+                
+                <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
+                 <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+              </span>
+          </button>
 
-                    <!-- Login Button on Responsive -->
-                     <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
-                    
-                    <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
-                     <span class="hamburger-box">
-                      <span class="hamburger-inner"></span>
-                  </span>
-              </button>
+          <!-- ====== Start of #main-nav ====== -->
+          <div class="navbar-collapse" id="main-nav">
 
-              <!-- ====== Start of #main-nav ====== -->
-              <div class="navbar-collapse" id="main-nav">
+            <!-- ====== Start of Main Menu ====== -->
+            <ul class="navbar-nav mx-auto" id="main-menu">
+                <!-- Menu Item -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Accueil</a>
+                </li>
 
-                <!-- ====== Start of Main Menu ====== -->
-                <ul class="navbar-nav mx-auto" id="main-menu">
-                    <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a>
+                <!-- Menu Item -->
+                <li class="nav-item">
+                    <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                </li>
 
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index.php">Home Version 1</a>
-                            </li>
+                <li class="nav-item">
 
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index2.html">Home Version 2</a>
-                            </li>
+                    <?php
+                    if (isset($_SESSION['Id'])):
+                        ?>
+                        <a class="nav-link" href="groupe.php">Groupes</a>
+                        <?php
+                    else:
+                        ?>
+                        <a class="nav-link" a href="groupe.php">Groupes</a>
+                        <?php
+                    endif
+                    ?>
 
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index3.html">Home Version 3</a>
-                            </li>
+                </li>
 
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="index4.html">Home Version 4</a>
-                            </li>
+                <!-- Menu Item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
 
-                        </ul>
-                    </li>
+                    <!-- Dropdown Menu -->
+                    <ul class="dropdown-menu">
+                        <!-- Menu Item -->
+                        <li>
+                            <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
+                        </li>
 
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                    </li>
+                        <!-- Menu Item -->
+                        <li>
+                            <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
+                        </li>
 
-                    <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groupes</a>
+                    </ul>
+                </li>
 
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-list.html">Movie List 1</a>
-                            </li>
+                <!-- Menu Item -->
+                <li class="nav-item">
+                    <a class="nav-link" href="contact-us.php">Contactez nous</a>
+                </li>
 
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-list2.html">Movie List 2</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid.html">Movie Grid 1</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid2.html">Movie Grid 2</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid3.html">Movie Grid 3</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-grid4.html">Movie Grid 4</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-detail.html">Movie Detail</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="movie-detail2.html">Movie Detail 2</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="watch-later.html">Watch Later</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-list.html">Blog List</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-list-fullwidth.html">Blog List Fullwidth</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-post-detail.html">Blog Detail</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href="blog-post-detail-fullwidth.html">Blog Detail Fullwidth</a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact-us.html">Contact us</a>
-                    </li>
-
-                </ul>
-                <!-- ====== End of Main Menu ====== -->
+            </ul>
+            <!-- ====== End of Main Menu ====== -->
 
 
-                <!-- ====== Start of Extra Nav ====== -->
-                <ul class="navbar-nav extra-nav">
+            <!-- ====== Start of Extra Nav ====== -->
+            <ul class="navbar-nav extra-nav">
 
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link toggle-search" href="#">
-                            <i class="fa fa-search"></i>
-                        </a>
-                    </li>
+                <!-- Menu Item -->
+                <li class="nav-item">
+                    <a class="nav-link toggle-search" href="#">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
 
-                    <!-- Menu Item -->
-                    <li class="nav-item notification-wrapper">
-                        <a class="nav-link notification" href="#">
-                            <i class="fa fa-globe"></i>
-                            <span class="notification-count">2</span>
-                        </a>
-                    </li>
+                <!-- Menu Item -->
+                <li class="nav-item notification-wrapper">
+                    <a class="nav-link notification" href="#">
+                        <i class="fa fa-globe"></i>
+                        <span class="notification-count">2</span>
+                    </a>
+                </li>
 
-                    <!-- Menu Item -->
-                    <li class="nav-item m-auto">
-                        <a href="login.php" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                            <i class="icon-user"></i>Se connecter
-                        </a>
-                    </li>
-                </ul>
-                <!-- ====== End of Extra Nav ====== -->
-
-            </div>
-            <!-- ====== End of #main-nav ====== -->
-        </nav>
-        <!-- ====== End of Navbar ====== -->
+                <!-- Menu Item -->
+                <li class="nav-item m-auto">
+                   <?php
+                   if (isset($_SESSION['Id'])):
+                    ?>
+                    <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                        <i class="icon-user"></i>Se déconnecter
+                    </a>
+                    <?php
+                else:
+                    ?>
+                    <a href="login.php" class="btn btn-main btn-effect login-btn">
+                        <i class="icon-user"></i>Se connecter
+                    </a>
+                    <?php
+                endif
+                ?>  
+            </li>
+        </ul>
+        <!-- ====== End of Extra Nav ====== -->
 
     </div>
+    <!-- ====== End of #main-nav ====== -->
+</nav>
+<!-- ====== End of Navbar ====== -->
+
+</div>
 </header>
 <!-- =============== END OF HEADER NAVIGATION =============== -->
 
@@ -459,46 +403,193 @@ elseif(isset($_GET['recherche'])) {
 
         <!-- Rating -->
         <div class="stars">
-        <div class="rating">
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star-o"></i>
-        </div>
-        </div>
+        <div class="rating">';
 
-        <!-- Image -->';
-        if($résultat[$i]['poster_path']!=''){
-            echo '<img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
+        if(isset($_SESSION['Id'])){
+         $SQLnote = "SELECT * FROM film_avis WHERE IdFilm='".$résultat[$i]['id']."' AND IdUtilisateur='".$_SESSION['Id']."'";
+         $resultnote = mysqli_query($db_handle, $SQLnote);
+         $db_fieldnote=mysqli_fetch_assoc($resultnote);
+
+         if($db_fieldnote['Note']=="0"){
+            echo '
+            <div class="mt10">
+            <span class="rating_stars rating_0">
+            <span class="s" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
             </div>';
         }
-        else{
+        elseif($db_fieldnote['Note']=="0.5"){
+            echo '
+            <div class="mt10">
+            <span class="rating_stars rating_0">
 
-            echo '<img src="assets/images/posters/poster-1.jpg" alt="">
+            <span class="s active-low" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="1"){
+            echo '
+            <div class="mt10">
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="1.5"){
+            echo '
+            <div class="mt10">
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-low" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="2"){
+            echo '
+            <div class="mt10">
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="2.5"){
+            echo '
+            <div class="mt10">
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-low" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
             </div>';
         }
 
-        echo'
-        <!-- Movie List Content -->
-        <div class="listing-content">
-        <div class="inner">
-        <h3 class="title">'.$title.'</h3>
+        elseif($db_fieldnote['Note']=="3"){
+            echo '
+            <div class="mt10">
 
-        <p>'.$synopsis.'</p>
 
-        <a href="movie-detail.php?id='.$résultat[$i]['id'].'" class="btn btn-main btn-effect">details</a>
-        </div>
-        </div>
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="3.5"){
+            echo '
+            <div class="mt10">
 
-        </div>
-        </div>
+
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-low" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="4"){
+            echo '
+            <div class="mt10">
+
+
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="4.5"){
+            echo '
+            <div class="mt10">
+
+
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-low" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+        elseif($db_fieldnote['Note']=="5"){
+            echo '
+            <div class="mt10">
+
+
+            <span class="rating_stars rating_0">
+            <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            <span class="s active-high" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+            </span>    
+            </div>';
+        }
+    }
+
+    echo'
+    </div>
+    </div>';
+
+    if($résultat[$i]['poster_path']!=''){
+        echo '<img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
+        </div>';
+    }
+    else{
+
+        echo '<img src="assets/images/posters/poster-1.jpg" alt="">
         </div>';
     }
 
+    echo'
+    <!-- Movie List Content -->
+    <div class="listing-content">
+    <div class="inner">
+    <h3 class="title">'.$title.'</h3>
+
+    <p>'.$synopsis.'</p>
+
+    <a href="movie-detail.php?id='.$résultat[$i]['id'].'" class="btn btn-main btn-effect">details</a>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>';
+}
 
 
-    ?>
+
+?>
 
 
 
