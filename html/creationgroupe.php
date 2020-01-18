@@ -1,15 +1,17 @@
     <?php
     session_start();
 
-    //$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
-    $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
-    $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+    $bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+    $db_handle=mysqli_connect("localhost","root", "root", "kult");
+    //$bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
+    //$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
     $db_found = mysqli_select_db($db_handle,"kult");
     if(isset($_POST['groupe'])) {
         $nom = htmlspecialchars($_POST['nom']);
-        if(!empty($_POST['nom']) ) {
+        $description = htmlspecialchars($_POST['description']);
+        $datenow=date("Y-d-m H:i:s");
+        if(!empty($_POST['nom']) && !empty($_POST['description'])) {
             $nomlength = strlen($nom);
-
 
         if($nomlength <= 255) { 
                     $reqnom = $bdd->prepare("SELECT * FROM GROUPE WHERE Nom = ?");
@@ -17,8 +19,13 @@
                     $nomexist = $reqnom->rowCount();
                     if($nomexist == 0) {
                         //if($mdp == $mdp2) {
-                            $insertmbr = $bdd->prepare("INSERT INTO GROUPE(Nom) VALUES(?)");
-                            $insertmbr->execute(array($nom));
+                            //$insertmbr = $bdd->prepare("INSERT INTO GROUPE(Nom,Description) VALUES(?,?)");
+                            $insertmbr = $bdd->prepare("INSERT INTO GROUPE(Nom,Description,Date_Creation) VALUES(?,?,now())");
+                           // $insertmbr->execute(array($nom),array($description));
+                           $insertmbr->execute(array($nom,$description));
+                           //$insertmbr2 = $bdd->prepare("UPDATE GROUPE SET Description= 'flu' WHERE Id =32 ");
+                           //$insertmbr2->execute();
+                           
                             $erreur = "Votre groupe a bien été créé !";
                         
                          $SQL1 = "SELECT * FROM groupe WHERE Nom='".$nom."'";
@@ -27,6 +34,13 @@
                          
                         $SQL56 = "INSERT INTO `groupe_membre`(`IdGroupe`, `IdUtilisateur`) VALUES (".$db_field1['Id']." , ".$_SESSION['Id'].")";
                         $result56 = mysqli_query($db_handle, $SQL56);
+
+                        /*if(!empty($_POST['description']) ) {
+                            $descriptionlength = strlen($description);
+                            $insertmbr = $bdd->prepare("INSERT INTO GROUPE(Description) VALUES(?) WHERE WHERE Nom='".$nom."'");
+                            $insertmbr->execute(array($description));
+                            $erreur = "Votre groupe a bien été créé !";
+                        }*/
                         
                             echo '<meta http-equiv="refresh" content="0;URL=ajoutermembres.php?idgroupe='.$db_field1['Id'].'">';
                         //} 
@@ -40,7 +54,10 @@
         else {
             $erreur = "Votre prenom ne doit pas dépasser 255 caractères !";
         }
-        }}
+        }
+        
+    
+    }
     ?>
 
 
@@ -63,7 +80,7 @@
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>KULT</title>
+    <title>Movify - Movies, Series & Cinema HTML Template</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -142,7 +159,10 @@
                                 </div>
 
 
-                               
+                                <div class="form-group">
+                                    <label for="Description">Description</label>
+                                    <input type="text" class="form-control" id="description" name="description" placeholder="Entrez la description du groupe *" />
+                                </div>
 
                                 <div class="form-group">
                                     <a href="ajoutermembres.php"><input type="submit" name="groupe" value="Créer nouveau groupe" class="btn btn-main btn-effect nomargin" /></a>
