@@ -1,10 +1,10 @@
     <?php
     session_start();
 
-    $bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
-    $db_handle=mysqli_connect("localhost","root", "root", "kult");
-    //$bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
-    //$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+    //$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+    //$db_handle=mysqli_connect("localhost","root", "root", "kult");
+    $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
+    $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
     $db_found = mysqli_select_db($db_handle,"kult");
     if(isset($_POST['groupe'])) {
         $nom = htmlspecialchars($_POST['nom']);
