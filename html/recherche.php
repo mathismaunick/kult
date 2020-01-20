@@ -150,7 +150,7 @@ elseif(isset($_GET['recherche'])) {
                     <?php
                 endif
                 ?>  
-                
+
                 <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                  <span class="hamburger-box">
                   <span class="hamburger-inner"></span>
@@ -561,7 +561,7 @@ elseif(isset($_GET['recherche'])) {
     </div>';
 
     if($résultat[$i]['poster_path']!=''){
-        echo '<img  data-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'" data-srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/twL4SiSF1jaIUMF8HYttBE8huSO.jpg 2x" alt="" sizes="250px" srcset="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].' 1x, https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].' 2x" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/'.$résultat[$i]['poster_path'].'">
+        echo '<img src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat[$i]['poster_path'].'">
         </div>';
     }
     else{
