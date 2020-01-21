@@ -205,7 +205,7 @@ if(isset($_SESSION['Id'])) {
                 </div>
                 <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
 
-                <a href="index.php" class="text-white">Back to Home</a>
+                <a href="profil.php" class="text-white">Revenir au profil</a>
 
             </div>
         </main>

@@ -25,7 +25,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>Mon Profil</title>
+     <title>KULT</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -97,25 +97,13 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
                     <a class="navbar-brand" href="index.html">
                         <!-- INSERT YOUR LOGO HERE -->
-                        KULT
+                        <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                        
+                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
 
                     <!-- Login Button on Responsive -->
-                    <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
+                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
@@ -204,7 +192,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                                         </a>
                                     <?php
                                     endif
-                                    ?>  
+                                ?>                                  
                             </li>
                         </ul>
                         <!-- ====== End of Extra Nav ====== -->
@@ -226,7 +214,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                 <div class="inner">
                     <h2 class="title">Mon Profil</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="index.php">Acceuil</a></li>
                         <li>Mon profil </li>
                     </ol>
                 </div>
@@ -299,8 +287,14 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
                 <?php
                         else:
-                        echo '<font color="red">'."Connectez-vous pour accéder à votre profil !"."</font>";
+                        echo '<font color="red">'."Connectez-vous pour accéder à votre profil ! "."</font>";
+
                 ?>
+
+                <a href="login.php" class="signInClick">
+                        <i class="icon-user"></i> Se connecter
+                </a>
+
 
                 <?php
                     endif
@@ -322,7 +316,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     
                     $id = $_SESSION['Id'];
-                    $sql="SELECT IdFilm, Note FROM film_avis WHERE IdUtilisateur= '$id' ORDER BY Note DESC";
+                    $sql="SELECT IdFilm, Note FROM film_avis WHERE IdUtilisateur= '$id' ORDER BY Id DESC LIMIT 6";
 
 
                     $results = $pdo->query($sql);
@@ -369,12 +363,23 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         $synopsis = $overview;
 
                     }
+                    
+
                     if($overview==""){
                      $synopsis = $overview;
                      $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
                      $synopsis .=str_repeat(". ", 66);
 
-                 }
+                    }
+
+
+                    $title = $object_response['title'];
+                    
+                    if (strlen($title)>=16) {
+                    $title = substr($title, 0, 16);
+                    $title .="...";
+                    }
+
    
 
 
@@ -397,29 +402,236 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                                     <!-- Buttons -->
                                     <div class="buttons">
                                         <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom" class="like">
-                                            <i class="icon-heart"></i>
+                                            
                                         </a>
 
-                                        <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom" class="share">
-                                            <i class="icon-share"></i>
+                                        
+                                            
                                         </a>
-                                    </div>
+                                    </div>';
 
-                                    <!-- Rating -->
+                                    ?>
 
 
-                                    <!-- Image -->
+                                <!-- Rating -->
+
+
+                        <?php 
+                            if(isset($_SESSION['Id'])){
+                        
+                            
+                            
+                            if($row["Note"]==NULL){
+                                echo '<form method="post">
+                            <div class="mt1">
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                            
+                        
+                        <span class="r r0_5" data-rating="1" data-value="0.5"></span>
+                        <span class="r r1" data-rating="1" data-value="1"></span>
+                        <span class="r r1_5" data-rating="15" data-value="1.5"></span>
+                        <span class="r r2" data-rating="2" data-value="2"></span>
+                        <span class="r r2_5" data-rating="25" data-value="2.5"></span>
+                        <span class="r r3" data-rating="3" data-value="3"></span>
+                        <span class="r r3_5" data-rating="35" data-value="3.5"></span>
+                        <span class="r r4" data-rating="4" data-value="4"></span>
+                        <span class="r r4_5" data-rating="45" data-value="4.5"></span>
+                        <span class="r r5" data-rating="5" data-value="5"></span>
+                        </span> <input class="title" type="submit" style="background: none; border: none; cursor: pointer;" value="Noter ce film"/>
+                                <div class="values">
+                
+                      <div>
+                        <input type="hidden" id="rating" value="0" />
+                      </div>
+                      <div>
+                        <input type="hidden" name="rating" id="rating_val" value="0" />
+                      </div>
+
+
+                    </div>
+                               
+                        </div>
+                                </form> ';
+                                
+                            }
+                            elseif($row["Note"]=="0"){
+                                echo '
+                            <div class="mt1">
+                            <span class="rating_stars rating_0">
+                        <span class="s" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($row["Note"]=="0.5"){
+                                echo '
+                            <div class="mt1">
+                            <span class="rating_stars rating_0">
+                        
+                        <span class="s active-low" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                        elseif($row["Note"]=="1"){
+                                echo '
+                            <div class="mt1">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                        elseif($row["Note"]=="1.5"){
+                                echo '
+                            <div class="mt1">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($row["Note"]=="2"){
+                                echo '
+                            <div class="mt1">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($row["Note"]=="2.5"){
+                                echo '
+                            <div class="mt1">
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            
+                            elseif($row["Note"]=="3"){
+                                echo '
+                            <div class="mt1">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                             elseif($row["Note"]=="3.5"){
+                                echo '
+                            <div class="mt1">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($row["Note"]=="4"){
+                                echo '
+                            <div class="mt1">
+                            
+                           
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($row["Note"]=="4.5"){
+                                echo '
+
+                  
+                            <div class="mt1">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-low" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            elseif($row["Note"]=="5"){
+                                echo '
+                            <div class="mt1">
+                            
+                            
+                            <span class="rating_stars rating_0">
+                        <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        <span class="s active-high" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                        </span>    
+                        </div>';
+                            }
+                            }
+                            
+                            
+                            ?>
+
+
+                                    <?php
+
+
+
+
+                                echo '<!-- Image -->
                                     <img src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$poster.'" alt="">
                                 </div>
 
                                 <!-- Movie List Content -->
                                 <div class="listing-content">
                                     <div class="inner">
-                                        <h2 class="title">'.$object_response["title"].'</h2>
+                                        <h2 class="title">'.$title.'</h2>
 
                                         <p>'.$synopsis.'</p>
 
-                                        <a href="movie-detail.html" class="btn btn-main btn-effect">details</a>
+
+                                        <a href="movie-detail.php?id='.$single_id.'" class="btn btn-main btn-effect">details</a>
+
+
                                     </div>
                                 </div>
 
@@ -436,16 +648,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                 }
 
                 ?>
-
-                <?php
-
-                else:
-
-                ?>
                                  
-                <a href="login.php" class="btn btn-main btn-effect login-btn">
-                    <i class="icon-user"></i> Se connecter
-                </a>
 
                 <?php
                     endif
@@ -465,7 +668,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
 
 
-                <!-- Start of Pagination -->
+                <!-- Start of Pagination 
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <nav class="pagination">
@@ -478,148 +681,165 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         </nav>
                     </div>
                 </div>
-                <!-- End of Pagination -->
+                 -->
 
             </div>
         </main>
         <!-- =============== END OF MAIN =============== -->
 
 
+
+                <?php 
+                if (isset($_SESSION['Id'])):
+                ?>
+
+                    <div class="col-md-15">
+                        <h2 class="title"; style="text-align:center" >A voir plus tard</h2>
+                    </div>
+
+                 <?php
+                    endif
+                ?>  
+
+
         <!-- =============== START OF FOOTER =============== -->
         <footer class="footer1 bg-dark">
 
-<!-- ===== START OF FOOTER WIDGET AREA ===== -->
-<div class="footer-widget-area ptb100">
-    <div class="container">
-        <div class="row">
+            <!-- ===== START OF FOOTER WIDGET AREA ===== -->
+            <div class="footer-widget-area ptb100">
+                <div class="container">
+                    <div class="row">
 
-            <!-- Start of Widget 1 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-about">
+                        <!-- Start of Widget 1 -->
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="widget widget-about">
 
-                    <!-- INSERT YOUR LOGO HERE -->
-                    <!--<img src="assets/images/logo.svg" alt="logo" class="logo"> -->
-                    <!-- INSERT YOUR WHITE LOGO HERE -->
-                    <!--<img src="assets/images/logo-white.svg" alt="white logo" class="logo-white"> -->
-                    <h4 class="widget-title">Kult</h4>
-                    <p class="nomargin">Kult est une plateforme de recommandation de film pour des soirées en groupe. Ne perdez plus votre temps à chercher un film.</p>
-                </div>
-            </div>
-            <!-- End of Widget 1 -->
+                                <!-- INSERT YOUR LOGO HERE -->
+                                <img src="assets/images/logo.svg" alt="logo" class="logo">
+                                <!-- INSERT YOUR WHITE LOGO HERE -->
+                                <img src="assets/images/logo-white.svg" alt="white logo" class="logo-white">
+                                <p class="nomargin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
+                            </div>
+                        </div>
+                        <!-- End of Widget 1 -->
 
-            <!-- Start of Widget 2 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-links">
-                    <h4 class="widget-title">liens vers API</h4>
+                        <!-- Start of Widget 2 -->
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="widget widget-links">
+                                <h4 class="widget-title">Useful links</h4>
 
-                    <ul class="general-listing">
-                        <li><a href="https://waatch.docs.apiary.io/#">Captain watch</a></li>
-                        <li><a href="https://developers.themoviedb.org/3">The Movie Database</a></li>
-                        <li><a href="http://www.omdbapi.com/">Open Movie Database</a></li>
-                    </ul>
+                                <ul class="general-listing">
+                                    <li><a href="#">about movify</a></li>
+                                    <li><a href="#">blog</a></li>
+                                    <li><a href="#">forum</a></li>
+                                    <li><a href="#">my account</a></li>
+                                    <li><a href="#">watch list</a></li>
+                                </ul>
 
-                </div>
-            </div>
-            <!-- End of Widget 2 -->
+                            </div>
+                        </div>
+                        <!-- End of Widget 2 -->
 
-            <!-- Start of Widget 3 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-blog">
-                    <h4 class="widget-title">Contact</h4>
+                        <!-- Start of Widget 3 -->
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="widget widget-blog">
+                                <h4 class="widget-title">latest news</h4>
 
-                    <ul class="blog-posts">
-                        <li><a href="#">Formulaire de contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End of Widget 3 -->
+                                <ul class="blog-posts">
+                                    <li><a href="#">blog post 1</a><small>januar 13, 2018</small></li>
+                                    <li><a href="#">blog post 2</a><small>januar 13, 2018</small></li>
+                                    <li><a href="#">blog post 3</a><small>januar 13, 2018</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End of Widget 3 -->
 
-            <!-- Start of Widget 4 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-social">
-                    <h4 class="widget-title">Suivez-nous</h4>
+                        <!-- Start of Widget 4 -->
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="widget widget-social">
+                                <h4 class="widget-title">follow us</h4>
 
-                    <p>Vous pouvez nous suivre sur les différents réseaux sociaux.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque.</p>
 
-                    <!-- Start of Social Buttons -->
-                    <ul class="social-btns">
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll facebook">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                    <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                </div>
-                            </a>
-                        </li>
+                                <!-- Start of Social Buttons -->
+                                <ul class="social-btns">
+                                    <!-- Social Media -->
+                                    <li>
+                                        <a href="#" class="social-btn-roll facebook">
+                                            <div class="social-btn-roll-icons">
+                                                <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                                <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                            </div>
+                                        </a>
+                                    </li>
 
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll twitter">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                    <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                </div>
-                            </a>
-                        </li>
+                                    <!-- Social Media -->
+                                    <li>
+                                        <a href="#" class="social-btn-roll twitter">
+                                            <div class="social-btn-roll-icons">
+                                                <i class="social-btn-roll-icon fa fa-twitter"></i>
+                                                <i class="social-btn-roll-icon fa fa-twitter"></i>
+                                            </div>
+                                        </a>
+                                    </li>
 
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll google-plus">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                    <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                </div>
-                            </a>
-                        </li>
+                                    <!-- Social Media -->
+                                    <li>
+                                        <a href="#" class="social-btn-roll google-plus">
+                                            <div class="social-btn-roll-icons">
+                                                <i class="social-btn-roll-icon fa fa-google-plus"></i>
+                                                <i class="social-btn-roll-icon fa fa-google-plus"></i>
+                                            </div>
+                                        </a>
+                                    </li>
 
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll instagram">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                    <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- End of Social Buttons -->
+                                    <!-- Social Media -->
+                                    <li>
+                                        <a href="#" class="social-btn-roll instagram">
+                                            <div class="social-btn-roll-icons">
+                                                <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                                <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- End of Social Buttons -->
 
-                </div>
-            </div>
-            <!-- End of Widget 4 -->
+                            </div>
+                        </div>
+                        <!-- End of Widget 4 -->
 
-        </div>
-    </div>
-</div>
-<!-- ===== END OF FOOTER WIDGET AREA ===== -->
-
-
-<!-- ===== START OF FOOTER COPYRIGHT AREA ===== -->
-<div class="footer-copyright-area ptb30">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="d-flex">
-                    <div class="links">
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a href="#">Privacy & Cookies</a></li>
-                            <li class="list-inline-item"><a href="#">Terms & Conditions</a></li>
-                            <li class="list-inline-item"><a href="#">Legal Disclaimer</a></li>
-                            <li class="list-inline-item"><a href="#">Community</a></li>
-                        </ul>
                     </div>
-
-                    <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
-
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- ===== END OF FOOTER COPYRIGHT AREA ===== -->
+            <!-- ===== END OF FOOTER WIDGET AREA ===== -->
 
-</footer>
+
+            <!-- ===== START OF FOOTER COPYRIGHT AREA ===== -->
+            <div class="footer-copyright-area ptb30">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex">
+                                <div class="links">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><a href="#">Privacy & Cookies</a></li>
+                                        <li class="list-inline-item"><a href="#">Terms & Conditions</a></li>
+                                        <li class="list-inline-item"><a href="#">Legal Disclaimer</a></li>
+                                        <li class="list-inline-item"><a href="#">Community</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ===== END OF FOOTER COPYRIGHT AREA ===== -->
+
+        </footer>
         <!-- =============== END OF FOOTER =============== -->
 
     </div>

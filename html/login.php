@@ -200,7 +200,7 @@ if(isset($_POST['formconnexion'])) {
                 </div>
                 <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
 
-                <a href="index.php" class="text-white">Back to Home</a>
+                <a href="index.php" class="text-white">Revenir au menu</a>
 
             </div>
         </main>
