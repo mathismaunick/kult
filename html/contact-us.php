@@ -201,10 +201,10 @@
         <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
             <div class="container">
                 <div class="inner">
-                    <h2 class="title">Contact Us</h2>
+                    <h2 class="title">Contact</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Contact Us</li>
+                        <li><a href="index.php">Home</a></li>
+                        <li>Contact</li>
                     </ol>
                 </div>
             </div>
@@ -219,7 +219,7 @@
                 <div class="row">
 
 
-                    <!-- Start of Contact Details -->
+                    <!-- Start of Contact Details 
                     <div class="col-md-4 col-sm-12">
                         <h3 class="title">Info</h3>
 
@@ -249,13 +249,13 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Start of Contact Details -->
 
 
                     <!-- Start of Contact Form -->
                     <div class="col-md-8 col-sm-12">
-                        <h3 class="title">Contact Form</h3>
+                        <h3 class="title">Formulaire de contact</h3>
 
                         <!-- Start of Contact Form -->
                         <form id="contact-form">
@@ -266,28 +266,28 @@
 
                             <!-- Form Group -->
                             <div class="form-group">
-                                <input class="form-control input-box" type="text" name="name" placeholder="Your Name" autocomplete="off">
+                                <input class="form-control input-box" type="text" name="name" placeholder="Votre Nom" autocomplete="off">
                             </div>
 
                             <!-- Form Group -->
                             <div class="form-group">
-                                <input class="form-control input-box" type="email" name="email" placeholder="your-email@movify.com" autocomplete="off">
+                                <input class="form-control input-box" type="email" name="email" placeholder="Email@movify.com" autocomplete="off">
                             </div>
 
 
                             <!-- Form Group -->
                             <div class="form-group">
-                                <input class="form-control input-box" type="text" name="subject" placeholder="Subject" autocomplete="off">
+                                <input class="form-control input-box" type="text" name="subject" placeholder="Objet" autocomplete="off">
                             </div>
 
                             <!-- Form Group -->
                             <div class="form-group mb20">
-                                <textarea class="form-control textarea-box" rows="8" name="message" placeholder="Type your message..."></textarea>
+                                <textarea class="form-control textarea-box" rows="8" name="message" placeholder="Message..."></textarea>
                             </div>
 
                             <!-- Form Group -->
                             <div class="form-group text-center">
-                                <button class="btn btn-main btn-effect" type="submit">Send message</button>
+                                <button class="btn btn-main btn-effect" type="submit">Envoyer le message</button>
                             </div>
                         </form>
                         <!-- End of Contact Form -->
@@ -314,10 +314,11 @@
                             <div class="widget widget-about">
 
                                 <!-- INSERT YOUR LOGO HERE -->
-                                <img src="assets/images/logo.svg" alt="logo" class="logo">
+                                <!--<img src="assets/images/logo.svg" alt="logo" class="logo"> -->
                                 <!-- INSERT YOUR WHITE LOGO HERE -->
-                                <img src="assets/images/logo-white.svg" alt="white logo" class="logo-white">
-                                <p class="nomargin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
+                                <!--<img src="assets/images/logo-white.svg" alt="white logo" class="logo-white"> -->
+                                <h4 class="widget-title">Kult</h4>
+                                <p class="nomargin">Kult est une plateforme de recommandation de film pour des soirées en groupe. Ne perdez plus votre temps à chercher un film.</p>
                             </div>
                         </div>
                         <!-- End of Widget 1 -->
@@ -325,14 +326,12 @@
                         <!-- Start of Widget 2 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-links">
-                                <h4 class="widget-title">Useful links</h4>
+                                <h4 class="widget-title">liens vers API</h4>
 
                                 <ul class="general-listing">
-                                    <li><a href="#">about movify</a></li>
-                                    <li><a href="#">blog</a></li>
-                                    <li><a href="#">forum</a></li>
-                                    <li><a href="#">my account</a></li>
-                                    <li><a href="#">watch list</a></li>
+                                    <li><a href="https://waatch.docs.apiary.io/#">Captain watch</a></li>
+                                    <li><a href="https://developers.themoviedb.org/3">The Movie Database</a></li>
+                                    <li><a href="http://www.omdbapi.com/">Open Movie Database</a></li>
                                 </ul>
 
                             </div>
@@ -342,12 +341,10 @@
                         <!-- Start of Widget 3 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-blog">
-                                <h4 class="widget-title">latest news</h4>
+                                <h4 class="widget-title">Contact</h4>
 
                                 <ul class="blog-posts">
-                                    <li><a href="#">blog post 1</a><small>januar 13, 2018</small></li>
-                                    <li><a href="#">blog post 2</a><small>januar 13, 2018</small></li>
-                                    <li><a href="#">blog post 3</a><small>januar 13, 2018</small></li>
+                                    <li><a href="#">Formulaire de contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -356,9 +353,9 @@
                         <!-- Start of Widget 4 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-social">
-                                <h4 class="widget-title">follow us</h4>
+                                <h4 class="widget-title">Suivez-nous</h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque.</p>
+                                <p>Vous pouvez nous suivre sur les différents réseaux sociaux.</p>
 
                                 <!-- Start of Social Buttons -->
                                 <ul class="social-btns">
@@ -429,7 +426,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
+                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
 
                             </div>
                         </div>
@@ -638,3 +635,143 @@
 </body>
 
 </html>
+
+
+<?php
+/*
+	********************************************************************************************
+	CONFIGURATION
+	********************************************************************************************
+*/
+// destinataire est votre adresse mail. Pour envoyer à plusieurs à la fois, séparez-les par une virgule
+$destinataire = 'mathis.maunick@gmail.com';
+ 
+// copie ? (envoie une copie au visiteur)
+$copie = 'oui';
+ 
+// Action du formulaire (si votre page a des paramètres dans l'URL)
+// si cette page est index.php?page=contact alors mettez index.php?page=contact
+// sinon, laissez vide
+$form_action = '';
+ 
+// Messages de confirmation du mail
+$message_envoye = "Votre message nous est bien parvenu !";
+$message_non_envoye = "L'envoi du mail a échoué, veuillez réessayer SVP.";
+ 
+// Message d'erreur du formulaire
+$message_formulaire_invalide = "Vérifiez que tous les champs soient bien remplis et que l'email soit sans erreur.";
+ 
+/*
+	********************************************************************************************
+	FIN DE LA CONFIGURATION
+	********************************************************************************************
+*/
+ 
+/*
+ * cette fonction sert à nettoyer et enregistrer un texte
+ */
+function Rec($text)
+{
+	$text = htmlspecialchars(trim($text), ENT_QUOTES);
+	if (1 === get_magic_quotes_gpc())
+	{
+		$text = stripslashes($text);
+	}
+ 
+	$text = nl2br($text);
+	return $text;
+};
+ 
+/*
+ * Cette fonction sert à vérifier la syntaxe d'un email
+ */
+function IsEmail($email)
+{
+	$value = preg_match('/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!\.)){0,61}[a-zA-Z0-9_-]?\.)+[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!$)){0,61}[a-zA-Z0-9_]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/', $email);
+	return (($value === 0) || ($value === false)) ? false : true;
+}
+ 
+// formulaire envoyé, on récupère tous les champs.
+$nom     = (isset($_POST['nom']))     ? Rec($_POST['nom'])     : '';
+$email   = (isset($_POST['email']))   ? Rec($_POST['email'])   : '';
+$objet   = (isset($_POST['objet']))   ? Rec($_POST['objet'])   : '';
+$message = (isset($_POST['message'])) ? Rec($_POST['message']) : '';
+ 
+// On va vérifier les variables et l'email ...
+$email = (IsEmail($email)) ? $email : ''; // soit l'email est vide si erroné, soit il vaut l'email entré
+$err_formulaire = false; // sert pour remplir le formulaire en cas d'erreur si besoin
+ 
+if (isset($_POST['envoi']))
+{
+	if (($nom != '') && ($email != '') && ($objet != '') && ($message != ''))
+	{
+		// les 4 variables sont remplies, on génère puis envoie le mail
+		$headers  = 'From:'.$nom.' <'.$email.'>' . "\r\n";
+		//$headers .= 'Reply-To: '.$email. "\r\n" ;
+		//$headers .= 'X-Mailer:PHP/'.phpversion();
+ 
+		// envoyer une copie au visiteur ?
+		if ($copie == 'oui')
+		{
+			$cible = $destinataire.';'.$email;
+		}
+		else
+		{
+			$cible = $destinataire;
+		};
+ 
+		// Remplacement de certains caractères spéciaux
+		$caracteres_speciaux     = array('&#039;', '&#8217;', '&quot;', '<br>', '<br />', '&lt;', '&gt;', '&amp;', '…',   '&rsquo;', '&lsquo;');
+		$caracteres_remplacement = array("'",      "'",        '"',      '',    '',       '<',    '>',    '&',     '...', '>>',      '<<'     );
+ 
+		$objet = html_entity_decode($objet);
+		$objet = str_replace($caracteres_speciaux, $caracteres_remplacement, $objet);
+ 
+		$message = html_entity_decode($message);
+		$message = str_replace($caracteres_speciaux, $caracteres_remplacement, $message);
+ 
+		// Envoi du mail
+		$num_emails = 0;
+		$tmp = explode(';', $cible);
+		foreach($tmp as $email_destinataire)
+		{
+			if (mail($email_destinataire, $objet, $message, $headers))
+				$num_emails++;
+		}
+ 
+		if ((($copie == 'oui') && ($num_emails == 2)) || (($copie == 'non') && ($num_emails == 1)))
+		{
+			echo '<p>'.$message_envoye.'</p>';
+		}
+		else
+		{
+			echo '<p>'.$message_non_envoye.'</p>';
+		};
+	}
+	else
+	{
+		// une des 3 variables (ou plus) est vide ...
+		echo '<p>'.$message_formulaire_invalide.'</p>';
+		$err_formulaire = true;
+	};
+}; // fin du if (!isset($_POST['envoi']))
+ 
+if (($err_formulaire) || (!isset($_POST['envoi'])))
+{
+	// afficher le formulaire
+	echo '
+	<form id="contact" method="post" action="'.$form_action.'">
+	<fieldset><legend>Vos coordonnées</legend>
+		<p><label for="nom">Nom :</label><input type="text" id="nom" name="nom" value="'.stripslashes($nom).'" /></p>
+		<p><label for="email">Email :</label><input type="text" id="email" name="email" value="'.stripslashes($email).'" /></p>
+	</fieldset>
+ 
+	<fieldset><legend>Votre message :</legend>
+		<p><label for="objet">Objet :</label><input type="text" id="objet" name="objet" value="'.stripslashes($objet).'" /></p>
+		<p><label for="message">Message :</label><textarea id="message" name="message" cols="30" rows="8">'.stripslashes($message).'</textarea></p>
+	</fieldset>
+ 
+	<div style="text-align:center;"><input type="submit" name="envoi" value="Envoyer le formulaire !" /></div>
+	</form>';
+};
+?>
