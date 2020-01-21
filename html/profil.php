@@ -97,13 +97,25 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
                     <a class="navbar-brand" href="index.html">
                         <!-- INSERT YOUR LOGO HERE -->
-                        <img src="assets/images/logo.svg" alt="logo" width="150" class="logo">
+                        KULT
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
+                        
                     </a>
 
                     <!-- Login Button on Responsive -->
-                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
+                    <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
@@ -178,9 +190,21 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
-                                <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                    <i class="icon-user"></i>login
-                                </a>
+                                <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se déconnecter
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se connecter
+                                        </a>
+                                    <?php
+                                    endif
+                                    ?>  
                             </li>
                         </ul>
                         <!-- ====== End of Extra Nav ====== -->
@@ -202,7 +226,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                 <div class="inner">
                     <h2 class="title">Mon Profil</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.php">Acceuil</a></li>
+                        <li><a href="index.php">Accueil</a></li>
                         <li>Mon profil </li>
                     </ol>
                 </div>
