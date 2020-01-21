@@ -1,16 +1,10 @@
 <?php
 session_start();
-//$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
 
-if(isset($_POST['recherche'])) {
-    echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
-}
-
-
 ?>
-
 
 
 
@@ -31,7 +25,7 @@ if(isset($_POST['recherche'])) {
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>KULT</title>
+    <title>Mon Profil</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -95,35 +89,22 @@ if(isset($_POST['recherche'])) {
 
         <!-- =============== START OF HEADER NAVIGATION =============== -->
         <!-- Insert the class "sticky" in the header if you want a sticky header -->
-        <header class="header header-fixed header-transparent text-white">
+        <header class="header">
             <div class="container-fluid">
 
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="index.html">
                         <!-- INSERT YOUR LOGO HERE -->
-                        <h4><strong>KULT</strong></h4>
+                        <img src="assets/images/logo.svg" alt="logo" width="150" class="logo">
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                       
+                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
-                    
-                    <!-- Login Button on Responsive -->
-                    <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
-                    
 
+                    <!-- Login Button on Responsive -->
+                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
+                    
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
                           <span class="hamburger-inner"></span>
@@ -140,25 +121,23 @@ if(isset($_POST['recherche'])) {
                                 <a class="nav-link" href="index.php">Accueil</a>
                             </li>
 
-                                                        <!-- Menu Item -->
+                            <!-- Menu Item -->
                             <li class="nav-item">
                                 <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                            </li>
+                            </li>                            
 
                             <!-- Menu Item -->
                             <li class="nav-item">
-
                                 <a class="nav-link" href="groupe.php">Groupes</a>
-
-                            </li>
+                            </li> 
 
                             <li class="nav-item">
                                 <a class="nav-link" href="profil.php">Profil</a>
-                            </li>
+                            </li>       
 
                             <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
+                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -174,7 +153,6 @@ if(isset($_POST['recherche'])) {
 
                                 </ul>
                             </li>
-
 
                         </ul>
                         <!-- ====== End of Main Menu ====== -->
@@ -194,29 +172,15 @@ if(isset($_POST['recherche'])) {
                             <li class="nav-item notification-wrapper">
                                 <a class="nav-link notification" href="#">
                                     <i class="fa fa-globe"></i>
-                                    <span class="notification-count"></span>
+                                    <span class="notification-count">2</span>
                                 </a>
                             </li>
 
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
-
-                                    <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
-                                            <i class="icon-user"></i>Se déconnecter
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
-                                            <i class="icon-user"></i>Se connecter
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
-
+                                <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
+                                    <i class="icon-user"></i>login
+                                </a>
                             </li>
                         </ul>
                         <!-- ====== End of Extra Nav ====== -->
@@ -232,72 +196,269 @@ if(isset($_POST['recherche'])) {
 
 
 
-
-        <!-- =============== START OF SLIDER REVOLUTION SECTION =============== -->
-        <section id="slider" class="full-slider">
-            <div class="rev-slider-wrapper fullscreen-container overlay-gradient">
-                <div id="fullscreen-slider" class="rev_slider fullscreenbanner" style="display:none" data-version="5.4.1">
-                    <ul>
-
-                        <!-- ===== SLIDE NR. 1 ===== -->
-                        <li data-transition="fade">
-                            <!-- MAIN IMAGE -->
-                            <img src="assets/images/slider/slider1.jpg"
-                                 alt="Image"
-                                 title="slider-bg"
-                                 data-bgposition="center center"
-                                 data-bgfit="cover"
-                                 data-bgrepeat="no-repeat"
-                                 data-bgparallax="10"
-                                 class="rev-slidebg"
-                                 data-no-retina="">
-                            <!-- LAYER NR. 1 -->
-                            <div class="tp-caption tp-resizeme"
-                                 data-x="center"
-                                 data-hoffset=""
-                                 data-y="middle"
-                                 data-voffset="['-30','-30','-30','-30']"
-                                 data-responsive_offset="on"
-                                 data-fontsize="['60','50','40','30']"
-                                 data-lineheight="['60','50','40','30']"
-                                 data-whitespace="nowrap"
-                                 data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
-                                 style="z-index: 5; color: #fff; font-weight: 900;">COMMENCER A NOTER DES FILMS
-                            </div>
-                        </li>
-
-                       
-
-                    </ul>
+        <!-- =============== START OF PAGE HEADER =============== -->
+        <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
+            <div class="container">
+                <div class="inner">
+                    <h2 class="title">Mon Profil</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="index.php">Acceuil</a></li>
+                        <li>Mon profil </li>
+                    </ol>
                 </div>
             </div>
-            <!-- ===== END OF REV SLIDER WRAPPER ===== -->
+        </section>
+        <!-- =============== END OF PAGE HEADER =============== -->
+
+        <?php 
+            if (isset($_SESSION['Id'])):
+        ?>
+
+        <h2 style="text-align:center">Bienvenue <?php echo $_SESSION['Pseudo']; ?></h2>   
+
+         <div class="col-md-10">
+            <a href="edition.php" class="btn btn-main btn-effect login-btn"; left: 50px;>
+               <i class="icon-user"; left: 50px></i> Editer mon profil 
+            </a> 
+
+        </div>
+
+        <?php
+            endif
+        ?>   
 
 
-            <!-- ===== START OF SEARCH FORM WRAPPER ===== -->
-            <div class="search-form-wrapper search-form-rev">
-                <div class="container">
+        <!-- =============== START OF MAIN =============== -->
+        <main class="ptb100">
+            <div class="container">
 
-                    <!-- ===== START OF SEARCH FORM ===== -->
-                    <form action="" id="search-form-1" method="post">
-                        <div class="row justify-content-center">
-                            <div class="col-md-8 col-sm-10 col-12">
-                                <div class="form-group">
-                                    <input name="recherche" type="text" id="search-keyword" value="" class="form-control" placeholder="Entrez un titre de film ou série">
-                                    <button type="submit" class="btn btn-main btn-effect"><i class="fa fa-search"></i></button>
-                                </div>
+                <!-- Start of Filters -->
+                <div class="row mb50">
+
+                    <div class="col-md-6">
+                        <!-- Layout Switcher -->
+                        <div class="layout-switcher">
+                            <a href="movie-list.html" class="list"><i class="fa fa-align-justify"></i></a>
+                            <a href="movie-grid.html" class="grid active"><i class="fa fa-th"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <!-- Sort by -->
+                        <div class="sort-by">
+                            <div class="sort-by-select">
+                                <select class="chosen-select-no-single">
+                                    <option>Default Order</option>
+                                    <option>Featured</option>
+                                    <option>Top Viewed</option>
+                                    <option>Top Rated</option>
+                                    <option>Newest</option>
+                                    <option>Oldest</option>
+                                </select>
                             </div>
                         </div>
-                    </form>
-                    <!-- ===== END OF SEARCH FORM ===== -->
+                        <!-- Sort by / End -->
+
+                    </div>
 
                 </div>
+                <!-- End of Filters -->
+
+                <?php 
+                if (isset($_SESSION['Id'])):
+                ?>
+
+                    <div class="col-md-15">
+                        <h2 class="title"; style="text-align:center" >Films notés récemment</h2>
+                    </div>
+
+                <?php
+                        else:
+                        echo '<font color="red">'."Connectez-vous pour accéder à votre profil !"."</font>";
+                ?>
+
+                <?php
+                    endif
+                ?>   
+
+
+
+                <!-- Start of Movie List -->
+                <div class="row">
+
+                     <?php 
+
+                
+                if (isset($_SESSION['Id'])):
+                                    
+
+                try {
+                    $pdo = new PDO("mysql:host=localhost;dbname=kult", "root", "");
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
+                    $id = $_SESSION['Id'];
+                    $sql="SELECT IdFilm, Note FROM film_avis WHERE IdUtilisateur= '$id' ORDER BY Note DESC";
+
+
+                    $results = $pdo->query($sql);
+                    
+                    foreach ($results as $row) {
+
+                    $url="https://api.themoviedb.org/3/movie/".$row["IdFilm"]."?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&region=FR"; 
+                    
+                    $json_response = file_get_contents($url);
+
+                    $object_response = json_decode($json_response, true);
+
+                    $size = count($object_response);
+
+                    $poster=$object_response['poster_path'];  
+
+                    //Synopsis
+
+                    $overview=$object_response["overview"];
+
+
+                    $single_id = $object_response["id"];
+                    //echo $single_id ; 
+                    //var_dump($single_id);
+
+                    $url2="https://api.themoviedb.org/3/movie/".$single_id."/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR";
+                    $json_response2 = file_get_contents($url2);
+                    //echo $json_response2; 
+                    $object_response2 = json_decode($json_response2, true);
+
+                    if($object_response2["results"] != null)
+                        $id_film=$object_response2["results"][0]["key"];
+                        //echo $id_film;
+                    if($object_response2["results"] == null)
+                        $id_film='NULL';
+
+
+                    if (strlen($overview)>=110) {
+                        $synopsis = substr($overview, 0, 110);
+                        $synopsis .="...";
+                    }
+                    elseif(strlen($overview)<=110 && $overview!=""){
+                        
+                        $synopsis = $overview;
+
+                    }
+                    if($overview==""){
+                     $synopsis = $overview;
+                     $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
+                     $synopsis .=str_repeat(". ", 66);
+
+                 }
+   
+
+
+                   echo '<!-- Movie List Item -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="movie-box-2 mb30">
+                            <div class="listing-container">
+
+                                <!-- Movie List Image -->
+                                <div class="listing-image">
+
+                                    <!-- Play Button -->
+                                    <div class="play-btn">
+
+                                        <a href="https://www.youtube.com/watch?v='.$id_film.'" class="play-video">
+                                            <i class="fa fa-play"></i>
+                                        </a>
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div class="buttons">
+                                        <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom" class="like">
+                                            <i class="icon-heart"></i>
+                                        </a>
+
+                                        <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom" class="share">
+                                            <i class="icon-share"></i>
+                                        </a>
+                                    </div>
+
+                                    <!-- Rating -->
+
+
+                                    <!-- Image -->
+                                    <img src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$poster.'" alt="">
+                                </div>
+
+                                <!-- Movie List Content -->
+                                <div class="listing-content">
+                                    <div class="inner">
+                                        <h2 class="title">'.$object_response["title"].'</h2>
+
+                                        <p>'.$synopsis.'</p>
+
+                                        <a href="movie-detail.html" class="btn btn-main btn-effect">details</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- test -->';
+
+                    }
+                }
+                catch (Exception $e) {
+                    print("Erreur : " . $e->getMessage());
+                }
+
+                ?>
+
+                <?php
+
+                else:
+
+                ?>
+                                 
+                <a href="login.php" class="btn btn-main btn-effect login-btn">
+                    <i class="icon-user"></i> Se connecter
+                </a>
+
+                <?php
+                    endif
+                ?>   
+
+                
+
+
+        
+
+
+
+
+
+                </div>
+                <!-- End of Movie List -->
+
+
+
+                <!-- Start of Pagination -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <nav class="pagination">
+                            <ul>
+                                <li><a href="#" class="current-page">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#"><i class="ti-angle-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- End of Pagination -->
+
             </div>
-            <!-- ===== END OF SEARCH FORM WRAPPER ===== -->
-        </section>
-        <!-- =============== START OF SLIDER REVOLUTION SECTION =============== -->
-
-
+        </main>
+        <!-- =============== END OF MAIN =============== -->
 
 
         <!-- =============== START OF FOOTER =============== -->
@@ -463,7 +624,7 @@ if(isset($_POST['recherche'])) {
         <!-- ===== Start of Signin wrapper ===== -->
         <div class="signin-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Se connecter</h4>
+                <h4 class="text-center">Sign in</h4>
             </div>
 
 
@@ -474,34 +635,34 @@ if(isset($_POST['recherche'])) {
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="username">Pseudo ou Email</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Pseudo ou Email" />
+                        <label for="username">Username or Email *</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Your Username or Email *" />
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" />
+                        <label for="password">Password *</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" />
                     </div>
 
                     <div class="form-group">
                         <div class="checkbox pad-bottom-10">
                             <input id="check1" type="checkbox" name="remember" value="yes">
-                            <label for="check1">Rester connecté</label>
+                            <label for="check1">Keep me signed in</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Se connecter" class="btn btn-main btn-effect nomargin" />
+                        <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
                     </div>
                 </form>
                 <!-- End of Login form -->
 
                 <div class="bottom-links">
                     <span>
-                        Pas déjà inscrit ?
-                        <a  class="signUpClick">S'inscrire</a>
+                        Not a member?
+                        <a  class="signUpClick">Sign up</a>
                     </span>
-                    <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a  class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
             </div>
 
@@ -513,80 +674,43 @@ if(isset($_POST['recherche'])) {
         <!-- ===== Start of Signup wrapper ===== -->
         <div class="signup-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">S'inscrire</h4>
+                <h4 class="text-center">Sign Up</h4>
             </div>
 
             <div class="small-dialog-content">
 
                 <!-- Start of Registration form -->
-                <form method="POST" action="">
+                <form id="cariera_registration" action="#" method="POST">
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="nom">Nom</label>
-                        <input type="text" placeholder="Votre nom" id="nom" name="nom" value="<?php if(isset($nom)) { echo $nom; } ?>" />
+                        <label for="movify_user_login">Username</label>
+                        <input name="movify_user_login" id="movify_user_login" class="form-control" type="text"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="prenom">Prenom</label>
-                       <input type="text" placeholder="Votre prenom" id="prenom" name="prenom" value="<?php if(isset($prenom)) { echo $prenom; } ?>" />
+                        <label for="movify_user_email">Email</label>
+                        <input name="movify_user_email" id="movify_user_email" class="form-control" type="email"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="nom">Pseudo</label>
-                        <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                        <label for="password">Password</label>
+                        <input name="movify_user_pass" id="movify_password" class="form-control" type="password"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="mail">Email</label>
-                        <input type="email" placeholder="Votre mail" id="mail" name="mail" value="<?php if(isset($mail)) { echo $mail; } ?>" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mail2">Confirmation Email</label>
-                        <input type="email" placeholder="Confirmation de votre mail" id="mail2" name="mail2" value="<?php if(isset($mail2)) { echo $mail2; } ?>" />
-        
-                    </div>
-
-                     <div class="form-group">
-                        <label for="mdp">Mot de passe</label>
-                        <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mdp2">Confirmer votre mot de passe</label>
-                        <input type="password" placeholder="Confirmation du mot de passe" id="mdp2" name="mdp2" />
-                    </div>
-             
-
-                    <div class="form-group">
-
-                        <input type="submit" class="btn btn-main btn-effect nomargin" name="forminscription" value="S'inscrire"/>
-
+                        <input type="submit" class="btn btn-main btn-effect nomargin" value="Register"/>
                     </div>
                 </form>
-
-                <!-- message d'erreur  -->
-
-                 <?php
-                 if(isset($erreur)) {
-                    echo '<font color="red">'.$erreur."</font>";
-                 }
-                 ?>                
-
                 <!-- End of Registration form -->
 
                 <div class="bottom-links">
                     <span>
-                        Déjà un compte ?
-                        <a class="signInClick">Se connecter</a>
+                        Already have an account?
+                        <a class="signInClick">Sign in</a>
                     </span>
 
-                    <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
 
             </div> <!-- .small-dialog-content -->
@@ -599,7 +723,7 @@ if(isset($_POST['recherche'])) {
         <!-- ===== Start of Forget Password wrapper ===== -->
         <div class="forgetpassword-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Mot de passe oublié</h4>
+                <h4 class="text-center">Forgotten Password</h4>
             </div>
 
             <div class="small-dialog-content">
@@ -609,7 +733,7 @@ if(isset($_POST['recherche'])) {
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="password">Adresse Email</label>
+                        <label for="password">Email Address *</label>
                         <input type="email" name="user_login" class="form-control" id="email3" placeholder="Email Address *" />
                     </div>
 
@@ -620,7 +744,7 @@ if(isset($_POST['recherche'])) {
                 <!-- End of Forger Password form -->
 
                 <div class="bottom-links">
-                    <a class="cancelClick">Annuler</a>
+                    <a class="cancelClick">Cancel</a>
                 </div>
 
             </div><!-- .small-dialog-content -->
