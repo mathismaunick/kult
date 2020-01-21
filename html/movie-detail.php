@@ -6,9 +6,11 @@ $db_found = mysqli_select_db($db_handle,"kult");
     
         
 if(isset($_POST['rating'])){
+    
+    //Ajout de la note dans film_avis
      $SQL2 = "INSERT INTO `film_avis`(`IdFilm`, `IdUtilisateur`, `Note`) VALUES (".$_GET['id']." , ".$_SESSION['Id'].",".$_POST['rating'].")";
      $result2 = mysqli_query($db_handle, $SQL2);
-
+    //suppression si il était dans la liste recommandation
      $SQLdelete = "DELETE FROM `recommandation` WHERE `IdFilm`=".$_GET['id']." AND IdUtilisateur = ".$_SESSION['Id']."";
      $resultdelete = mysqli_query($db_handle, $SQLdelete);
 
@@ -38,7 +40,98 @@ if(isset($_POST['rating'])){
         }
         
      }
+    
+    //Collaborative filtering
+    if(intval($_POST['rating'])>=4){
+        //On récupère les utilisateurs qui ont noté le même film >=4/5
+        $SQL_listeuser = "SELECT * FROM film_avis WHERE `IdFilm`= ".$_GET['id']." AND Note >=4 AND IdUtilisateur != ".$_SESSION['Id']." ";
+        $result_listeuser = mysqli_query($db_handle, $SQL_listeuser);
+        
+        //Pour chaque utilisateur on récupère les films qu'il a noté
+        while($db_field_listeuser = mysqli_fetch_assoc($result_listeuser)){
+           
+            $SQL_filmavis = "SELECT * FROM film_avis WHERE `IdUtilisateur`=".$db_field_listeuser['IdUtilisateur']." AND IdFilm !=".$_GET['id']." ";
+            $result_filmavis = mysqli_query($db_handle, $SQL_filmavis);
+            //Pour chaque film on l'ajoute dans notre table
+            
+            while($db_field_filmavis = mysqli_fetch_assoc($result_filmavis)){
+                
+                
+                $SQL_filmavis2 = "SELECT * FROM liste_provisoire WHERE `IdFilm`=".$db_field_filmavis['IdFilm']." ";
+                $result_filmavis2 = mysqli_query($db_handle, $SQL_filmavis2);
+                $db_field_filmavis2 = mysqli_fetch_assoc($result_filmavis2);
+                
+                //Si il n'est pas déjà la table
+                if($db_field_filmavis2==NULL){
+                //Insert film dans la table
+                $SQL_liste = "INSERT INTO liste_provisoire (`IdFilm`,`Moyenne`,`NombreNote`) VALUES (".$db_field_filmavis['IdFilm'].",".$db_field_filmavis['Note'].",1)";
+                $result_liste = mysqli_query($db_handle, $SQL_liste);
+                
+                }
+                
+                //Si il existe : recalculer la moyenne et faire +1 au nombre d'utilisateur qui ont noté
+                else {
+                    $moyenne = $db_field_filmavis2['Moyenne']+$db_field_filmavis['Note']/2;
+                        
+                    $nombrenote = $db_field_filmavis2['NombreNote'] + 1;
+                    
+                    $SQL_update = "UPDATE `liste_provisoire` SET `Moyenne`=".$moyenne.",`NombreNote`=".$nombrenote."WHERE IdFilm = ".$db_field_filmavis['IdFilm']." ";
+                    $result_update = mysqli_query($db_handle, $SQL_update);
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+            //Ordonner l'array
+            //D'abord avec la moyenne 
+            
+            //Ensuite avec le nb de gens qui ont noté
+            
+            $SQL_liste = "SELECT * FROM `liste_provisoire` WHERE Moyenne >=3.5 ORDER BY Moyenne DESC, NombreNote DESC LIMIT 10";
+            $result_liste = mysqli_query($db_handle, $SQL_liste);
+           
+            //On les ajoute dans le tableau de la recommandation
+            while($db_field_liste = mysqli_fetch_assoc($result_liste)){
+                
+                
+                $SQL4 = "SELECT `Poids` FROM `recommandation` WHERE `IdFilm`=".$db_field_liste['IdFilm']." AND IdUtilisateur = ".$_SESSION['Id']." ";
+                $result4 = mysqli_query($db_handle, $SQL4);
+                $db_field4 = mysqli_fetch_assoc($result4);
+                
+                if($db_field4==null) {
+                    //var_dump($db_field_liste['IdFilm']);
+                    $SQL3 = "INSERT INTO `recommandation`(`IdUtilisateur`,`IdFilm`,`Poids`) VALUES (".$_SESSION['Id'].",".$db_field_liste['IdFilm'].",".$db_field_liste['Moyenne'].")";
+                    $result3 = mysqli_query($db_handle, $SQL3);
+                }
+
+                elseif(intval($db_field4)<intval($db_field_liste['Moyenne'])){
+                   $SQL_update = "UPDATE `recommandation` SET `Poids`=".$db_field_liste['Moyenne']." WHERE IdFilm = ".$db_field_liste['IdFilm']." AND IdUtilisateur = ".$_SESSION['Id']." ";
+                    $result_update = mysqli_query($db_handle, $SQL_update);
+                }
+                
+                
+            }
+                
+            
+            
+            
+            
+            
+            
+        }
+        
+        
+       $SQL_delete = "DELETE FROM `liste_provisoire`";
+       $result_delete = mysqli_query($db_handle, $SQL_delete);
+        
+    }
+    
+    
      
+    
     
 }
 ?>
