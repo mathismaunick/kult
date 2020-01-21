@@ -9,7 +9,7 @@ if(isset($_POST['rating'])){
      $SQL2 = "INSERT INTO `film_avis`(`IdFilm`, `IdUtilisateur`, `Note`) VALUES (".$_GET['id']." , ".$_SESSION['Id'].",".$_POST['rating'].")";
      $result2 = mysqli_query($db_handle, $SQL2);
 
-     $SQLdelete = "DELETE FROM `recommandation` WHERE `IdFilm`=".$_GET['id']." ";
+     $SQLdelete = "DELETE FROM `recommandation` WHERE `IdFilm`=".$_GET['id']." AND IdUtilisateur = ".$_SESSION['Id']."";
      $resultdelete = mysqli_query($db_handle, $SQLdelete);
 
 
@@ -20,12 +20,12 @@ if(isset($_POST['rating'])){
      $count_similars = count($capt['similars']);
      for($i=0;$i<$count_similars;$i++){
 
-        $SQL4 = "SELECT `Poids` FROM `recommandation` WHERE `IdFilm`=".$capt['similars'][$i]['tmdb_id']." ";
+        $SQL4 = "SELECT `Poids` FROM `recommandation` WHERE `IdFilm`=".$capt['similars'][$i]['tmdb_id']." AND IdUtilisateur = ".$_SESSION['Id']."";
         $result4 = mysqli_query($db_handle, $SQL4);
         $db_field4 = mysqli_fetch_assoc($result4);
 
         if(intval($db_field4)<intval($_POST['rating'])){
-            $SQL5 = "DELETE FROM `recommandation` WHERE `IdFilm`=".$capt['similars'][$i]['tmdb_id']." ";
+            $SQL5 = "DELETE FROM `recommandation` WHERE `IdFilm`=".$capt['similars'][$i]['tmdb_id']." AND IdUtilisateur = ".$_SESSION['Id']." ";
             $result5 = mysqli_query($db_handle, $SQL5);
 
             $SQL3 = "INSERT INTO `recommandation`(`IdUtilisateur`,`IdFilm`,`Poids`) VALUES (".$_SESSION['Id'].",".$capt['similars'][$i]['tmdb_id'].",".$_POST['rating'].")";
