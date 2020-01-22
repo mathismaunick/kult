@@ -514,7 +514,7 @@ $requête = $requête."ORDER BY Poids DESC LIMIT 3";
                                     </ul>
                                 </div>
 
-                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
+                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
 
                             </div>
                         </div>
