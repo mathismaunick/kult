@@ -214,7 +214,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                 <div class="inner">
                     <h2 class="title">Mon Profil</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.php">Acceuil</a></li>
+                        <li><a href="index.php">Accueil</a></li>
                         <li>Mon profil </li>
                     </ol>
                 </div>
@@ -413,57 +413,20 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                                     ?>
 
 
-                                <!-- Rating -->
+                <!-- Rating -->
 
+                <?php
 
-                        <?php 
-                            if(isset($_SESSION['Id'])){
-                        
-                            
-                            
-                            if($row["Note"]==NULL){
-                                echo '<form method="post">
-                            <div class="mt1">
-                            
-                            <span class="rating_stars rating_0">
-                        <span class="s" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
-                        <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
-                        <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
-                        <span class="s" data-low="3.5" data-high="4"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
-                        <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
-                            
-                        
-                        <span class="r r0_5" data-rating="1" data-value="0.5"></span>
-                        <span class="r r1" data-rating="1" data-value="1"></span>
-                        <span class="r r1_5" data-rating="15" data-value="1.5"></span>
-                        <span class="r r2" data-rating="2" data-value="2"></span>
-                        <span class="r r2_5" data-rating="25" data-value="2.5"></span>
-                        <span class="r r3" data-rating="3" data-value="3"></span>
-                        <span class="r r3_5" data-rating="35" data-value="3.5"></span>
-                        <span class="r r4" data-rating="4" data-value="4"></span>
-                        <span class="r r4_5" data-rating="45" data-value="4.5"></span>
-                        <span class="r r5" data-rating="5" data-value="5"></span>
-                        </span> <input class="title" type="submit" style="background: none; border: none; cursor: pointer;" value="Noter ce film"/>
-                                <div class="values">
-                
-                      <div>
-                        <input type="hidden" id="rating" value="0" />
-                      </div>
-                      <div>
-                        <input type="hidden" name="rating" id="rating_val" value="0" />
-                      </div>
+                echo '
+                <div class="stars">
+                <div class="rating">';
 
+                if(isset($_SESSION['Id'])){
 
-                    </div>
-                               
-                        </div>
-                                </form> ';
-                                
-                            }
-                            elseif($row["Note"]=="0"){
-                                echo '
-                            <div class="mt1">
-                            <span class="rating_stars rating_0">
+                    if($row['Note']=="0"){
+                        echo '
+                        <div class="mt10">
+                        <span class="rating_stars rating_0">
                         <span class="s" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -471,12 +434,12 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            elseif($row["Note"]=="0.5"){
-                                echo '
-                            <div class="mt1">
-                            <span class="rating_stars rating_0">
-                        
+                    }
+                    elseif($row['Note']=="0.5"){
+                        echo '
+                        <div class="mt10">
+                        <span class="rating_stars rating_0">
+
                         <span class="s active-low" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -484,11 +447,11 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                        elseif($row["Note"]=="1"){
-                                echo '
-                            <div class="mt1">
-                            <span class="rating_stars rating_0">
+                    }
+                    elseif($row['Note']=="1"){
+                        echo '
+                        <div class="mt10">
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -496,11 +459,11 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                        elseif($row["Note"]=="1.5"){
-                                echo '
-                            <div class="mt1">
-                            <span class="rating_stars rating_0">
+                    }
+                    elseif($row['Note']=="1.5"){
+                        echo '
+                        <div class="mt10">
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-low" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -508,11 +471,11 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            elseif($row["Note"]=="2"){
-                                echo '
-                            <div class="mt1">
-                            <span class="rating_stars rating_0">
+                    }
+                    elseif($row['Note']=="2"){
+                        echo '
+                        <div class="mt10">
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -520,11 +483,11 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            elseif($row["Note"]=="2.5"){
-                                echo '
-                            <div class="mt1">
-                            <span class="rating_stars rating_0">
+                    }
+                    elseif($row['Note']=="2.5"){
+                        echo '
+                        <div class="mt10">
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s active-low" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -532,14 +495,14 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            
-                            elseif($row["Note"]=="3"){
-                                echo '
-                            <div class="mt1">
-                            
-                            
-                            <span class="rating_stars rating_0">
+                    }
+
+                    elseif($row['Note']=="3"){
+                        echo '
+                        <div class="mt10">
+
+
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -547,13 +510,13 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                             elseif($row["Note"]=="3.5"){
-                                echo '
-                            <div class="mt1">
-                            
-                            
-                            <span class="rating_stars rating_0">
+                    }
+                    elseif($row['Note']=="3.5"){
+                        echo '
+                        <div class="mt10">
+
+
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -561,13 +524,13 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            elseif($row["Note"]=="4"){
-                                echo '
-                            <div class="mt1">
-                            
-                           
-                            <span class="rating_stars rating_0">
+                    }
+                    elseif($row['Note']=="4"){
+                        echo '
+                        <div class="mt10">
+
+
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -575,15 +538,13 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            elseif($row["Note"]=="4.5"){
-                                echo '
+                    }
+                    elseif($row['Note']=="4.5"){
+                        echo '
+                        <div class="mt10">
 
-                  
-                            <div class="mt1">
-                            
-                            
-                            <span class="rating_stars rating_0">
+
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -591,13 +552,13 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s active-low" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            elseif($row["Note"]=="5"){
-                                echo '
-                            <div class="mt1">
-                            
-                            
-                            <span class="rating_stars rating_0">
+                    }
+                    elseif($row['Note']=="5"){
+                        echo '
+                        <div class="mt10">
+
+
+                        <span class="rating_stars rating_0">
                         <span class="s active-high" data-low="0.5" data-high="1"><i class="fa fa-star-o"></i><i class="fa fa-star-half"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="1.5" data-high="2"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         <span class="s active-high" data-low="2.5" data-high="3"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
@@ -605,14 +566,14 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <span class="s active-high" data-low="4.5" data-high="5"><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
                         </span>    
                         </div>';
-                            }
-                            }
-                            
-                            
-                            ?>
+                    }
+                }
+                echo '
+                </div>
+                </div>';
 
 
-                                    <?php
+
 
 
 
@@ -694,7 +655,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                 ?>
 
                     <div class="col-md-15">
-                        <h2 class="title"; style="text-align:center" >A voir plus tard</h2>
+                        <h2 class="title"; style="text-align:center" >Films à voir plus tard</h2>
                     </div>
 
                  <?php
