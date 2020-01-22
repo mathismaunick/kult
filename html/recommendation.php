@@ -96,7 +96,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
                     <a class="navbar-brand" href="index.html">
                         <!-- INSERT YOUR LOGO HERE -->
-                        <img src="assets/images/logo.svg" alt="logo" width="150" class="logo">
+                        <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
                         <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
@@ -116,155 +116,41 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <!-- ====== Start of Main Menu ====== -->
                         <ul class="navbar-nav mx-auto" id="main-menu">
                             <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
-
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="404.html">404 Page</a>
-                                    </li>
-
-                                    <!-- Divider -->
-                                    <li class="divider" role="separator"></li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="celebrities-list.html">celebrities list</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="celebrities-grid.html">celebrities grid</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="celebrity-detail.html">celebrity detail</a>
-                                    </li>
-
-                                    <!-- Divider -->
-                                    <li class="divider" role="separator"></li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="contact-us.html">Contact us</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="coming-soon.html">Coming soon</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="pricing.html">Pricing Plan</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="login-register.html">Login - Register</a>
-                                    </li>
-                                    
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="testimonials.html">Testimonials</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Movies & TV Shows</a>
-
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-list.html">Movie List 1</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-list2.html">Movie List 2</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid.html">Movie Grid 1</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid2.html">Movie Grid 2</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid3.html">Movie Grid 3</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-grid4.html">Movie Grid 4</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-detail.html">Movie Detail</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="movie-detail2.html">Movie Detail 2</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="watch-later.html">Watch Later</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="blog-list.html">Blog List</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="blog-list-fullwidth.html">Blog List Fullwidth</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="blog-post-detail.html">Blog Detail</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="blog-post-detail-fullwidth.html">Blog Detail Fullwidth</a>
-                                    </li>
-
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Accueil</a>
                             </li>
 
                             <!-- Menu Item -->
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.html">Contact us</a>
+                                <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                            </li>                            
+
+                            <!-- Menu Item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="groupe.php">Groupes</a>
+                            </li> 
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="profil.php">Profil</a>
+                            </li>       
+
+                            <!-- Menu Item -->
+                            <li class="nav-item dropdown">
+                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
+
+                                <!-- Dropdown Menu -->
+                                <ul class="dropdown-menu">
+                                    <!-- Menu Item -->
+                                    <li>
+                                        <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
+                                    </li>
+
+                                    <!-- Menu Item -->
+                                    <li>
+                                        <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
+                                    </li>
+
+                                </ul>
                             </li>
 
                         </ul>
@@ -291,9 +177,21 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
                             <!-- Menu Item -->
                             <li class="nav-item m-auto">
-                                <a href="#login-register-popup" class="btn btn-main btn-effect login-btn popup-with-zoom-anim">
-                                    <i class="icon-user"></i>login
-                                </a>
+                                <?php
+                                    if (isset($_SESSION['Id'])):
+                                    ?>
+                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se déconnecter
+                                        </a>
+                                    <?php
+                                    else:
+                                    ?>
+                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                                            <i class="icon-user"></i>Se connecter
+                                        </a>
+                                    <?php
+                                    endif
+                                ?>                                  
                             </li>
                         </ul>
                         <!-- ====== End of Extra Nav ====== -->
@@ -306,6 +204,8 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
             </div>
         </header>
         <!-- =============== END OF HEADER NAVIGATION =============== -->
+
+
 
 
 
@@ -496,10 +396,11 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                             <div class="widget widget-about">
 
                                 <!-- INSERT YOUR LOGO HERE -->
-                                <img src="assets/images/logo.svg" alt="logo" class="logo">
+                                <!--<img src="assets/images/logo.svg" alt="logo" class="logo"> -->
                                 <!-- INSERT YOUR WHITE LOGO HERE -->
-                                <img src="assets/images/logo-white.svg" alt="white logo" class="logo-white">
-                                <p class="nomargin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
+                                <!--<img src="assets/images/logo-white.svg" alt="white logo" class="logo-white"> -->
+                                <h4 class="widget-title">Kult</h4>
+                                <p class="nomargin">Kult est une plateforme de recommandation de film pour des soirées en groupe. Ne perdez plus votre temps à chercher un film.</p>
                             </div>
                         </div>
                         <!-- End of Widget 1 -->
@@ -507,14 +408,12 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <!-- Start of Widget 2 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-links">
-                                <h4 class="widget-title">Useful links</h4>
+                                <h4 class="widget-title">liens vers API</h4>
 
                                 <ul class="general-listing">
-                                    <li><a href="#">about movify</a></li>
-                                    <li><a href="#">blog</a></li>
-                                    <li><a href="#">forum</a></li>
-                                    <li><a href="#">my account</a></li>
-                                    <li><a href="#">watch list</a></li>
+                                    <li><a href="https://waatch.docs.apiary.io/#">Captain watch</a></li>
+                                    <li><a href="https://developers.themoviedb.org/3">The Movie Database</a></li>
+                                    <li><a href="http://www.omdbapi.com/">Open Movie Database</a></li>
                                 </ul>
 
                             </div>
@@ -524,12 +423,10 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <!-- Start of Widget 3 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-blog">
-                                <h4 class="widget-title">latest news</h4>
+                                <h4 class="widget-title">Contact</h4>
 
                                 <ul class="blog-posts">
-                                    <li><a href="#">blog post 1</a><small>januar 13, 2018</small></li>
-                                    <li><a href="#">blog post 2</a><small>januar 13, 2018</small></li>
-                                    <li><a href="#">blog post 3</a><small>januar 13, 2018</small></li>
+                                    <li><a href="#">Formulaire de contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -538,9 +435,9 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                         <!-- Start of Widget 4 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-social">
-                                <h4 class="widget-title">follow us</h4>
+                                <h4 class="widget-title">Suivez-nous</h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque.</p>
+                                <p>Vous pouvez nous suivre sur les différents réseaux sociaux.</p>
 
                                 <!-- Start of Social Buttons -->
                                 <ul class="social-btns">
