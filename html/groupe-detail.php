@@ -1,36 +1,36 @@
 <?php
-        session_start();
+session_start();
 
-        $bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', '');
+$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', '');
 
-        $id = $_GET['id'];
-        $request = $bdd->prepare('SELECT * FROM GROUPE WHERE Id='.$id);
-        $request->execute();
-        $request2 = $bdd->prepare('SELECT * FROM UTILISATEUR AS a JOIN GROUPE_MEMBRE AS b ON a.Id=b.IdUtilisateur where b.IdGroupe='.$id);
-        $request2->execute();
+$id = $_GET['id'];
+$request = $bdd->prepare('SELECT * FROM GROUPE WHERE Id='.$id);
+$request->execute();
+$request2 = $bdd->prepare('SELECT * FROM UTILISATEUR AS a JOIN GROUPE_MEMBRE AS b ON a.Id=b.IdUtilisateur where b.IdGroupe='.$id);
+$request2->execute();
 
-        $table_pseudo = array();
+$table_pseudo = array();
 
-        while ($data = $request2->fetch() )
-    {
+while ($data = $request2->fetch() )
+{
     $table_pseudo[] = $data['Pseudo'];
-    }
-    $number = $request2->rowCount();
-    
-         while ($data = $request->fetch() )
-        {
-        $nomGroupe = $data['Nom'];
-        $descriptionGroupe = $data['Description'];
-        $dateGroupe = $data['Date_Creation'];
-        }
-        if($dateGroupe!=NULL){
-        $fdate = explode(" ", $dateGroupe);
-        $fdate2 = explode("-", $fdate[0]);
-        $year= $fdate2[0];
-        $month= $fdate2[1];
-        $day=$fdate2[2];
-        }
-        ?>
+}
+$number = $request2->rowCount();
+
+while ($data = $request->fetch() )
+{
+    $nomGroupe = $data['Nom'];
+    $descriptionGroupe = $data['Description'];
+    $dateGroupe = $data['Date_Creation'];
+}
+if($dateGroupe!=NULL){
+    $fdate = explode(" ", $dateGroupe);
+    $fdate2 = explode("-", $fdate[0]);
+    $year= $fdate2[0];
+    $month= $fdate2[1];
+    $day=$fdate2[2];
+}
+?>
 
 
 <!DOCTYPE html>
@@ -114,7 +114,7 @@
 
         <!-- =============== START OF HEADER NAVIGATION =============== -->
         <!-- Insert the class "sticky" in the header if you want a sticky header -->
-         <header class="header">
+        <header class="header">
             <div class="container-fluid">
 
                 <!-- ====== Start of Navbar ====== -->
@@ -127,545 +127,548 @@
                     </a>
 
                     <!-- Login Button on Responsive -->
-                     <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
+                    <?php
+                    if (isset($_SESSION['Id'])):
+                        ?>
+                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
+                        </a>
+                        <?php
+                    else:
+                        ?>
+                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
+                        </a>
+                        <?php
+                    endif
+                    ?>  
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
-                       <span class="hamburger-box">
-                          <span class="hamburger-inner"></span>
-                      </span>
-                  </button>
+                     <span class="hamburger-box">
+                      <span class="hamburger-inner"></span>
+                  </span>
+              </button>
 
-                  <!-- ====== Start of #main-nav ====== -->
-                  <div class="navbar-collapse" id="main-nav">
+              <!-- ====== Start of #main-nav ====== -->
+              <div class="navbar-collapse" id="main-nav">
 
-                    <!-- ====== Start of Main Menu ====== -->
-                    <ul class="navbar-nav mx-auto" id="main-menu">
-                        <!-- Menu Item -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php">Accueil</a>
-                            </li>
+                <!-- ====== Start of Main Menu ====== -->
+                <ul class="navbar-nav mx-auto" id="main-menu">
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Accueil</a>
+                    </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                        </li>
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                    </li>
 
-                        <li class="nav-item">
+                    <li class="nav-item">
 
-                            <?php
-                            if (isset($_SESSION['Id'])):
-                                ?>
-                                <a class="nav-link" href="groupe.php">Groupes</a>
-                                <?php
-                            else:
-                                ?>
-                                <a class="nav-link" a href="groupe.php">Groupes</a>
-                                <?php
-                            endif
+                        <?php
+                        if (isset($_SESSION['Id'])):
                             ?>
+                            <a class="nav-link" href="groupe.php">Groupes</a>
+                            <?php
+                        else:
+                            ?>
+                            <a class="nav-link" a href="groupe.php">Groupes</a>
+                            <?php
+                        endif
+                        ?>
 
-                        </li>
+                    </li>
 
-                        <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
+                    <!-- Menu Item -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
 
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
-                                    </li>
-
-                                </ul>
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu">
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
                             </li>
 
-                        <!-- Menu Item -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact-us.php">Contactez nous</a>
+                            <!-- Menu Item -->
+                            <li>
+                                <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
                             </li>
 
-                    </ul>
-                    <!-- ====== End of Main Menu ====== -->
+                        </ul>
+                    </li>
+
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact-us.php">Contactez nous</a>
+                    </li>
+
+                </ul>
+                <!-- ====== End of Main Menu ====== -->
 
 
-                    <!-- ====== Start of Extra Nav ====== -->
-                    <ul class="navbar-nav extra-nav">
+                <!-- ====== Start of Extra Nav ====== -->
+                <ul class="navbar-nav extra-nav">
 
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link toggle-search" href="#">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link toggle-search" href="#">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item notification-wrapper">
-                            <a class="nav-link notification" href="#">
-                                <i class="fa fa-globe"></i>
-                                <span class="notification-count">2</span>
-                            </a>
-                        </li>
+                    <!-- Menu Item -->
+                    <li class="nav-item notification-wrapper">
+                        <a class="nav-link notification" href="#">
+                            <i class="fa fa-globe"></i>
+                            <span class="notification-count">2</span>
+                        </a>
+                    </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item m-auto">
-                             <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
-                                            <i class="icon-user"></i>Se déconnecter
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
-                                            <i class="icon-user"></i>Se connecter
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
-                        </li>
-                    </ul>
-                    <!-- ====== End of Extra Nav ====== -->
-
-                </div>
-                <!-- ====== End of #main-nav ====== -->
-            </nav>
-            <!-- ====== End of Navbar ====== -->
+                    <!-- Menu Item -->
+                    <li class="nav-item m-auto">
+                       <?php
+                       if (isset($_SESSION['Id'])):
+                        ?>
+                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                            <i class="icon-user"></i>Se déconnecter
+                        </a>
+                        <?php
+                    else:
+                        ?>
+                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                            <i class="icon-user"></i>Se connecter
+                        </a>
+                        <?php
+                    endif
+                    ?>  
+                </li>
+            </ul>
+            <!-- ====== End of Extra Nav ====== -->
 
         </div>
-    </header>
-        <!-- =============== END OF HEADER NAVIGATION =============== -->
+        <!-- ====== End of #main-nav ====== -->
+    </nav>
+    <!-- ====== End of Navbar ====== -->
+
+</div>
+</header>
+<!-- =============== END OF HEADER NAVIGATION =============== -->
 
 
 
-        <!-- =============== START OF MOVIE DETAIL INTRO =============== -->
-        <section class="celeb-detail-intro overlay-gradient ptb100" style="background: url(assets/images/other/actor-img.jpg);">
-        </section>
-        <!-- =============== END OF MOVIE DETAIL INTRO =============== -->
+<!-- =============== START OF MOVIE DETAIL INTRO =============== -->
+<section class="celeb-detail-intro overlay-gradient ptb100" style="background: url(assets/images/other/actor-img.jpg);">
+</section>
+<!-- =============== END OF MOVIE DETAIL INTRO =============== -->
 
 
 
-        <!-- =============== START OF CELEBRITY DETAIL =============== -->
-        <section class="celeb-detail pb100">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-4 col-12">
-                        <div class="celeb-img">
-                            <img src="assets/images/celebrities/celebrity2a.jpg" alt="">
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-8 col-12">
-                        <div class="celeb-details">
-                            <h3 class="title"><?php echo $nomGroupe ?></h3>
-                           
-
-                            <!-- tab links -->
-                            <ul class="nav tab-links">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="bio-tab" data-toggle="tab" href="#bio" aria-controls="bio" aria-expanded="false">Description</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="film-tab" data-toggle="tab" href="#filmography" aria-controls="filmography" aria-expanded="false">Membres du groupe</a>
-                                </li>
-                            </ul>
-
-                            <!-- Tab Content -->
-                            <div class="tab-content mt70">
-
-                                <div class="tab-pane fade active show" id="bio" role="tabpanel" aria-labelledby="bio-tab" aria-expanded="false">
-                                    <div class="bio-description">
-                                        <p><?php echo $descriptionGroupe ?></p>
-                                    </div>
-
-                                    <div class="bio-details">
-                                        <ul class="bio-wrapper">
-                                            <li><h6>Date de création du groupe:</h6> <?php if($dateGroupe!=NULL){
-                                            echo 'Le ',$day,'/',$month,'/',$year,' ' ; 
-                                            } ?></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                </div>
-
-                                <div class="tab-pane fade" id="filmography" role="tabpanel" aria-labelledby="film-tab" aria-expanded="false">
-                                    <ul class="film-list">
-                                    <?php for ($i=0; $i<$number; $i++)
-                                        {
-                                            echo '
-                                     <html>
-                                     <head>
-                                     </head>
-                                     <body>
-                                     <li><a href="#">'.$table_pseudo[$i].'</a></li>
-                                     </body>
-                                     </html>';
-                                        }
-                                        ?>  
-                                        
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- =============== End OF CELEBRITY DETAIL =============== -->
-
-
-        <!-- =============== START OF FOOTER =============== -->
-        <footer class="footer1 bg-dark">
-
-<!-- ===== START OF FOOTER WIDGET AREA ===== -->
-<div class="footer-widget-area ptb100">
+<!-- =============== START OF CELEBRITY DETAIL =============== -->
+<section class="celeb-detail pb100">
     <div class="container">
         <div class="row">
 
-            <!-- Start of Widget 1 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-about">
-
-                    <!-- INSERT YOUR LOGO HERE -->
-                    <!--<img src="assets/images/logo.svg" alt="logo" class="logo"> -->
-                    <!-- INSERT YOUR WHITE LOGO HERE -->
-                    <!--<img src="assets/images/logo-white.svg" alt="white logo" class="logo-white"> -->
-                    <h4 class="widget-title">Kult</h4>
-                    <p class="nomargin">Kult est une plateforme de recommandation de film pour des soirées en groupe. Ne perdez plus votre temps à chercher un film.</p>
+            <div class="col-md-4 col-12">
+                <div class="celeb-img">
+                    <img src="assets/images/celebrities/celebrity2a.jpg" alt="">
                 </div>
             </div>
-            <!-- End of Widget 1 -->
 
-            <!-- Start of Widget 2 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-links">
-                    <h4 class="widget-title">liens vers API</h4>
 
-                    <ul class="general-listing">
-                        <li><a href="https://waatch.docs.apiary.io/#">Captain watch</a></li>
-                        <li><a href="https://developers.themoviedb.org/3">The Movie Database</a></li>
-                        <li><a href="http://www.omdbapi.com/">Open Movie Database</a></li>
+            <div class="col-md-8 col-12">
+                <div class="celeb-details">
+                    <h3 class="title"><?php echo $nomGroupe ?></h3>
+
+
+                    <!-- tab links -->
+                    <ul class="nav tab-links">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="bio-tab" data-toggle="tab" href="#bio" aria-controls="bio" aria-expanded="false">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="film-tab" data-toggle="tab" href="#filmography" aria-controls="filmography" aria-expanded="false">Membres du groupe</a>
+                        </li>
+                        <a href="recommendation.php" class="btn btn-main btn-effect login-btn">
+                            <i class="icon-film"></i> Trouver un film
+                        </a>
                     </ul>
 
+                    <!-- Tab Content -->
+                    <div class="tab-content mt70">
+
+                        <div class="tab-pane fade active show" id="bio" role="tabpanel" aria-labelledby="bio-tab" aria-expanded="false">
+                            <div class="bio-description">
+                                <p><?php echo $descriptionGroupe ?></p>
+                            </div>
+
+                            <div class="bio-details">
+                                <ul class="bio-wrapper">
+                                    <li><h6>Date de création du groupe:</h6> <?php if($dateGroupe!=NULL){
+                                        echo 'Le ',$day,'/',$month,'/',$year,' ' ; 
+                                    } ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="tab-pane fade" id="filmography" role="tabpanel" aria-labelledby="film-tab" aria-expanded="false">
+                            <ul class="film-list">
+                                <?php for ($i=0; $i<$number; $i++)
+                                {
+                                    echo '
+                                    <html>
+                                    <head>
+                                    </head>
+                                    <body>
+                                    <li><a href="#">'.$table_pseudo[$i].'</a></li>
+                                    </body>
+                                    </html>';
+                                }
+                                ?>  
+
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <!-- End of Widget 2 -->
-
-            <!-- Start of Widget 3 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-blog">
-                    <h4 class="widget-title">Contact</h4>
-
-                    <ul class="blog-posts">
-                        <li><a href="#">Formulaire de contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- End of Widget 3 -->
-
-            <!-- Start of Widget 4 -->
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="widget widget-social">
-                    <h4 class="widget-title">Suivez-nous</h4>
-
-                    <p>Vous pouvez nous suivre sur les différents réseaux sociaux.</p>
-
-                    <!-- Start of Social Buttons -->
-                    <ul class="social-btns">
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll facebook">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                    <i class="social-btn-roll-icon fa fa-facebook"></i>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll twitter">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                    <i class="social-btn-roll-icon fa fa-twitter"></i>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll google-plus">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                    <i class="social-btn-roll-icon fa fa-google-plus"></i>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Social Media -->
-                        <li>
-                            <a href="#" class="social-btn-roll instagram">
-                                <div class="social-btn-roll-icons">
-                                    <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                    <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- End of Social Buttons -->
-
-                </div>
-            </div>
-            <!-- End of Widget 4 -->
-
         </div>
     </div>
-</div>
-<!-- ===== END OF FOOTER WIDGET AREA ===== -->
+</section>
+<!-- =============== End OF CELEBRITY DETAIL =============== -->
 
 
-<!-- ===== START OF FOOTER COPYRIGHT AREA ===== -->
-<div class="footer-copyright-area ptb30">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="d-flex">
-                    <div class="links">
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a href="#">Privacy & Cookies</a></li>
-                            <li class="list-inline-item"><a href="#">Terms & Conditions</a></li>
-                            <li class="list-inline-item"><a href="#">Legal Disclaimer</a></li>
-                            <li class="list-inline-item"><a href="#">Community</a></li>
+<!-- =============== START OF FOOTER =============== -->
+<footer class="footer1 bg-dark">
+
+    <!-- ===== START OF FOOTER WIDGET AREA ===== -->
+    <div class="footer-widget-area ptb100">
+        <div class="container">
+            <div class="row">
+
+                <!-- Start of Widget 1 -->
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="widget widget-about">
+
+                        <!-- INSERT YOUR LOGO HERE -->
+                        <!--<img src="assets/images/logo.svg" alt="logo" class="logo"> -->
+                        <!-- INSERT YOUR WHITE LOGO HERE -->
+                        <!--<img src="assets/images/logo-white.svg" alt="white logo" class="logo-white"> -->
+                        <h4 class="widget-title">Kult</h4>
+                        <p class="nomargin">Kult est une plateforme de recommandation de film pour des soirées en groupe. Ne perdez plus votre temps à chercher un film.</p>
+                    </div>
+                </div>
+                <!-- End of Widget 1 -->
+
+                <!-- Start of Widget 2 -->
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="widget widget-links">
+                        <h4 class="widget-title">liens vers API</h4>
+
+                        <ul class="general-listing">
+                            <li><a href="https://waatch.docs.apiary.io/#">Captain watch</a></li>
+                            <li><a href="https://developers.themoviedb.org/3">The Movie Database</a></li>
+                            <li><a href="http://www.omdbapi.com/">Open Movie Database</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- End of Widget 2 -->
+
+                <!-- Start of Widget 3 -->
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="widget widget-blog">
+                        <h4 class="widget-title">Contact</h4>
+
+                        <ul class="blog-posts">
+                            <li><a href="#">Formulaire de contact</a></li>
                         </ul>
                     </div>
+                </div>
+                <!-- End of Widget 3 -->
 
-                    <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
+                <!-- Start of Widget 4 -->
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="widget widget-social">
+                        <h4 class="widget-title">Suivez-nous</h4>
 
+                        <p>Vous pouvez nous suivre sur les différents réseaux sociaux.</p>
+
+                        <!-- Start of Social Buttons -->
+                        <ul class="social-btns">
+                            <!-- Social Media -->
+                            <li>
+                                <a href="#" class="social-btn-roll facebook">
+                                    <div class="social-btn-roll-icons">
+                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                        <i class="social-btn-roll-icon fa fa-facebook"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Social Media -->
+                            <li>
+                                <a href="#" class="social-btn-roll twitter">
+                                    <div class="social-btn-roll-icons">
+                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
+                                        <i class="social-btn-roll-icon fa fa-twitter"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Social Media -->
+                            <li>
+                                <a href="#" class="social-btn-roll google-plus">
+                                    <div class="social-btn-roll-icons">
+                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
+                                        <i class="social-btn-roll-icon fa fa-google-plus"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Social Media -->
+                            <li>
+                                <a href="#" class="social-btn-roll instagram">
+                                    <div class="social-btn-roll-icons">
+                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- End of Social Buttons -->
+
+                    </div>
+                </div>
+                <!-- End of Widget 4 -->
+
+            </div>
+        </div>
+    </div>
+    <!-- ===== END OF FOOTER WIDGET AREA ===== -->
+
+
+    <!-- ===== START OF FOOTER COPYRIGHT AREA ===== -->
+    <div class="footer-copyright-area ptb30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex">
+                        <div class="links">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a href="#">Privacy & Cookies</a></li>
+                                <li class="list-inline-item"><a href="#">Terms & Conditions</a></li>
+                                <li class="list-inline-item"><a href="#">Legal Disclaimer</a></li>
+                                <li class="list-inline-item"><a href="#">Community</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- ===== END OF FOOTER COPYRIGHT AREA ===== -->
+    <!-- ===== END OF FOOTER COPYRIGHT AREA ===== -->
 
 </footer>
-        <!-- =============== END OF FOOTER =============== -->
+<!-- =============== END OF FOOTER =============== -->
 
-    </div>
-    <!-- =============== END OF WRAPPER =============== -->
-
-
-
-
-    <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
-    <div class="general-search-wrapper">
-        <form class="general-search" role="search" method="get" action="#">
-            <input type="text" placeholder="Type and hit enter...">
-            <span id="general-search-close" class="ti-close toggle-search"></span>
-        </form>
-    </div>
-    <!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
+</div>
+<!-- =============== END OF WRAPPER =============== -->
 
 
 
-    <!-- =============== START OF LOGIN & REGISTER POPUP =============== -->
-    <div id="login-register-popup" class="small-dialog zoom-anim-dialog mfp-hide">
 
-        <!-- ===== Start of Signin wrapper ===== -->
-        <div class="signin-wrapper">
-            <div class="small-dialog-headline">
-                <h4 class="text-center">Sign in</h4>
-            </div>
+<!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
+<div class="general-search-wrapper">
+    <form class="general-search" role="search" method="get" action="#">
+        <input type="text" placeholder="Type and hit enter...">
+        <span id="general-search-close" class="ti-close toggle-search"></span>
+    </form>
+</div>
+<!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
 
 
-            <div class="small-dialog-content">
 
-                <!-- Start of Login form -->
-                <form id="cariera_login" method="post">
-                    <p class="status"></p>
+<!-- =============== START OF LOGIN & REGISTER POPUP =============== -->
+<div id="login-register-popup" class="small-dialog zoom-anim-dialog mfp-hide">
 
-                    <div class="form-group">
-                        <label for="username">Username or Email *</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Your Username or Email *" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password *</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" />
-                    </div>
-
-                    <div class="form-group">
-                        <div class="checkbox pad-bottom-10">
-                            <input id="check1" type="checkbox" name="remember" value="yes">
-                            <label for="check1">Keep me signed in</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
-                    </div>
-                </form>
-                <!-- End of Login form -->
-
-                <div class="bottom-links">
-                    <span>
-                        Not a member?
-                        <a  class="signUpClick">Sign up</a>
-                    </span>
-                    <a  class="forgetPasswordClick pull-right">Forgot Password</a>
-                </div>
-            </div>
-
+    <!-- ===== Start of Signin wrapper ===== -->
+    <div class="signin-wrapper">
+        <div class="small-dialog-headline">
+            <h4 class="text-center">Sign in</h4>
         </div>
-        <!-- ===== End of Signin wrapper ===== -->
 
 
+        <div class="small-dialog-content">
 
-        <!-- ===== Start of Signup wrapper ===== -->
-        <div class="signup-wrapper">
-            <div class="small-dialog-headline">
-                <h4 class="text-center">Sign Up</h4>
-            </div>
+            <!-- Start of Login form -->
+            <form id="cariera_login" method="post">
+                <p class="status"></p>
 
-            <div class="small-dialog-content">
-
-                <!-- Start of Registration form -->
-                <form id="cariera_registration" action="#" method="POST">
-                    <p class="status"></p>
-
-                    <div class="form-group">
-                        <label for="movify_user_login">Username</label>
-                        <input name="movify_user_login" id="movify_user_login" class="form-control" type="text"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="movify_user_email">Email</label>
-                        <input name="movify_user_email" id="movify_user_email" class="form-control" type="email"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input name="movify_user_pass" id="movify_password" class="form-control" type="password"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-main btn-effect nomargin" value="Register"/>
-                    </div>
-                </form>
-                <!-- End of Registration form -->
-
-                <div class="bottom-links">
-                    <span>
-                        Already have an account?
-                        <a class="signInClick">Sign in</a>
-                    </span>
-
-                    <a class="forgetPasswordClick pull-right">Forgot Password</a>
+                <div class="form-group">
+                    <label for="username">Username or Email *</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Your Username or Email *" />
                 </div>
 
-            </div> <!-- .small-dialog-content -->
-
-        </div>
-        <!-- ===== End of Signup wrapper ===== -->
-
-
-
-        <!-- ===== Start of Forget Password wrapper ===== -->
-        <div class="forgetpassword-wrapper">
-            <div class="small-dialog-headline">
-                <h4 class="text-center">Forgotten Password</h4>
-            </div>
-
-            <div class="small-dialog-content">
-
-                <!-- Start of Forger Password form -->
-                <form id="forget_pass_form" action="#"  method="post">
-                    <p class="status"></p>
-
-                    <div class="form-group">
-                        <label for="password">Email Address *</label>
-                        <input type="email" name="user_login" class="form-control" id="email3" placeholder="Email Address *" />
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" name="submit" value="Get New Password" class="btn btn-main btn-effect nomargin" />
-                    </div>
-                </form>
-                <!-- End of Forger Password form -->
-
-                <div class="bottom-links">
-                    <a class="cancelClick">Cancel</a>
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" />
                 </div>
 
-            </div><!-- .small-dialog-content -->
+                <div class="form-group">
+                    <div class="checkbox pad-bottom-10">
+                        <input id="check1" type="checkbox" name="remember" value="yes">
+                        <label for="check1">Keep me signed in</label>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
+                </div>
+            </form>
+            <!-- End of Login form -->
+
+            <div class="bottom-links">
+                <span>
+                    Not a member?
+                    <a  class="signUpClick">Sign up</a>
+                </span>
+                <a  class="forgetPasswordClick pull-right">Forgot Password</a>
+            </div>
         </div>
-        <!-- ===== End of Forget Password wrapper ===== -->
 
     </div>
-    <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
+    <!-- ===== End of Signin wrapper ===== -->
 
 
 
-    <!-- ===== Start of Back to Top Button ===== -->
-    <div id="backtotop">
-        <a href="#"></a>
+    <!-- ===== Start of Signup wrapper ===== -->
+    <div class="signup-wrapper">
+        <div class="small-dialog-headline">
+            <h4 class="text-center">Sign Up</h4>
+        </div>
+
+        <div class="small-dialog-content">
+
+            <!-- Start of Registration form -->
+            <form id="cariera_registration" action="#" method="POST">
+                <p class="status"></p>
+
+                <div class="form-group">
+                    <label for="movify_user_login">Username</label>
+                    <input name="movify_user_login" id="movify_user_login" class="form-control" type="text"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="movify_user_email">Email</label>
+                    <input name="movify_user_email" id="movify_user_email" class="form-control" type="email"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input name="movify_user_pass" id="movify_password" class="form-control" type="password"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-main btn-effect nomargin" value="Register"/>
+                </div>
+            </form>
+            <!-- End of Registration form -->
+
+            <div class="bottom-links">
+                <span>
+                    Already have an account?
+                    <a class="signInClick">Sign in</a>
+                </span>
+
+                <a class="forgetPasswordClick pull-right">Forgot Password</a>
+            </div>
+
+        </div> <!-- .small-dialog-content -->
+
     </div>
-    <!-- ===== End of Back to Top Button ===== -->
+    <!-- ===== End of Signup wrapper ===== -->
 
 
 
-    <!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.ajaxchimp.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/jquery.mmenu.js"></script>
-    <script src="assets/js/jquery.inview.min.js"></script>
-    <script src="assets/js/jquery.countTo.min.js"></script>
-    <script src="assets/js/jquery.countdown.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/headroom.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <!-- ===== Start of Forget Password wrapper ===== -->
+    <div class="forgetpassword-wrapper">
+        <div class="small-dialog-headline">
+            <h4 class="text-center">Forgotten Password</h4>
+        </div>
 
-    <!-- ===== Slider Revolution core JavaScript files ===== -->
-    <script type="text/javascript" src="assets/revolution/js/jquery.themepunch.tools.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/jquery.themepunch.revolution.min.js"></script>
+        <div class="small-dialog-content">
 
-    <!-- ===== Slider Revolution extension scripts ===== -->
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-    <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
+            <!-- Start of Forger Password form -->
+            <form id="forget_pass_form" action="#"  method="post">
+                <p class="status"></p>
+
+                <div class="form-group">
+                    <label for="password">Email Address *</label>
+                    <input type="email" name="user_login" class="form-control" id="email3" placeholder="Email Address *" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" name="submit" value="Get New Password" class="btn btn-main btn-effect nomargin" />
+                </div>
+            </form>
+            <!-- End of Forger Password form -->
+
+            <div class="bottom-links">
+                <a class="cancelClick">Cancel</a>
+            </div>
+
+        </div><!-- .small-dialog-content -->
+
+    </div>
+    <!-- ===== End of Forget Password wrapper ===== -->
+
+</div>
+<!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
+
+
+
+<!-- ===== Start of Back to Top Button ===== -->
+<div id="backtotop">
+    <a href="#"></a>
+</div>
+<!-- ===== End of Back to Top Button ===== -->
+
+
+
+<!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
+<script src="assets/js/jquery-3.2.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.ajaxchimp.js"></script>
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<script src="assets/js/jquery.mmenu.js"></script>
+<script src="assets/js/jquery.inview.min.js"></script>
+<script src="assets/js/jquery.countTo.min.js"></script>
+<script src="assets/js/jquery.countdown.min.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
+<script src="assets/js/imagesloaded.pkgd.min.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/headroom.js"></script>
+<script src="assets/js/custom.js"></script>
+
+<!-- ===== Slider Revolution core JavaScript files ===== -->
+<script type="text/javascript" src="assets/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/jquery.themepunch.revolution.min.js"></script>
+
+<!-- ===== Slider Revolution extension scripts ===== -->
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
 
 </body>
 
