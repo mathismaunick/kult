@@ -508,7 +508,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                                     </ul>
                                 </div>
 
-                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
+                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
 
                             </div>
                         </div>
