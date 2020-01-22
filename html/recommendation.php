@@ -11,20 +11,20 @@ $IdGroupe = $_GET['id'];
 $SQL3 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$IdGroupe."'";
 $result3 = mysqli_query($db_handle, $SQL3);
 
-$requête = "SELECT * FROM recommandation WHERE IdUtilisateur =".$_SESSION['Id']." ";
+$requête1 = "SELECT * FROM recommandation WHERE IdUtilisateur =".$_SESSION['Id']." ";
 //Parcours tous les membres
 while($db_field3=mysqli_fetch_assoc($result3)){
   $SQL4 = "SELECT * FROM utilisateur WHERE Id='".$db_field3['IdUtilisateur']."'";
   $result4 = mysqli_query($db_handle, $SQL4);
   $db_field4=mysqli_fetch_assoc($result4);
     if($db_field3['IdUtilisateur']!=$_SESSION['Id']){
-  $requête = $requête."AND IdFilm IN (SELECT IdFilm FROM recommandation WHERE IdUtilisateur =".$db_field3['IdUtilisateur'].")";
+  $requête1 = $requête1."AND IdFilm IN (SELECT IdFilm FROM recommandation WHERE IdUtilisateur =".$db_field3['IdUtilisateur'].")";
     }
       
 }
 
 
-$requête = $requête."ORDER BY Poids DESC LIMIT 3";
+//$requête = $requête."ORDER BY Poids DESC LIMIT 3";
  
 
 
@@ -265,6 +265,60 @@ $requête = $requête."ORDER BY Poids DESC LIMIT 3";
                 <!-- Start of Movie List -->
                 <div class="row">
                      <?php 
+
+                     $moyenne = 0;
+                     $nombrenote = 0;
+
+                    $result_requête1 = mysqli_query($db_handle, $requête1);
+                while($db_field_requête1=mysqli_fetch_assoc($result_requête1)){
+                    $SQL3 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$IdGroupe."'";
+                    $result3 = mysqli_query($db_handle, $SQL3);
+
+                    while($db_field3=mysqli_fetch_assoc($result3)){
+
+
+
+
+                     $SQL4 = "SELECT `Poids` FROM `recommandation` WHERE `IdFilm`=".$db_field_requête1['IdFilm']." AND IdUtilisateur = ".$db_field3['Id']." ";
+                     $result4 = mysqli_query($db_handle, $SQL4);
+                     $db_field4 = mysqli_fetch_assoc($result4);
+
+
+
+                $SQL_filmavis2 = "SELECT * FROM liste_provisoire WHERE `IdFilm`=".$db_field_requête1['IdFilm']." ";
+                $result_filmavis2 = mysqli_query($db_handle, $SQL_filmavis2);
+                $db_field_filmavis2 = mysqli_fetch_assoc($result_filmavis2);
+                
+                //Si il n'est pas déjà la table
+                if($db_field_filmavis2==NULL){
+                //Insert film dans la table
+                $SQL_liste = "INSERT INTO liste_provisoire (`IdFilm`,`Moyenne`,`NombreNote`) VALUES (".$db_field_requête1['IdFilm'].",".$db_field4['Note'].",1)";
+                $result_liste = mysqli_query($db_handle, $SQL_liste);
+                
+                }
+                
+                //Si il existe : recalculer la moyenne et faire +1 au nombre d'utilisateur qui ont noté
+                else {
+                    $moyenne = $db_field_filmavis2['Moyenne']+$db_field_filmavis['Note']/2;
+                        
+                    $nombrenote = $db_field_filmavis2['NombreNote'] + 1;
+                    
+                    $SQL_update = "UPDATE `liste_provisoire` SET `Moyenne`=".$moyenne.",`NombreNote`=".$nombrenote."WHERE IdFilm = ".$db_field_requête1['IdFilm']." ";
+                    $result_update = mysqli_query($db_handle, $SQL_update);
+                    
+                    
+                }
+
+                }
+
+
+                }
+
+
+
+                $requête="SELECT * FROM liste_provisoire ORDER BY Moyenne DESC LIMIT 3";
+
+
                     $result_requête = mysqli_query($db_handle, $requête);
                 while($db_field_requête=mysqli_fetch_assoc($result_requête)){
                 
