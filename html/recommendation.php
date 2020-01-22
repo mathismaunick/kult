@@ -1,7 +1,34 @@
 <?php
 session_start();
 //$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+$db_found = mysqli_select_db($db_handle,"kult");
+
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
+
+$IdGroupe = $_GET['id'];
+//Récupère les membres du groupe
+$SQL3 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$IdGroupe."'";
+$result3 = mysqli_query($db_handle, $SQL3);
+
+$requête = "SELECT * FROM recommandation WHERE IdUtilisateur =".$_SESSION['Id']." ";
+//Parcours tous les membres
+while($db_field3=mysqli_fetch_assoc($result3)){
+  $SQL4 = "SELECT * FROM utilisateur WHERE Id='".$db_field3['IdUtilisateur']."'";
+  $result4 = mysqli_query($db_handle, $SQL4);
+  $db_field4=mysqli_fetch_assoc($result4);
+    if($db_field3['IdUtilisateur']!=$_SESSION['Id']){
+  $requête = $requête."AND IdFilm IN (SELECT IdFilm FROM recommandation WHERE IdUtilisateur =".$db_field3['IdUtilisateur'].")";
+    }
+      
+}
+
+
+$requête = $requête."ORDER BY Poids DESC LIMIT 3";
+ 
+
+
+
 
 ?>
 
@@ -215,7 +242,7 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
                 <div class="inner">
                     <h2 class="title">Recommandation de Groupe</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Accueil</a></li>
                         <li>Recommandation</li>
                     </ol>
                 </div>
@@ -233,141 +260,120 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
 
         <main class="ptb100">
             <div class="container">
-
-
-
+               
 
                 <!-- Start of Movie List -->
                 <div class="row">
+                     <?php 
+                    $result_requête = mysqli_query($db_handle, $requête);
+                while($db_field_requête=mysqli_fetch_assoc($result_requête)){
+                
+              //Requête API avec le keyword
+                    $result = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'.$db_field_requête['IdFilm'].'?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
+              $résultat = $result;
+                    
+              
 
-                    <!-- Movie List Item -->
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="movie-box-1 mb30">
 
-                            <!-- Start of Poster -->
-                            <div class="poster">
-                                <img src="assets/images/posters/poster-1.jpg" alt="">
-                            </div>
-                            <!-- End of Poster -->
 
-                            <!-- Start of Buttons -->
-                            <div class="buttons">
-                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
-                                    <i class="fa fa-play"></i>
-                                </a>
-                            </div>
-                            <!-- End of Buttons -->
+            
 
-                            <!-- Start of Movie Details -->
-                            <div class="movie-details">
-                                <h4 class="movie-title">
-                                    <a href="movie-detail.html">Star Wars</a>
-                                </h4>
-                                <span class="released">14 Dec 2017</span>
-                            </div>
-                            <!-- End of Movie Details -->
+               $overview=$résultat['overview'];
 
-                            <!-- Start of Rating -->
-                            <div class="stars">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <span>7.5 / 10</span>
-                            </div>
-                            <!-- End of Rating -->
+               if (strlen($overview)>=150) {
+                $synopsis = substr($overview, 0, 150);
+                $synopsis .="...";
+            }
+            elseif(strlen($overview)<=150 && $overview!=""){
+                $nbmanquants = 150 - strlen($overview);
 
-                        </div>
-                    </div>
+                        //for($j=0; $j<$nbmanquants; $j++){
+                $synopsis = $overview;
+                $synopsis .= str_repeat(".", $nbmanquants) ;
 
-                    <!-- Movie List Item -->
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="movie-box-1 mb30">
 
-                            <!-- Start of Poster -->
-                            <div class="poster">
-                                <img src="assets/images/posters/poster-2.jpg" alt="">
-                            </div>
-                            <!-- End of Poster -->
+            }
+            if($overview==""){
+               $synopsis = $overview;
+               $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
+               $synopsis .=str_repeat(". ", 66);
 
-                            <!-- Start of Buttons -->
-                            <div class="buttons">
-                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
-                                    <i class="fa fa-play"></i>
-                                </a>
-                            </div>
-                            <!-- End of Buttons -->
+           }
+           $title = $résultat['title'];
+           if (strlen($title)>=16) {
+            $title = substr($title, 0, 16);
+            $title .="...";
+        }
 
-                            <!-- Start of Movie Details -->
-                            <div class="movie-details">
-                                <h4 class="movie-title">
-                                    <a href="movie-detail.html">The Brain</a>
-                                </h4>
-                                <span class="released">20 Dec 2017</span>
-                            </div>
-                            <!-- End of Movie Details -->
+       // $json = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
+       // $vid = json_decode($json, TRUE);
+       // if($vid['results']!=null){
+         //   $vidéo = $vid['results'][0]['key'];
+        //}
+        //else $vidéo="";
 
-                            <!-- Start of Rating -->
-                            <div class="stars">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <span>7.2 / 10</span>
-                            </div>
-                            <!-- End of Rating -->
 
-                        </div>
-                    </div>
 
-                    <!-- Movie List Item -->
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="movie-box-1 mb30">
 
-                            <!-- Start of Poster -->
-                            <div class="poster">
-                                <img src="assets/images/posters/poster-3.jpg" alt="">
-                            </div>
-                            <!-- End of Poster -->
+        echo '<div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="movie-box-2 mb30">
+        <div class="listing-container">
 
-                            <!-- Start of Buttons -->
-                            <div class="buttons">
-                                <a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="play-video">
-                                    <i class="fa fa-play"></i>
-                                </a>
-                            </div>
-                            <!-- End of Buttons -->
+        <!-- Movie List Image -->
+        <div class="listing-image">
 
-                            <!-- Start of Movie Details -->
-                            <div class="movie-details">
-                                <h4 class="movie-title">
-                                    <a href="movie-detail.html">The Mummy</a>
-                                </h4>
-                                <span class="released">9 Jun 2017</span>
-                            </div>
-                            <!-- End of Movie Details -->
+       
 
-                            <!-- Start of Rating -->
-                            <div class="stars">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <span>5.5 / 10</span>
-                            </div>
-                            <!-- End of Rating -->
+        <!-- Buttons -->
+        <div class="buttons">
+        <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom" class="like">
+        <i class="icon-heart"></i>
+        </a>
 
-                        </div>
-                    </div>
+        <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom" class="share">
+        <i class="icon-share"></i>
+        </a>
+        </div>
+
+        <!-- Rating -->
+        <div class="stars">
+        <div class="rating">
+       
+    </div>
+    </div>';
+
+    if($résultat['poster_path']!=''){
+        echo '<img src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat['poster_path'].'">
+        </div>';
+    }
+    else{
+
+        echo '<img src="assets/images/posters/poster-1.jpg" alt="">
+        </div>';
+    }
+
+    echo'
+    <!-- Movie List Content -->
+    <div class="listing-content">
+    <div class="inner">
+    <h3 class="title">'.$title.'</h3>
+
+    <p>'.$synopsis.'</p>
+
+    <a href="movie-detail.php?id='.$résultat['id'].'" class="btn btn-main btn-effect">details</a>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>';
+
+                    
+                }
+                                ?>
+
+
+                    
 
     
 

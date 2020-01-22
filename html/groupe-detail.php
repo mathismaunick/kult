@@ -50,7 +50,7 @@ if($dateGroupe!=NULL){
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>Movify - Movies, Series & Cinema HTML Template</title>
+    <title>KULT</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -288,7 +288,9 @@ if($dateGroupe!=NULL){
                         <li class="nav-item">
                             <a class="nav-link" id="film-tab" data-toggle="tab" href="#filmography" aria-controls="filmography" aria-expanded="false">Membres du groupe</a>
                         </li>
-                        <a href="recommendation.php" class="btn btn-main btn-effect login-btn">
+                        <?php
+                        echo '<a href="recommendation.php?id='.$_GET['id'].'" class="btn btn-main btn-effect login-btn">';
+                        ?>
                             <i class="icon-film"></i> Trouver un film
                         </a>
                     </ul>
