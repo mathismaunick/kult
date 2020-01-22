@@ -3,6 +3,11 @@ session_start();
 $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 $db_found = mysqli_select_db($db_handle,"kult");
 
+
+if(isset($_POST['recherche'])) {
+    echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
+}
+
 ?>
 
 
@@ -130,7 +135,7 @@ elseif(isset($_GET['recherche'])) {
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- INSERT YOUR LOGO HERE -->
                         <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
@@ -740,12 +745,12 @@ elseif(isset($_GET['recherche'])) {
 
 
 <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
-<div class="general-search-wrapper">
-    <form class="general-search" role="search" method="get" action="#">
-        <input type="text" placeholder="Type and hit enter...">
-        <span id="general-search-close" class="ti-close toggle-search"></span>
-    </form>
-</div>
+    <div class="general-search-wrapper">
+        <form class="general-search" role="search" method="post" action="#">
+            <input name="recherche" type="text" id="search-keyword" value="" class="form-control" placeholder="Entrez un titre de film ou série">
+            <span id="general-search-close" class="ti-close toggle-search"></span>
+        </form>
+    </div>
 <!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
 
 

@@ -11,6 +11,11 @@ $size = count($object_response["results"]);
 $id=[];
 
 
+if(isset($_POST['recherche'])) {
+    echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -490,12 +495,12 @@ $id=[];
 
 
 <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
-<div class="general-search-wrapper">
-    <form class="general-search" role="search" method="get" action="#">
-        <input type="text" placeholder="Type and hit enter...">
-        <span id="general-search-close" class="ti-close toggle-search"></span>
-    </form>
-</div>
+    <div class="general-search-wrapper">
+        <form class="general-search" role="search" method="post" action="#">
+            <input name="recherche" type="text" id="search-keyword" value="" class="form-control" placeholder="Entrez un titre de film ou série">
+            <span id="general-search-close" class="ti-close toggle-search"></span>
+        </form>
+    </div>
 <!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
 
 

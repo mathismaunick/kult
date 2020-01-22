@@ -27,6 +27,9 @@ while($db_field3=mysqli_fetch_assoc($result3)){
 
 //$requête = $requête."ORDER BY Poids DESC LIMIT 3";
  
+if(isset($_POST['recherche'])) {
+    echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
+}
 
 
 
@@ -361,12 +364,12 @@ while($db_field3=mysqli_fetch_assoc($result3)){
             $title .="...";
         }
 
-       // $json = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
-       // $vid = json_decode($json, TRUE);
-       // if($vid['results']!=null){
-         //   $vidéo = $vid['results'][0]['key'];
-        //}
-        //else $vidéo="";
+       $url_vid = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
+       $vid = json_decode($url_vid, TRUE);
+       if($vid['results']!=null){
+            $vidéo = $vid['results'][0]['key'];
+        }
+        else $vidéo="";
 
 
 
@@ -377,6 +380,14 @@ while($db_field3=mysqli_fetch_assoc($result3)){
 
         <!-- Movie List Image -->
         <div class="listing-image">
+
+                        <!-- Play Button -->
+                <div class="play-btn">
+
+                <a href="https://www.youtube.com/watch?v='.$vidéo.'" class="play-video">
+                <i class="fa fa-play"></i>
+                </a>
+                </div>
 
        
 
@@ -591,8 +602,8 @@ $SQL_delete = "DELETE FROM `liste_provisoire`";
 
     <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
     <div class="general-search-wrapper">
-        <form class="general-search" role="search" method="get" action="#">
-            <input type="text" placeholder="Type and hit enter...">
+        <form class="general-search" role="search" method="post" action="#">
+            <input name="recherche" type="text" id="search-keyword" value="" class="form-control" placeholder="Entrez un titre de film ou série">
             <span id="general-search-close" class="ti-close toggle-search"></span>
         </form>
     </div>
