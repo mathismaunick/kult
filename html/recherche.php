@@ -321,16 +321,15 @@ elseif(isset($_GET['recherche'])) {
                if (strlen($overview)>=150) {
                 $synopsis = substr($overview, 0, 150);
                 $synopsis .="...";
-            }
-            elseif(strlen($overview)<=150 && $overview!=""){
+                }
+                elseif(strlen($overview)<=150 && $overview!=""){
                 $nbmanquants = 150 - strlen($overview);
 
                         //for($j=0; $j<$nbmanquants; $j++){
                 $synopsis = $overview;
-                $synopsis .= str_repeat(".", $nbmanquants) ;
-
-
-            }
+                $synopsis .= str_repeat(". ", $nbmanquants) ;
+                }
+                
             if($overview==""){
                $synopsis = $overview;
                $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
