@@ -1,6 +1,7 @@
 <?php
 session_start();
-$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+//$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+$db_handle=mysqli_connect("localhost","root", "root", "kult");
     $db_found = mysqli_select_db($db_handle,"kult");
     # controle
     if (mysqli_connect_error())
@@ -432,10 +433,11 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                             <div class="widget widget-about">
 
                                 <!-- INSERT YOUR LOGO HERE -->
-                                <img src="assets/images/logo.svg" alt="logo" class="logo">
+                                <!--<img src="assets/images/logo.svg" alt="logo" class="logo"> -->
                                 <!-- INSERT YOUR WHITE LOGO HERE -->
-                                <img src="assets/images/logo-white.svg" alt="white logo" class="logo-white">
-                                <p class="nomargin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
+                                <!--<img src="assets/images/logo-white.svg" alt="white logo" class="logo-white"> -->
+                                <h4 class="widget-title">Kult</h4>
+                                <p class="nomargin">Kult est une plateforme de recommandation de film pour des soirées en groupe. Ne perdez plus votre temps à chercher un film.</p>
                             </div>
                         </div>
                         <!-- End of Widget 1 -->
@@ -443,14 +445,12 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                         <!-- Start of Widget 2 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-links">
-                                <h4 class="widget-title">Useful links</h4>
+                                <h4 class="widget-title">liens vers API</h4>
 
                                 <ul class="general-listing">
-                                    <li><a href="#">about movify</a></li>
-                                    <li><a href="#">blog</a></li>
-                                    <li><a href="#">forum</a></li>
-                                    <li><a href="#">my account</a></li>
-                                    <li><a href="#">watch list</a></li>
+                                    <li><a href="https://waatch.docs.apiary.io/#">Captain watch</a></li>
+                                    <li><a href="https://developers.themoviedb.org/3">The Movie Database</a></li>
+                                    <li><a href="http://www.omdbapi.com/">Open Movie Database</a></li>
                                 </ul>
 
                             </div>
@@ -460,12 +460,10 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                         <!-- Start of Widget 3 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-blog">
-                                <h4 class="widget-title">latest news</h4>
+                                <h4 class="widget-title">Contact</h4>
 
                                 <ul class="blog-posts">
-                                    <li><a href="#">blog post 1</a><small>januar 13, 2018</small></li>
-                                    <li><a href="#">blog post 2</a><small>januar 13, 2018</small></li>
-                                    <li><a href="#">blog post 3</a><small>januar 13, 2018</small></li>
+                                    <li><a href="#">Formulaire de contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -474,9 +472,9 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                         <!-- Start of Widget 4 -->
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="widget widget-social">
-                                <h4 class="widget-title">follow us</h4>
+                                <h4 class="widget-title">Suivez-nous</h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque.</p>
+                                <p>Vous pouvez nous suivre sur les différents réseaux sociaux.</p>
 
                                 <!-- Start of Social Buttons -->
                                 <ul class="social-btns">
@@ -547,7 +545,7 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                                     </ul>
                                 </div>
 
-                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
+                                <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
 
                             </div>
                         </div>
