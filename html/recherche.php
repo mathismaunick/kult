@@ -25,7 +25,16 @@ if(isset($_POST['recherche'])) {
   //Requête API avec le keyword
   $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
   $result = json_decode($json, TRUE);
-  $résultat = $result['results'];
+  $résultatInter = $result['results'];
+  $résultat=null;
+  for($i = 0; $i<count($résultatInter); $i++){
+
+    $idmovie=$résultatInter[$i]['id'];
+    $captain = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
+    if (isset($captain)){$résultat[]= $résultatInter[$i];}
+     
+    
+ }
 
   
 }
@@ -42,7 +51,16 @@ elseif(isset($_GET['recherche'])) {
   //Requête API avec le keyword
   $json = file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR&page=1&query='.$recherche.'');
   $result = json_decode($json, TRUE);
-  $résultat = $result['results'];
+  $résultatInter = $result['results'];
+  $résultat=null;
+  for($i = 0; $i<count($résultatInter); $i++){
+
+    $idmovie=$résultatInter[$i]['id'];
+    $captain = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
+    if (isset($captain)){$résultat[]= $résultatInter[$i];}
+     
+    
+ }
 }
 
 
