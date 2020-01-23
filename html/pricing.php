@@ -8,6 +8,11 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
         echo "Echec de connexion à la base de donnée";
         echo "Error code : ". mysqli_connect_error();
     }
+
+if(isset($_POST['recherche'])) {
+    echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
+}
+
 ?>
 
 
@@ -99,67 +104,49 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="index.html">
                         <!-- INSERT YOUR LOGO HERE -->
                         <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
+                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
 
                     <!-- Login Button on Responsive -->
-                     <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
+                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
                           <span class="hamburger-inner"></span>
-                      </span>
-                  </button>
+                       </span>
+                    </button>
 
-                  <!-- ====== Start of #main-nav ====== -->
-                  <div class="navbar-collapse" id="main-nav">
+                    <!-- ====== Start of #main-nav ====== -->
+                    <div class="navbar-collapse" id="main-nav">
 
-                    <!-- ====== Start of Main Menu ====== -->
-                    <ul class="navbar-nav mx-auto" id="main-menu">
-                        <!-- Menu Item -->
+                        <!-- ====== Start of Main Menu ====== -->
+                        <ul class="navbar-nav mx-auto" id="main-menu">
+                            <!-- Menu Item -->
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php">Accueil</a>
                             </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                        </li>
+                            <!-- Menu Item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                            </li>                            
 
-                        <li class="nav-item">
-
-                            <?php
-                            if (isset($_SESSION['Id'])):
-                                ?>
+                            <!-- Menu Item -->
+                            <li class="nav-item">
                                 <a class="nav-link" href="groupe.php">Groupes</a>
-                                <?php
-                            else:
-                                ?>
-                                <a class="nav-link" a href="groupe.php">Groupes</a>
-                                <?php
-                            endif
-                            ?>
+                            </li> 
 
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="profil.php">Profil</a>
+                            </li>       
 
-                        <!-- Menu Item -->
+                            <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
+                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -176,37 +163,31 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                                 </ul>
                             </li>
 
-                        <!-- Menu Item -->
+                        </ul>
+                        <!-- ====== End of Main Menu ====== -->
+
+
+                        <!-- ====== Start of Extra Nav ====== -->
+                        <ul class="navbar-nav extra-nav">
+
+                            <!-- Menu Item -->
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.php">Contactez nous</a>
+                                <a class="nav-link toggle-search" href="#">
+                                    <i class="fa fa-search"></i>
+                                </a>
                             </li>
 
-                    </ul>
-                    <!-- ====== End of Main Menu ====== -->
+                            <!-- Menu Item -->
+                            <li class="nav-item notification-wrapper">
+                                <a class="nav-link notification" href="#">
+                                    <i class="fa fa-globe"></i>
+                                    <span class="notification-count">2</span>
+                                </a>
+                            </li>
 
-
-                    <!-- ====== Start of Extra Nav ====== -->
-                    <ul class="navbar-nav extra-nav">
-
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link toggle-search" href="#">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-
-                        <!-- Menu Item -->
-                        <li class="nav-item notification-wrapper">
-                            <a class="nav-link notification" href="#">
-                                <i class="fa fa-globe"></i>
-                                <span class="notification-count">2</span>
-                            </a>
-                        </li>
-
-                        <!-- Menu Item -->
-                        <li class="nav-item m-auto">
-
-                                    <?php
+                            <!-- Menu Item -->
+                            <li class="nav-item m-auto">
+                                <?php
                                     if (isset($_SESSION['Id'])):
                                     ?>
                                         <a href="logout.php" class="btn btn-main btn-effect login-btn">
@@ -220,20 +201,19 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
                                         </a>
                                     <?php
                                     endif
-                                    ?>  
-
+                                ?>                                  
                             </li>
-                    </ul>
-                    <!-- ====== End of Extra Nav ====== -->
+                        </ul>
+                        <!-- ====== End of Extra Nav ====== -->
 
-                </div>
-                <!-- ====== End of #main-nav ====== -->
-            </nav>
-            <!-- ====== End of Navbar ====== -->
+                    </div>
+                    <!-- ====== End of #main-nav ====== -->
+                </nav>
+                <!-- ====== End of Navbar ====== -->
 
-        </div>
-    </header>
-    <!-- =============== END OF HEADER NAVIGATION =============== -->
+            </div>
+        </header>
+        <!-- =============== END OF HEADER NAVIGATION =============== -->
 
 
 
@@ -639,8 +619,8 @@ $db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
 
     <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
     <div class="general-search-wrapper">
-        <form class="general-search" role="search" method="get" action="#">
-            <input type="text" placeholder="Type and hit enter...">
+        <form class="general-search" role="search" method="post" action="#">
+            <input name="recherche" type="text" id="search-keyword" value="" class="form-control" placeholder="Entrez un titre de film ou série">
             <span id="general-search-close" class="ti-close toggle-search"></span>
         </form>
     </div>

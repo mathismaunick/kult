@@ -50,7 +50,7 @@ if($dateGroupe!=NULL){
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>KULT</title>
+    <title>Movify - Movies, Series & Cinema HTML Template</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -120,116 +120,139 @@ if($dateGroupe!=NULL){
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- INSERT YOUR LOGO HERE -->
                         <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
 
                     <!-- Login Button on Responsive -->
-                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
+                    <?php
+                    if (isset($_SESSION['Id'])):
+                        ?>
+                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
+                        </a>
+                        <?php
+                    else:
+                        ?>
+                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
+                        </a>
+                        <?php
+                    endif
+                    ?>  
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
-                       <span class="hamburger-box">
-                          <span class="hamburger-inner"></span>
-                       </span>
-                    </button>
+                     <span class="hamburger-box">
+                      <span class="hamburger-inner"></span>
+                  </span>
+              </button>
 
-                    <!-- ====== Start of #main-nav ====== -->
-                    <div class="navbar-collapse" id="main-nav">
+              <!-- ====== Start of #main-nav ====== -->
+              <div class="navbar-collapse" id="main-nav">
 
-                        <!-- ====== Start of Main Menu ====== -->
-                        <ul class="navbar-nav mx-auto" id="main-menu">
+                <!-- ====== Start of Main Menu ====== -->
+                <ul class="navbar-nav mx-auto" id="main-menu">
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Accueil</a>
+                    </li>
+
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <?php
+                        if (isset($_SESSION['Id'])):
+                            ?>
+                            <a class="nav-link" href="groupe.php">Groupes</a>
+                            <?php
+                        else:
+                            ?>
+                            <a class="nav-link" a href="groupe.php">Groupes</a>
+                            <?php
+                        endif
+                        ?>
+
+                    </li>
+
+                    <!-- Menu Item -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
+
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu">
                             <!-- Menu Item -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php">Accueil</a>
+                            <li>
+                                <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
                             </li>
 
                             <!-- Menu Item -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                            </li>                            
-
-                            <!-- Menu Item -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="groupe.php">Groupes</a>
-                            </li> 
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="profil.php">Profil</a>
-                            </li>       
-
-                            <!-- Menu Item -->
-                            <li class="nav-item dropdown">
-                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
-
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu">
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="fonctionnement.php">Kult, c'est quoi ?</a>
-                                    </li>
-
-                                    <!-- Menu Item -->
-                                    <li>
-                                        <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
-                                    </li>
-
-                                </ul>
+                            <li>
+                                <a class="dropdown-item" href="pricing.php">Nos tarifs</a>
                             </li>
 
                         </ul>
-                        <!-- ====== End of Main Menu ====== -->
+                    </li>
+
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact-us.php">Contactez nous</a>
+                    </li>
+
+                </ul>
+                <!-- ====== End of Main Menu ====== -->
 
 
-                        <!-- ====== Start of Extra Nav ====== -->
-                        <ul class="navbar-nav extra-nav">
+                <!-- ====== Start of Extra Nav ====== -->
+                <ul class="navbar-nav extra-nav">
 
-                            <!-- Menu Item -->
-                            <li class="nav-item">
-                                <a class="nav-link toggle-search" href="#">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </li>
+                    <!-- Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link toggle-search" href="#">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
 
-                            <!-- Menu Item -->
-                            <li class="nav-item notification-wrapper">
-                                <a class="nav-link notification" href="#">
-                                    <i class="fa fa-globe"></i>
-                                    <span class="notification-count">2</span>
-                                </a>
-                            </li>
+                    <!-- Menu Item -->
+                    <li class="nav-item notification-wrapper">
+                        <a class="nav-link notification" href="#">
+                            <i class="fa fa-globe"></i>
+                            <span class="notification-count">2</span>
+                        </a>
+                    </li>
 
-                            <!-- Menu Item -->
-                            <li class="nav-item m-auto">
-                                <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
-                                            <i class="icon-user"></i>Se déconnecter
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="btn btn-main btn-effect login-btn">
-                                            <i class="icon-user"></i>Se connecter
-                                        </a>
-                                    <?php
-                                    endif
-                                ?>                                  
-                            </li>
-                        </ul>
-                        <!-- ====== End of Extra Nav ====== -->
+                    <!-- Menu Item -->
+                    <li class="nav-item m-auto">
+                       <?php
+                       if (isset($_SESSION['Id'])):
+                        ?>
+                        <a href="logout.php" class="btn btn-main btn-effect login-btn">
+                            <i class="icon-user"></i>Se déconnecter
+                        </a>
+                        <?php
+                    else:
+                        ?>
+                        <a href="login.php" class="btn btn-main btn-effect login-btn">
+                            <i class="icon-user"></i>Se connecter
+                        </a>
+                        <?php
+                    endif
+                    ?>  
+                </li>
+            </ul>
+            <!-- ====== End of Extra Nav ====== -->
 
-                    </div>
-                    <!-- ====== End of #main-nav ====== -->
-                </nav>
-                <!-- ====== End of Navbar ====== -->
+        </div>
+        <!-- ====== End of #main-nav ====== -->
+    </nav>
+    <!-- ====== End of Navbar ====== -->
 
-            </div>
-        </header>
-        <!-- =============== END OF HEADER NAVIGATION =============== -->
+</div>
+</header>
+<!-- =============== END OF HEADER NAVIGATION =============== -->
 
 
 
@@ -265,11 +288,9 @@ if($dateGroupe!=NULL){
                         <li class="nav-item">
                             <a class="nav-link" id="film-tab" data-toggle="tab" href="#filmography" aria-controls="filmography" aria-expanded="false">Membres du groupe</a>
                         </li>
-                        <?php
-                        echo '<a href="recommendation.php?id='.$_GET['id'].'" class="btn btn-main btn-effect login-btn">';
-                        ?>
-                            <i class="icon-film"></i> Trouver un film
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link" id="film-tab" href="recommendation.php" aria-expanded="false">Trouver un film</a>
+                        </li>
                     </ul>
 
                     <!-- Tab Content -->
@@ -331,11 +352,10 @@ if($dateGroupe!=NULL){
                     <div class="widget widget-about">
 
                         <!-- INSERT YOUR LOGO HERE -->
-                        <!--<img src="assets/images/logo.svg" alt="logo" class="logo"> -->
+                        <img src="assets/images/logo.svg" alt="logo" class="logo">
                         <!-- INSERT YOUR WHITE LOGO HERE -->
-                        <!--<img src="assets/images/logo-white.svg" alt="white logo" class="logo-white"> -->
-                        <h4 class="widget-title">Kult</h4>
-                        <p class="nomargin">Kult est une plateforme de recommandation de film pour des soirées en groupe. Ne perdez plus votre temps à chercher un film.</p>
+                        <img src="assets/images/logo-white.svg" alt="white logo" class="logo-white">
+                        <p class="nomargin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque. Praesentium suscipit provident explicabo dignissimos nostrum numquam deserunt earum accusantium et fugit.</p>
                     </div>
                 </div>
                 <!-- End of Widget 1 -->
@@ -343,12 +363,14 @@ if($dateGroupe!=NULL){
                 <!-- Start of Widget 2 -->
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="widget widget-links">
-                        <h4 class="widget-title">liens vers API</h4>
+                        <h4 class="widget-title">Useful links</h4>
 
                         <ul class="general-listing">
-                            <li><a href="https://waatch.docs.apiary.io/#">Captain watch</a></li>
-                            <li><a href="https://developers.themoviedb.org/3">The Movie Database</a></li>
-                            <li><a href="http://www.omdbapi.com/">Open Movie Database</a></li>
+                            <li><a href="#">about movify</a></li>
+                            <li><a href="#">blog</a></li>
+                            <li><a href="#">forum</a></li>
+                            <li><a href="#">my account</a></li>
+                            <li><a href="#">watch list</a></li>
                         </ul>
 
                     </div>
@@ -358,10 +380,12 @@ if($dateGroupe!=NULL){
                 <!-- Start of Widget 3 -->
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="widget widget-blog">
-                        <h4 class="widget-title">Contact</h4>
+                        <h4 class="widget-title">latest news</h4>
 
                         <ul class="blog-posts">
-                            <li><a href="#">Formulaire de contact</a></li>
+                            <li><a href="#">blog post 1</a><small>januar 13, 2018</small></li>
+                            <li><a href="#">blog post 2</a><small>januar 13, 2018</small></li>
+                            <li><a href="#">blog post 3</a><small>januar 13, 2018</small></li>
                         </ul>
                     </div>
                 </div>
@@ -370,9 +394,9 @@ if($dateGroupe!=NULL){
                 <!-- Start of Widget 4 -->
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="widget widget-social">
-                        <h4 class="widget-title">Suivez-nous</h4>
+                        <h4 class="widget-title">follow us</h4>
 
-                        <p>Vous pouvez nous suivre sur les différents réseaux sociaux.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ducimus, atque.</p>
 
                         <!-- Start of Social Buttons -->
                         <ul class="social-btns">
@@ -443,7 +467,7 @@ if($dateGroupe!=NULL){
                             </ul>
                         </div>
 
-                        <div class="copyright ml-auto">All Rights Reserved by <a href="#">Kult</a>.</div>
+                        <div class="copyright ml-auto">All Rights Reserved by <a href="#">Movify</a>.</div>
 
                     </div>
                 </div>

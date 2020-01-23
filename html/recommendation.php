@@ -1,19 +1,44 @@
 <?php
 session_start();
-//$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
-$db_handle=mysqli_connect("localhost","root", "root", "kult");
-    $db_found = mysqli_select_db($db_handle,"kult");
-    # controle
-    if (mysqli_connect_error())
-    {
-        echo "Echec de connexion à la base de donnée";
-        echo "Error code : ". mysqli_connect_error();
+//$bdd = new PDO('mysql:host=localhost;dbname=kult', 'root', 'root');
+$db_handle=mysqli_connect("127.0.0.1","root", "", "kult");
+$db_found = mysqli_select_db($db_handle,"kult");
+
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=kult', 'root', '');
+
+$IdGroupe = $_GET['id'];
+//Récupère les membres du groupe
+$SQL3 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$IdGroupe."'";
+$result3 = mysqli_query($db_handle, $SQL3);
+
+$requête1 = "SELECT * FROM recommandation WHERE IdUtilisateur =".$_SESSION['Id']." ";
+//Parcours tous les membres
+while($db_field3=mysqli_fetch_assoc($result3)){
+  $SQL4 = "SELECT * FROM utilisateur WHERE Id='".$db_field3['IdUtilisateur']."'";
+  $result4 = mysqli_query($db_handle, $SQL4);
+  $db_field4=mysqli_fetch_assoc($result4);
+    if($db_field3['IdUtilisateur']!=$_SESSION['Id']){
+  $requête1 = $requête1."AND IdFilm IN (SELECT IdFilm FROM recommandation WHERE IdUtilisateur =".$db_field3['IdUtilisateur'].")";
     }
+    
+      
+}
+
+
+//$requête = $requête."ORDER BY Poids DESC LIMIT 3";
+ 
+if(isset($_POST['recherche'])) {
+    echo '<meta http-equiv="refresh" content="0;URL=recherche.php?recherche='.$_POST['recherche'].'">';
+}
+
+
+
+
 ?>
 
 
-    
-   <!DOCTYPE html>
+
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -30,7 +55,7 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
     <meta name="author" content="GnoDesign">
 
     <!-- ===== Website Title ===== -->
-    <title>KULT</title>
+    <title>Recommandation</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
@@ -100,67 +125,49 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
                 <!-- ====== Start of Navbar ====== -->
                 <nav class="navbar navbar-expand-lg">
 
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="index.html">
                         <!-- INSERT YOUR LOGO HERE -->
                         <h4><strong>KULT</strong></h4>
                         <!-- INSERT YOUR WHITE LOGO HERE -->
+                        <img src="assets/images/logo-white.svg" alt="white logo" width="150" class="logo-white">
                     </a>
 
                     <!-- Login Button on Responsive -->
-                     <?php
-                                    if (isset($_SESSION['Id'])):
-                                    ?>
-                                        <a href="logout.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    else:
-                                    ?>
-                                        <a href="login.php" class="login-mobile-btn"><i class="icon-user"></i>
-                                        </a>
-                                    <?php
-                                    endif
-                                    ?>  
+                    <a href="#login-register-popup" class="login-mobile-btn popup-with-zoom-anim"><i class="icon-user"></i></a>
                     
                     <button id="mobile-nav-toggler" class="hamburger hamburger--collapse" type="button">
                        <span class="hamburger-box">
                           <span class="hamburger-inner"></span>
-                      </span>
-                  </button>
+                       </span>
+                    </button>
 
-                  <!-- ====== Start of #main-nav ====== -->
-                  <div class="navbar-collapse" id="main-nav">
+                    <!-- ====== Start of #main-nav ====== -->
+                    <div class="navbar-collapse" id="main-nav">
 
-                    <!-- ====== Start of Main Menu ====== -->
-                    <ul class="navbar-nav mx-auto" id="main-menu">
-                        <!-- Menu Item -->
+                        <!-- ====== Start of Main Menu ====== -->
+                        <ul class="navbar-nav mx-auto" id="main-menu">
+                            <!-- Menu Item -->
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php">Accueil</a>
                             </li>
 
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
-                        </li>
+                            <!-- Menu Item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="fil-dactu.php">Fil D'actus</a>
+                            </li>                            
 
-                        <li class="nav-item">
-
-                            <?php
-                            if (isset($_SESSION['Id'])):
-                                ?>
+                            <!-- Menu Item -->
+                            <li class="nav-item">
                                 <a class="nav-link" href="groupe.php">Groupes</a>
-                                <?php
-                            else:
-                                ?>
-                                <a class="nav-link" a href="groupe.php">Groupes</a>
-                                <?php
-                            endif
-                            ?>
+                            </li> 
 
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="profil.php">Profil</a>
+                            </li>       
 
-                        <!-- Menu Item -->
+                            <!-- Menu Item -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
+                               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informations</a>
 
                                 <!-- Dropdown Menu -->
                                 <ul class="dropdown-menu">
@@ -177,36 +184,31 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
                                 </ul>
                             </li>
 
-                        <!-- Menu Item -->
+                        </ul>
+                        <!-- ====== End of Main Menu ====== -->
+
+
+                        <!-- ====== Start of Extra Nav ====== -->
+                        <ul class="navbar-nav extra-nav">
+
+                            <!-- Menu Item -->
                             <li class="nav-item">
-                                <a class="nav-link" href="contact-us.php">Contactez nous</a>
+                                <a class="nav-link toggle-search" href="#">
+                                    <i class="fa fa-search"></i>
+                                </a>
                             </li>
 
-                    </ul>
-                    <!-- ====== End of Main Menu ====== -->
+                            <!-- Menu Item -->
+                            <li class="nav-item notification-wrapper">
+                                <a class="nav-link notification" href="#">
+                                    <i class="fa fa-globe"></i>
+                                    <span class="notification-count">2</span>
+                                </a>
+                            </li>
 
-
-                    <!-- ====== Start of Extra Nav ====== -->
-                    <ul class="navbar-nav extra-nav">
-
-                        <!-- Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link toggle-search" href="#">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-
-                        <!-- Menu Item -->
-                        <li class="nav-item notification-wrapper">
-                            <a class="nav-link notification" href="#">
-                                <i class="fa fa-globe"></i>
-                                <span class="notification-count">2</span>
-                            </a>
-                        </li>
-
-                        <!-- Menu Item -->
-                        <li class="nav-item m-auto">
-                             <?php
+                            <!-- Menu Item -->
+                            <li class="nav-item m-auto">
+                                <?php
                                     if (isset($_SESSION['Id'])):
                                     ?>
                                         <a href="logout.php" class="btn btn-main btn-effect login-btn">
@@ -220,30 +222,32 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
                                         </a>
                                     <?php
                                     endif
-                                    ?>  
-                        </li>
-                    </ul>
-                    <!-- ====== End of Extra Nav ====== -->
+                                ?>                                  
+                            </li>
+                        </ul>
+                        <!-- ====== End of Extra Nav ====== -->
 
-                </div>
-                <!-- ====== End of #main-nav ====== -->
-            </nav>
-            <!-- ====== End of Navbar ====== -->
+                    </div>
+                    <!-- ====== End of #main-nav ====== -->
+                </nav>
+                <!-- ====== End of Navbar ====== -->
 
-        </div>
-    </header>
-    <!-- =============== END OF HEADER NAVIGATION =============== -->
+            </div>
+        </header>
+        <!-- =============== END OF HEADER NAVIGATION =============== -->
+
+
 
 
 
         <!-- =============== START OF PAGE HEADER =============== -->
-         <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
+        <section class="page-header overlay-gradient" style="background: url(assets/images/posters/movie-collection.jpg);">
             <div class="container">
                 <div class="inner">
-                    <h2 class="title">MES GROUPES</h2>
+                    <h2 class="title">Recommandation de Groupe</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.php">Home</a></li>
-                    
+                        <li><a href="index.php">Accueil</a></li>
+                        <li>Recommandation</li>
                     </ol>
                 </div>
             </div>
@@ -253,166 +257,199 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
 
 
         <!-- =============== START OF MAIN =============== -->
+
+        <br/>
+
+        <h2 class="title"; style="text-align:center">Voici les films qui vous correspondent</h2>
+
         <main class="ptb100">
-            <div class="container">      
-
-            <!-- Blindage pour création d'un groupe ssi on est connecte -->      
-
-                            <?php
-                            if (isset($_SESSION['Id'])):
-                            ?>
-                                <a class="list active" href="creationgroupe.php">CREER UN NOUVEAU GROUPE</a>
-                            <?php
-                            else:
-                                echo '<font color="red">'."Connectez-vous pour créer un groupe !"."</font>";
-                            ?>
-                            <a href="login.php" class="signInClick">
-                                 <i class="icon-user"></i> Se connecter
-                            </a>
-                            <?php
-                            endif
-                            ?>                    
-
-                <!-- Start of Filters -->
-                <div class="row mb50">
-
-                    <div class="col-md-6">
-                        <!-- Layout Switcher -->
-                        <div class="layout-switcher">
-                            <!-- <a href="groupe.php" class="list active"><i class="fa fa-align-justify"></i></a>-->
-                           
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-
-                        <!-- Sort by -->
-                        <div class="sort-by">
-                            <div class="sort-by-select">
-                               <select class="chosen-select-no-single">
-                                    <option>Ordre par défaut</option>
-                                    <option>Featured</option>
-                                    <option>Plus vu</option>
-                                    <option>Mieux noté</option>
-                                    <option>Récent</option>
-                                    <option>Ancien</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Sort by / End -->
-
-                    </div>
-
-                </div>
-                <!-- End of Filters -->
-
-
+            <div class="container">
+               
 
                 <!-- Start of Movie List -->
                 <div class="row">
+                     <?php 
 
-                    <!-- Groupe List Item -->
-                    <?php
+                     $moyenne = 0;
+                     $nombrenote = 0;
 
-                //if(isset($_POST['recherche'])) {
-                    if(isset($_SESSION['Id'])){
-                    //$id = 1;
-                  //Requête à ma BDD pour récupérer les groupes de l'utilisateur
-                    if($db_handle && $db_found){
-                         $SQL1 = "SELECT * FROM groupe_membre WHERE IdUtilisateur='".$_SESSION['Id']."'";
-                         $result1 = mysqli_query($db_handle, $SQL1);
-
-                        while($db_field1=mysqli_fetch_assoc($result1)){
-
-                         $SQL2 = "SELECT * FROM groupe WHERE Id='".$db_field1['IdGroupe']."'";
-                         $result2 = mysqli_query($db_handle, $SQL2);
-                         $db_field2=mysqli_fetch_assoc($result2);
-                        
-                        echo '<div class="col-md-12 col-sm-12">
-                        <div class="movie-list-1 mb30">
-                            <div class="listing-container">
-
-                                <!-- Movie List Image -->
-                                <div class="listing-content">
-                                <div class="inner">
-                                        <h3 style="font-color: white;" class="title">'.$db_field2['Nom'].'</h3>
-
-                                        <p></p>
-
-                                         <a href="groupe-detail.php?id='.$db_field2['Id'].'" class="btn btn-main btn-effect">details</a>
-                                    </div>
-                                    
-
-                                    <!-- Buttons -->
-                                    <div class="buttons">
-                                        
-                                    </div>
-
-                                    <!-- Rating -->
-                                    <div class="stars">
-                                        
-                                    </div>
-
-                                    
-                                </div>
-
-                                <!-- Movie List Content -->
-                                <div style="margin-top: 50px;"class="listing-content">';
-                                $SQL3 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$db_field2['Id']."'";
-                             $result3 = mysqli_query($db_handle, $SQL3);
-                              while($db_field3=mysqli_fetch_assoc($result3)){
-                                  $SQL4 = "SELECT * FROM utilisateur WHERE Id='".$db_field3['IdUtilisateur']."'";
-                                  $result4 = mysqli_query($db_handle, $SQL4);
-                                  while($db_field4=mysqli_fetch_assoc($result4)){
-                                      if($db_field4['Id']!=$_SESSION['Id']){
-                                            echo '<h3 style="color: white;" class="title">'.$db_field4['Pseudo'].'</h3>';
-                                      }
-                                      else{
-                                          echo '<h3 style="color: white;" class="title"> Moi </h3>';
-                                      }
-                              }} 
-                                
-                                echo '</div>
-
-                            </div>
-                        </div>
-                    </div>';
-                             
-                            
-                                
-                        }
-                            
-
-                         
-
-                        }
-
-
-                     }
-
-                //}
-
-  ?>  
+                    $result_requête1 = mysqli_query($db_handle, $requête1);
+                while($db_field_requête1=mysqli_fetch_assoc($result_requête1)){
+                    $SQL3 = "SELECT * FROM groupe_membre WHERE IdGroupe='".$IdGroupe."'";
+                    $result3 = mysqli_query($db_handle, $SQL3);
                     
+                    while($db_field3=mysqli_fetch_assoc($result3)){
+
+                        
+
+
+                     $SQL4 = "SELECT `Poids` FROM `recommandation` WHERE `IdFilm`=".$db_field_requête1['IdFilm']." AND IdUtilisateur = ".$db_field3['IdUtilisateur']." ";
+                     $result4 = mysqli_query($db_handle, $SQL4);
+                     $db_field4 = mysqli_fetch_assoc($result4);
+                       
+                        
+
+
+                $SQL_filmavis2 = "SELECT * FROM liste_provisoire WHERE `IdFilm`=".$db_field_requête1['IdFilm']." ";
+                $result_filmavis2 = mysqli_query($db_handle, $SQL_filmavis2);
+                $db_field_filmavis2 = mysqli_fetch_assoc($result_filmavis2);
+                
+                //Si il n'est pas déjà la table
+                if($db_field_filmavis2==NULL){
+                //Insert film dans la table
+                $SQL_liste = "INSERT INTO liste_provisoire (`IdFilm`,`Moyenne`,`NombreNote`) VALUES (".$db_field_requête1['IdFilm'].",".$db_field4['Poids'].",1)";
+                $result_liste = mysqli_query($db_handle, $SQL_liste);
+                
+                }
+                
+                //Si il existe : recalculer la moyenne et faire +1 au nombre d'utilisateur qui ont noté
+                else {
+                    $moyenne = $db_field_filmavis2['Moyenne']+$db_field4['Poids']/2;
+                        
+                    $nombrenote = $db_field_filmavis2['NombreNote'] + 1;
+                    
+                    $SQL_update = "UPDATE `liste_provisoire` SET `Moyenne`=".$moyenne.",`NombreNote`=".$nombrenote."WHERE IdFilm = ".$db_field_requête1['IdFilm']." ";
+                    $result_update = mysqli_query($db_handle, $SQL_update);
+                    
+                    
+                }
+
+                }
+
+
+                }
+
+
+
+                $requête="SELECT * FROM liste_provisoire ORDER BY Moyenne DESC LIMIT 3";
+
+
+                    $result_requête = mysqli_query($db_handle, $requête);
+                while($db_field_requête=mysqli_fetch_assoc($result_requête)){
+                
+              //Requête API avec le keyword
+                    $result = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'.$db_field_requête['IdFilm'].'?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR'), TRUE);
+              $résultat = $result;
+                    
+              
+
+
+
+            
+
+               $overview=$résultat['overview'];
+
+               if (strlen($overview)>=150) {
+                $synopsis = substr($overview, 0, 150);
+                $synopsis .="...";
+            }
+            elseif(strlen($overview)<=150 && $overview!=""){
+                $nbmanquants = 150 - strlen($overview);
+
+                        //for($j=0; $j<$nbmanquants; $j++){
+                $synopsis = $overview;
+                $synopsis .= str_repeat(".", $nbmanquants) ;
+
+
+            }
+            if($overview==""){
+               $synopsis = $overview;
+               $synopsis.="Désolés, nous ne disposons d'aucun résumé en français pour ce film (pour le moment).";
+               $synopsis .=str_repeat(". ", 66);
+
+           }
+           $title = $résultat['title'];
+           if (strlen($title)>=16) {
+            $title = substr($title, 0, 16);
+            $title .="...";
+        }
+
+       $url_vid = file_get_contents('https://api.themoviedb.org/3/movie/'.$résultat['id'].'/videos?api_key=f28b73c15bf2d40ebce39e45e931d32e&language=fr-FR');
+       $vid = json_decode($url_vid, TRUE);
+       if($vid['results']!=null){
+            $vidéo = $vid['results'][0]['key'];
+        }
+        else $vidéo="";
+
+
+
+
+        echo '<div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="movie-box-2 mb30">
+        <div class="listing-container">
+
+        <!-- Movie List Image -->
+        <div class="listing-image">
+
+                        <!-- Play Button -->
+                <div class="play-btn">
+
+                <a href="https://www.youtube.com/watch?v='.$vidéo.'" class="play-video">
+                <i class="fa fa-play"></i>
+                </a>
+                </div>
+
+       
+
+        <!-- Buttons -->
+        <div class="buttons">
+        <a href="#" data-original-title="Rate" data-toggle="tooltip" data-placement="bottom" class="like">
+        <i class="icon-heart"></i>
+        </a>
+
+        <a href="#" data-original-title="Share" data-toggle="tooltip" data-placement="bottom" class="share">
+        <i class="icon-share"></i>
+        </a>
+        </div>
+
+        <!-- Rating -->
+        <div class="stars">
+        <div class="rating">
+       
+    </div>
+    </div>';
+
+    if($résultat['poster_path']!=''){
+        echo '<img src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/'.$résultat['poster_path'].'">
+        </div>';
+    }
+    else{
+
+        echo '<img src="assets/images/posters/poster-1.jpg" alt="">
+        </div>';
+    }
+
+    echo'
+    <!-- Movie List Content -->
+    <div class="listing-content">
+    <div class="inner">
+    <h3 class="title">'.$title.'</h3>
+
+    <p>'.$synopsis.'</p>
+
+    <a href="movie-detail.php?id='.$résultat['id'].'" class="btn btn-main btn-effect">details</a>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>';
+$SQL_delete = "DELETE FROM `liste_provisoire`";
+       $result_delete = mysqli_query($db_handle, $SQL_delete);
+                    
+                }
+                                ?>
+
+
+                    
+
+    
+
                 </div>
                 <!-- End of Movie List -->
 
 
 
-                <!-- Start of Pagination -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <nav class="pagination">
-                            <ul>
-                                <li><a href="#" class="current-page">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="ti-angle-right"></i></a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <!-- End of Pagination -->
 
             </div>
         </main>
@@ -565,8 +602,8 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
 
     <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
     <div class="general-search-wrapper">
-        <form class="general-search" role="search" method="get" action="#">
-            <input type="text" placeholder="Type and hit enter...">
+        <form class="general-search" role="search" method="post" action="#">
+            <input name="recherche" type="text" id="search-keyword" value="" class="form-control" placeholder="Entrez un titre de film ou série">
             <span id="general-search-close" class="ti-close toggle-search"></span>
         </form>
     </div>
@@ -580,7 +617,7 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
         <!-- ===== Start of Signin wrapper ===== -->
         <div class="signin-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Se connecter</h4>
+                <h4 class="text-center">Sign in</h4>
             </div>
 
 
@@ -591,34 +628,34 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="username">Pseudo ou Email</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Pseudo ou Email" />
+                        <label for="username">Username or Email *</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Your Username or Email *" />
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" />
+                        <label for="password">Password *</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" />
                     </div>
 
                     <div class="form-group">
                         <div class="checkbox pad-bottom-10">
                             <input id="check1" type="checkbox" name="remember" value="yes">
-                            <label for="check1">Rester connecté</label>
+                            <label for="check1">Keep me signed in</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Se connecter" class="btn btn-main btn-effect nomargin" />
+                        <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
                     </div>
                 </form>
                 <!-- End of Login form -->
 
                 <div class="bottom-links">
                     <span>
-                        Pas déjà inscrit ?
-                        <a  class="signUpClick">S'inscrire</a>
+                        Not a member?
+                        <a  class="signUpClick">Sign up</a>
                     </span>
-                    <a  class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a  class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
             </div>
 
@@ -630,80 +667,43 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
         <!-- ===== Start of Signup wrapper ===== -->
         <div class="signup-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">S'inscrire</h4>
+                <h4 class="text-center">Sign Up</h4>
             </div>
 
             <div class="small-dialog-content">
 
                 <!-- Start of Registration form -->
-                <form method="POST" action="">
+                <form id="cariera_registration" action="#" method="POST">
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="nom">Nom</label>
-                        <input type="text" placeholder="Votre nom" id="nom" name="nom" value="<?php if(isset($nom)) { echo $nom; } ?>" />
+                        <label for="movify_user_login">Username</label>
+                        <input name="movify_user_login" id="movify_user_login" class="form-control" type="text"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="prenom">Prenom</label>
-                       <input type="text" placeholder="Votre prenom" id="prenom" name="prenom" value="<?php if(isset($prenom)) { echo $prenom; } ?>" />
+                        <label for="movify_user_email">Email</label>
+                        <input name="movify_user_email" id="movify_user_email" class="form-control" type="email"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="nom">Pseudo</label>
-                        <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                        <label for="password">Password</label>
+                        <input name="movify_user_pass" id="movify_password" class="form-control" type="password"/>
                     </div>
-
 
                     <div class="form-group">
-                        <label for="mail">Email</label>
-                        <input type="email" placeholder="Votre mail" id="mail" name="mail" value="<?php if(isset($mail)) { echo $mail; } ?>" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mail2">Confirmation Email</label>
-                        <input type="email" placeholder="Confirmation de votre mail" id="mail2" name="mail2" value="<?php if(isset($mail2)) { echo $mail2; } ?>" />
-        
-                    </div>
-
-                     <div class="form-group">
-                        <label for="mdp">Mot de passe</label>
-                        <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="mdp2">Confirmer votre mot de passe</label>
-                        <input type="password" placeholder="Confirmation du mot de passe" id="mdp2" name="mdp2" />
-                    </div>
-             
-
-                    <div class="form-group">
-
-                        <input type="submit" class="btn btn-main btn-effect nomargin" name="forminscription" value="S'inscrire"/>
-
+                        <input type="submit" class="btn btn-main btn-effect nomargin" value="Register"/>
                     </div>
                 </form>
-
-                <!-- message d'erreur  -->
-
-                 <?php
-                 if(isset($erreur)) {
-                    echo '<font color="red">'.$erreur."</font>";
-                 }
-                 ?>                
-
                 <!-- End of Registration form -->
 
                 <div class="bottom-links">
                     <span>
-                        Déjà un compte ?
-                        <a class="signInClick">Se connecter</a>
+                        Already have an account?
+                        <a class="signInClick">Sign in</a>
                     </span>
 
-                    <a class="forgetPasswordClick pull-right">Mot de passe oublié</a>
+                    <a class="forgetPasswordClick pull-right">Forgot Password</a>
                 </div>
 
             </div> <!-- .small-dialog-content -->
@@ -716,7 +716,7 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
         <!-- ===== Start of Forget Password wrapper ===== -->
         <div class="forgetpassword-wrapper">
             <div class="small-dialog-headline">
-                <h4 class="text-center">Mot de passe oublié</h4>
+                <h4 class="text-center">Forgotten Password</h4>
             </div>
 
             <div class="small-dialog-content">
@@ -726,7 +726,7 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
                     <p class="status"></p>
 
                     <div class="form-group">
-                        <label for="password">Adresse Email</label>
+                        <label for="password">Email Address *</label>
                         <input type="email" name="user_login" class="form-control" id="email3" placeholder="Email Address *" />
                     </div>
 
@@ -737,7 +737,7 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
                 <!-- End of Forger Password form -->
 
                 <div class="bottom-links">
-                    <a class="cancelClick">Annuler</a>
+                    <a class="cancelClick">Cancel</a>
                 </div>
 
             </div><!-- .small-dialog-content -->
@@ -790,9 +790,4 @@ $db_handle=mysqli_connect("localhost","root", "root", "kult");
 
 </body>
 
-</html>
-
-
-   
-</body>
 </html>
