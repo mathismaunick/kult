@@ -30,8 +30,8 @@ if(isset($_POST['recherche'])) {
   for($i = 0; $i<count($résultatInter); $i++){
 
     $idmovie=$résultatInter[$i]['id'];
-    $captain = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
-    if (isset($captain)){$résultat[]= $résultatInter[$i];}
+    //$captain = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
+    if (null!==json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE)){$résultat[]= $résultatInter[$i];}
      
     
  }
@@ -56,8 +56,8 @@ elseif(isset($_GET['recherche'])) {
   for($i = 0; $i<count($résultatInter); $i++){
 
     $idmovie=$résultatInter[$i]['id'];
-    $captain = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
-    if (isset($captain)){$résultat[]= $résultatInter[$i];}
+    //$captain = json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE);
+    if (null!==json_decode(file_get_contents('https://api.waatch.co/v1/movies/'.$idmovie.'?api_key=5AC9C78B-DD2F-4515-ABD7-B651056B3D56'), TRUE)){$résultat[]= $résultatInter[$i];}
      
     
  }
